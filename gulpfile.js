@@ -23,29 +23,36 @@ var nodemon = require('gulp-nodemon');
 
 gulp.task('default', ['build', 'serve']);
 gulp.task('build', ['scripts', 'styles', 'html']);
-gulp.task('dev', ['build', 'serve', 'livereload']);
-gulp.task('debug', ['lint', 'test', 'build', 'serve', 'livereload']);
+gulp.task('dev', ['build', 'serve']);
+gulp.task('debug', ['lint', 'test', 'build', 'serve']);
 
 
 var paths = {
    server    : 'config/server.js',
    tests   : 'test/**/*.js',
-   sources : [ '**/*.js', '!node_modules/**', '!client/vendor/**', '!build/**'],
+   sources : [ '**/*.js', '!node_modules/**', '!public/vendor/**', '!public/build/**'],
    client  : {
-      main    : './public/javascripts/app.js',
-      sources : 'client/js/**.*.js',
-      build   : './public/dist/build/',
+      main    : './public/javascripts/app.jsx',
+      sources : './public/javascripts/**.*.js',
+      build   : './public/build/',
       basedir : './public/javascripts/'
    }
 };
 
 //run app using nodemon
 gulp.task('serve', function () {
+   var client = ['scripts', 'styles', 'html'];
+   gulp.watch('public/javascripts/**/*.js', client);
+   gulp.watch('public/stylesheets/**/*.less', client);
+   gulp.watch('public/**/*.html', client);
    nodemon({
       script: paths.server,
       env: {
          'NODE_ENV': 'development'
-      }
+      },
+      watch: '*.js',
+      ext: 'js',
+      ignore: [paths.client.sources, 'public/build/**', '*.xml']
    })
          .on('start', ['livereload'])
          .on('change', ['livereload'])
@@ -54,7 +61,7 @@ gulp.task('serve', function () {
          });
 });
 
-
+// Run Javascript linter
 gulp.task('lint', function () {
    gulp.src(paths.sources)
          .pipe(jshint())
@@ -64,13 +71,15 @@ gulp.task('lint', function () {
 // Browserify frontend code and compile React JSX files.
 gulp.task('scripts', function() {
    browserify(paths.client.main)
-         .transform(reactify)
          .transform(babelify)
+         .transform(reactify)
          .bundle()
          .pipe(source('js.js'))
-         .pipe(gulp.dest(paths.client.build));
+         .pipe(gulp.dest(paths.client.build))
+         .pipe(livereload());
 });
 
+// Compile CSS file from less styles
 gulp.task('styles', function () {
    gulp.src(['public/stylesheets/style.less'])
          .pipe(less())
@@ -79,6 +88,7 @@ gulp.task('styles', function () {
          .pipe(livereload());
 });
 
+// Move HTML files to build folder
 gulp.task('html', function () {
    gulp.src("public/*.html")
          .pipe(gulp.dest(paths.client.build))
@@ -87,10 +97,5 @@ gulp.task('html', function () {
 
 // livereload browser on client app changes
 gulp.task('livereload', function(){
-   var client = ['scripts', 'styles', 'html'];
-   gulp.watch('public/javascripts/**', client);
-   gulp.watch('public/stylesheets/**', client);
-   gulp.watch('public/**/*.html', client);
-   livereload({ auto: false });
-   livereload.listen();
+   livereload.listen({ auto: true });
 });
