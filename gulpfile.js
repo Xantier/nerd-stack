@@ -9,7 +9,6 @@ var reactify = require('reactify');
 var browserify = require('browserify');
 var babelify = require('babelify');
 var source = require('vinyl-source-stream');
-var concat = require('gulp-concat');
 var minifyCSS = require('gulp-minify-css');
 var nodemon = require('gulp-nodemon');
 
@@ -70,7 +69,7 @@ gulp.task('lint', function () {
 
 // Browserify frontend code and compile React JSX files.
 gulp.task('scripts', function() {
-   browserify(paths.client.main)
+   browserify(paths.client.main, {debug: true})
          .transform(babelify)
          .transform(reactify)
          .bundle()

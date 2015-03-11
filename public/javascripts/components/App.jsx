@@ -3,6 +3,12 @@ var Router = require('react-router');
 var { RouteHandler } = Router;
 
 var App = React.createClass({
+
+   statics: {
+      fetchData: function(token, params, query) {
+         return {name: "datataaa"}
+      }
+   },
     render: function() {
         return (
             <div className="container">

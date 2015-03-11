@@ -1,24 +1,19 @@
 //Imports
-var users = require('../app/users/userController');
-var React = require('react');
-var Application = React.createFactory(require('./Application'));
-var _ = require('lodash');
-var fs = require('fs');
+var serverRenderer = require('./serverRenderer');
+var Cookies = require('cookies');
+var uuid = require('uuid');
 
-var template = fs.readFileSync('index.html', 'utf8');
 
-module.exports = function(app){
-
-   // Server-side rendering (SSR)
-   app.get('/', function(req, res) {
-      var data = {};
-      var component = Application({
-         path: req.path,
-         onSetTitle: (title) => data.title = title,
-         onPageNotFound: () => res.status(404)
+module.exports = function (app) {
+   app.use('*', function (req, res) {
+      var cookies = new Cookies(req, res);
+      var token = cookies.get('token') || uuid();
+      cookies.set('token', token, {maxAge: 30 * 24 * 60 * 60});
+      serverRenderer(req, token, (error, html, token) => {
+         if (!error) {
+            res.header('Content-Type', 'text/html');
+            res.send(html);
+         }
       });
-      data.body = React.renderToString(component);
-      var html = _.template(template);
-      res.send(html(data));
    });
 };

@@ -3,6 +3,12 @@ var Router = require('react-router');
 var { Link } = Router;
 
 var Hello = React.createClass({
+
+   statics: {
+      fetchData: function(token, params, query) {
+         return {name: "datataaa"}
+      }
+   },
     mixins: [ Router.State ],
     render: function() {
         var name = this.getParams().name;
