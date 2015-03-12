@@ -15,8 +15,6 @@ module.exports = function (app) {
       cookies.set('token', token, {maxAge: 30 * 24 * 60 * 60});
       serverRenderer(req, token, (error, html, clientHandoff) => {
          if (!error) {
-/*            res.header('Content-Type', 'text/html');
-            res.send(html);*/
             res.render('layout', {data: JSON.stringify(clientHandoff), html: html});
          }
       });
@@ -47,13 +45,6 @@ var serverRenderer = (req, token, cb) => {
       dispatcher(token, state).then((data) => {
          var clientHandoff = {token, data: cache.clean(token)};
          var html = React.renderToString(<Handler data={data} />);
-/*         var htmlRegex = /¡HTML!/;
-         var dataRegex = /¡DATA!/;
-         var output = indexHTML.
-               replace(htmlRegex, html).
-               replace(dataRegex, JSON.stringify(clientHandoff));
-         cb(null, output, token);
- */
          cb(null, html, clientHandoff);
       });
    });
