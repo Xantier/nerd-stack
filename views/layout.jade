@@ -2,7 +2,9 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/build/style.css')
+    link(rel='stylesheet', href='/style.css')
   body
-    link(rel='javascript', href='/build/js.js')
-    block content
+    #app!=html
+      script.
+        __DATA__= !{data}
+      script(type='javascript', src='/js.js')

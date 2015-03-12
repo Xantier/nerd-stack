@@ -27,11 +27,11 @@ gulp.task('debug', ['lint', 'test', 'build', 'serve']);
 
 
 var paths = {
-   server    : 'config/server.js',
+   server    : 'app/server.js',
    tests   : 'test/**/*.js',
    sources : [ '**/*.js', '!node_modules/**', '!public/vendor/**', '!public/build/**'],
    client  : {
-      main    : './public/javascripts/app.jsx',
+      main    : './app/components/app.jsx',
       sources : './public/javascripts/**.*.js',
       build   : './public/build/',
       basedir : './public/javascripts/'

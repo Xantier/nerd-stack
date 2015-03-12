@@ -2,9 +2,9 @@ var React = require('react');
 var Router = require('react-router');
 var { Route } = Router;
 
-var App = require('./components/App.jsx');
-var Home = require('./components/Home.jsx');
-var Hello = require('./components/Hello.jsx');
+var App = require('./App.jsx');
+var Home = require('./Home.jsx');
+var Hello = require('./Hello.jsx');
 
 var routes = (
     <Route handler={App}>

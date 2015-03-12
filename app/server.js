@@ -1,7 +1,7 @@
 /**
  * Module dependencies.
  */
-var app = require('../app');
+var app = require('./../bootstrap');
 var debug = require('debug')('NERD-seed:server');
 var http = require('http');
 
