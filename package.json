@@ -1,6 +1,8 @@
 {
-  "name": "NERD-seed",
-  "version": "0.0.0",
+  "name": "NERD-stack",
+  "version": "0.0.1",
+  "author" : "Jussi Hallila",
+  "repository" : "https://github.com/Spruceslope/nerd",
   "private": true,
   "scripts": {
     "start": "node ./bin/server"

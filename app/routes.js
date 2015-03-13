@@ -1,3 +1,5 @@
+'use strict';
+
 //Imports
 var Cookies = require('cookies');
 var uuid = require('uuid');
@@ -6,16 +8,15 @@ var Router = require('react-router');
 var reactRouter = require('./router');
 var cache = require('./cache');
 var dispatcher = require('./dispatcher');
-var indexHTML = require('fs').readFileSync(__dirname+'/../views/index.html').toString();
 
 module.exports = function (app) {
    app.use('*', function (req, res) {
       var cookies = new Cookies(req, res);
       var token = cookies.get('token') || uuid();
       cookies.set('token', token, {maxAge: 30 * 24 * 60 * 60});
-      serverRenderer(req, token, (error, html, clientHandoff) => {
+      serverRenderer(req, token, (error, html, clientToken) => {
          if (!error) {
-            res.render('layout', {data: JSON.stringify(clientHandoff), html: html});
+            res.render('layout', {data: JSON.stringify(clientToken), html: html});
          }
       });
    });
@@ -43,9 +44,9 @@ var serverRenderer = (req, token, cb) => {
          return;
       }
       dispatcher(token, state).then((data) => {
-         var clientHandoff = {token, data: cache.clean(token)};
+         var clientToken = {token, data: cache.clean(token)};
          var html = React.renderToString(<Handler data={data} />);
-         cb(null, html, clientHandoff);
+         cb(null, html, clientToken);
       });
    });
 };

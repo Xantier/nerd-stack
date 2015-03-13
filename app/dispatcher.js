@@ -1,3 +1,5 @@
+'use strict';
+
 var all = require('when/keys').all;
 
 // TODO: modify to use the dispatcher style of Facebooks Flux architecture

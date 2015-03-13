@@ -1,3 +1,5 @@
+'use strict';
+
 var cache = {};
 
 var ensureTokenKey = (token) => {

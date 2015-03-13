@@ -1,3 +1,5 @@
+'use strict';
+
 // Transpile all ES6 to ES5
 require("babel/register");
 

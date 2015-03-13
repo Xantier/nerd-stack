@@ -1,3 +1,5 @@
+'use strict';
+
 var db = {
    Users: {
       id: {type: 'increments', nullable: false, primary: true},

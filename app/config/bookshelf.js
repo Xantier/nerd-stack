@@ -1,3 +1,5 @@
+'use strict';
+
 var knex = require('knex')(require('./env/development').db);
 var bookshelf = require('bookshelf')(knex);
 
