@@ -1,9 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="bin/www" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="/usr/bin/nodejs" path-to-js-file="bin/server.js" working-dir="$PROJECT_DIR$">
-    <envs>
-      <env name="DEBUG" value="NERD-seed" />
-    </envs>
-    <browser url="http://localhost:3000/" />
-    <method />
-  </configuration>
-</component>
