@@ -1,8 +1,8 @@
 {
   "name": "NERD-stack",
   "version": "0.0.1",
-  "author" : "Jussi Hallila",
-  "repository" : "https://github.com/Spruceslope/nerd",
+  "author": "Jussi Hallila",
+  "repository": "https://github.com/Spruceslope/nerd",
   "private": true,
   "scripts": {
     "start": "node ./bin/server"
@@ -29,12 +29,17 @@
     "less-middleware": "1.0.x",
     "lodash": "^3.4.0",
     "morgan": "~1.5.1",
+    "pg": "^4.3.0",
     "react": "^0.12.2",
     "react-router": "^0.12.4",
     "reactify": "^1.0.0",
     "serve-favicon": "~2.2.0",
     "uuid": "^2.0.1",
+    "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "when": "^3.7.2"
+  },
+  "devDependencies": {
+    "gulp-uglify": "^1.1.0"
   }
 }
