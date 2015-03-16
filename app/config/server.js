@@ -1,6 +1,6 @@
 'use strict';
 
-var app = require('./../bootstrap');
+var app = require('./../../app');
 var debug = require('debug')('NERD-seed:server');
 var http = require('http');
 

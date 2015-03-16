@@ -9,8 +9,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var Cookies = require('cookies');
+var uuid = require('uuid');
 var bookshelf = require('./app/config/bookshelf');
-var routes = require('./app/routes');
+var ssr = require('./app/ssr/render');
 
 var app = express();
 
@@ -32,7 +34,20 @@ app.use(function(req,res,next){
    next();
 });
 
-routes(app);
+// All paths go through this, routes determined by react
+app.use('*', function (req, res) {
+   var cookies = new Cookies(req, res);
+   var token = cookies.get('token') || uuid();
+   cookies.set('token', token, {maxAge: 30 * 24 * 60 * 60});
+   ssr(req, token, function (error, html, clientToken) {
+      if (!error) {
+         res.render('layout', {data: JSON.stringify(clientToken), html: html});
+      }else{
+         res.render('error', {data: JSON.stringify(clientToken), html: html});
+      }
+   });
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
