@@ -2,9 +2,9 @@
 
 var React = require('react');
 var { DefaultRoute, Route, NotFoundRoute } = require('react-router');
-var App = require('../components/App.jsx');
-var Home = require('../components/Home.jsx');
-var Hello = require('../components/Hello.jsx');
+var App = require('./components/App.jsx');
+var Home = require('./components/Home.jsx');
+var Hello = require('./components/Hello.jsx');
 
 module.exports = (token) => {
    return [
