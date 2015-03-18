@@ -4,7 +4,7 @@ var React = require('react');
 var Router = require('react-router');
 var { Link } = Router;
 
-var Home = React.createClass({
+module.exports = React.createClass({
 
    statics: {
       fetchData: function(token, params, query) {
@@ -22,5 +22,3 @@ var Home = React.createClass({
         );
     }
 });
-
-module.exports = Home;

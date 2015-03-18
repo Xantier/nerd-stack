@@ -9,6 +9,7 @@ var reactify = require('reactify');
 var browserify = require('browserify');
 var babelify = require('babelify');
 var uglify = require('gulp-uglify');
+var sourcemaps = require('gulp-sourcemaps');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var minifyCSS = require('gulp-minify-css');
@@ -29,11 +30,11 @@ gulp.task('debug', ['lint', 'test', 'build', 'serve']);
 
 
 var paths = {
-   server    : 'app/server.js',
+   server    : 'app/config/server.js',
    tests   : 'test/**/*.js',
    sources : [ '**/*.js', '!node_modules/**', '!public/vendor/**', '!public/build/**'],
    client  : {
-      main    : './app/components/app.jsx',
+      main    : './app/components/App.jsx',
       sources : './public/javascripts/**.*.js',
       build   : './public/build/',
       basedir : './public/javascripts/'
@@ -43,7 +44,7 @@ var paths = {
 //run app using nodemon
 gulp.task('serve', function () {
    var client = ['scripts', 'styles', 'html'];
-   gulp.watch('public/javascripts/**/*.js', client);
+   gulp.watch(['app/**/*.js', 'app/**/*.jsx'], client);
    gulp.watch('public/stylesheets/**/*.less', client);
    gulp.watch('public/**/*.html', client);
    nodemon({
@@ -77,7 +78,9 @@ gulp.task('scripts', function() {
          .bundle()
          .pipe(source('js.js'))
          .pipe(buffer())
+         .pipe(sourcemaps.init({loadMaps: true}))
          .pipe(uglify())
+         .pipe(sourcemaps.write('./'))
          .pipe(gulp.dest(paths.client.build))
          .pipe(livereload());
 });

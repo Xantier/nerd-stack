@@ -4,7 +4,4 @@ html
     title= title
     link(rel='stylesheet', href='/style.css')
   body
-    #app!=html
-      script.
-        __DATA__= !{data}
-      script(src='/js.js')
+    block content
