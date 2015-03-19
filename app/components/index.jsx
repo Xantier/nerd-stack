@@ -4,7 +4,7 @@ var React = require('react');
 var Router = require('react-router');
 var { RouteHandler } = Router;
 
-var App = React.createClass({
+module.exports = React.createClass({
 
    statics: {
       fetchData: function(token, params, query) {
@@ -20,5 +20,3 @@ var App = React.createClass({
         );
     }
 });
-
-module.exports = App;

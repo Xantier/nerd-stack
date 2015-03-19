@@ -34,7 +34,7 @@ var paths = {
    tests   : 'test/**/*.js',
    sources : [ '**/*.js', '!node_modules/**', '!public/vendor/**', '!public/build/**'],
    client  : {
-      main    : './app/components/App.jsx',
+      main    : './app/csr.js',
       sources : './public/javascripts/**.*.js',
       build   : './public/build/',
       basedir : './public/javascripts/'
@@ -46,7 +46,7 @@ gulp.task('serve', function () {
    var client = ['scripts', 'styles', 'html'];
    gulp.watch(['app/**/*.js', 'app/**/*.jsx'], client);
    gulp.watch('public/stylesheets/**/*.less', client);
-   gulp.watch('public/**/*.html', client);
+   gulp.watch('views/**/*.jade', client);
    nodemon({
       script: paths.server,
       env: {

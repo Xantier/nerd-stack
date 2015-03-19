@@ -12,7 +12,7 @@ var bodyParser = require('body-parser');
 var Cookies = require('cookies');
 var uuid = require('uuid');
 var bookshelf = require('./app/config/bookshelf');
-var render = require('./app/ssr/render');
+var render = require('./app/ssr');
 
 var app = express();
 

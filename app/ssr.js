@@ -4,14 +4,14 @@
 var React = require('react');
 var Router = require('react-router');
 var routes = require('./routes');
-var cache = require('../cache');
-var dispatcher = require('../dispatcher');
+var cache = require('./util/cache');
+var dispatcher = require('./util/dispatcher');
 
 module.exports = (req, token, cb) => {
    var path = req.baseUrl;
 
    var router = Router.create({
-      routes: routes(token),
+      routes: routes(),
       location: path,
       onAbort: function (redirect) {
          cb({redirect});

@@ -1,7 +1,8 @@
 extends layout
 
 block content
-    #app!=html
-    script.
-        __DATA__ = !{data}
+    #content
+        #app!=html
+        script.
+            __DATA__ = !{data}
     script(src='/js.js')
