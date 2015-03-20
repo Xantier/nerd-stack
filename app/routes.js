@@ -6,7 +6,7 @@ var { Route, NotFoundRoute } = Router;
 
 var Index = require('./components/index.jsx');
 var Home = require('./components/home.jsx');
-var Hello = require('./components/hello.jsx');
+var Hello = require('./components/hello/hello.jsx');
 var NotFound = require('./components/notFound.jsx');
 
 module.exports = () => {
