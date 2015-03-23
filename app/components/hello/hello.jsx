@@ -8,7 +8,7 @@ var { Link } = Router;
 
 function getHelloString() {
    return {
-      helloString: helloStore.get()
+      helloString: helloStore.getData()
    };
 }
 
@@ -19,17 +19,17 @@ module.exports = React.createClass({
    },
 
    componentDidMount: function () {
-      helloStore.addChangeListener(this._onChange);
+      helloStore.addChangeListener('get', this._onChange);
+      helloAction.getData();
    },
 
    componentWillUnmount: function () {
-      helloStore.removeChangeListener(this._onChange);
+      helloStore.removeChangeListener('get', this._onChange);
    },
-
-   _onChange: function() {
+   _onChange: function () {
       this.setState(getHelloString());
    },
-   _onDoubleClick: function() {
+   _onDoubleClick: function () {
       helloAction.create('Tsi tsing');
    },
    statics: {
