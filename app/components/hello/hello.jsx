@@ -42,11 +42,6 @@ module.exports = React.createClass({
    },
    render: function () {
       var name = this.context.router.getCurrentParams().name;
-      //if(this.props
-      var routes = this.context.router.getCurrentRoutes();
-      var values = routes.filter(function (route) {
-
-      });
       return (
             <div className="hello">
                <h2>Hello {name}</h2>
