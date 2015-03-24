@@ -4,7 +4,7 @@ var React = require('react');
 var Router = require('react-router');
 var { Route, NotFoundRoute } = Router;
 var routes = require('./routes');
-var dispatcher = require('./util/dispatcher');
+var initialData = require('./util/initialData');
 var rehydrate = require('./util/rehydrate');
 
 var token = rehydrate();
@@ -17,8 +17,8 @@ var renderState = {
 
 var render = () => {
    var { element, Handler, routerState } = renderState;
-   dispatcher(token, routerState).then((data) => {
-      React.render(<Handler data={data} />, element);
+   initialData(token, routerState).then((data) => {
+      React.render(<Handler params={data} />, element);
    });
 };
 

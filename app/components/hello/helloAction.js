@@ -1,36 +1,39 @@
 var Dispatcher = require('../../util/fluxDispatcher');
 var request = require('superagent');
 
+function retrieveXhrData(cb) {
+   let response;
+   request.get('/api/user')
+         .set('Accept', 'application/json')
+         .set('port', 3000)
+         .end(function (err, res) {
+            if (res.ok) {
+               response = JSON.stringify(res.text);
+            } else {
+               response = 'SOMETHING WENT WRONG \\o/ ' + res.text;
+            }
+            cb('get', response);
+         });
+}
+function dispatch(actionType, text) {
+   Dispatcher.dispatch({
+      actionType: actionType,
+      text: text
+   });
+}
 var HelloAction = {
 
    create: function (text) {
-      Dispatcher.dispatch({
-         actionType: 'create',
-         text: text
-      });
+      dispatch('create', text);
    },
 
    getData: () => {
-      let response;
-      //return 'I called this value from the DB';
-      request.get('/api/user')
-            .set('Accept', 'application/json')
-            .set('port', 3000)
-            .end(function (err, res) {
-               if (res.ok) {
-                  response = JSON.stringify(res.text);
-                  Dispatcher.dispatch({
-                     actionType: 'get',
-                     text: response
-                  });
-               } else {
-                  response = res.text;
-                  Dispatcher.dispatch({
-                     actionType: 'get',
-                     text: 'SOMETHING WENT WRONG \\o/ ' + response
-                  });
-               }
-            });
+      if(typeof window !== 'undefined') {
+         retrieveXhrData(dispatch);
+      }else{
+         dispatch('get', 'server side rendering data');
+      }
+
    }
 };
 

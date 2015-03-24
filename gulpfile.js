@@ -52,8 +52,8 @@ gulp.task('serve', function () {
       env: {
          'NODE_ENV': 'development'
       },
-      watch: '*.js',
-      ext: 'js',
+      watch: ['*.js', '*.jsx'],
+      ext: ['js', 'jsx'],
       ignore: [paths.client.sources, 'public/build/**', '*.xml']
    })
          .on('start', ['livereload'])

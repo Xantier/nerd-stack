@@ -14,6 +14,11 @@ function getHelloString() {
 
 module.exports = React.createClass({
 
+   statics: {
+      fetchData: function () {
+         helloAction.getData();
+      }
+   },
    getInitialState: function () {
       return getHelloString();
    },
@@ -32,14 +37,16 @@ module.exports = React.createClass({
    _onDoubleClick: function () {
       helloAction.create('Tsi tsing');
    },
-   statics: {
-      fetchData: function (token, params, query) {
-         return {name: "datataaa"}
-      }
+   contextTypes: {
+      router: React.PropTypes.func
    },
-   mixins: [Router.State],
    render: function () {
-      var name = this.getParams().name;
+      var name = this.context.router.getCurrentParams().name;
+      //if(this.props
+      var routes = this.context.router.getCurrentRoutes();
+      var values = routes.filter(function (route) {
+
+      });
       return (
             <div className="hello">
                <h2>Hello {name}</h2>
