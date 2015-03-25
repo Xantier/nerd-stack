@@ -24,6 +24,7 @@ module.exports = function (app) {
                html: html
             });
          } else {
+            // TODO: Do stack trace error object logging and remove from returns on production runs
             res.render('error', {
                message: error.message,
                error: error

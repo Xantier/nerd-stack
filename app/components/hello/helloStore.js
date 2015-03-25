@@ -1,6 +1,6 @@
 'use strict';
 
-var IndexDispatcher = require('../../util/fluxDispatcher');
+var IndexDispatcher = require('../../util/dispatcher');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 var text = 'Loading... ';

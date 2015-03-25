@@ -1,4 +1,4 @@
-var Dispatcher = require('../../util/fluxDispatcher');
+var Dispatcher = require('../../util/dispatcher');
 var request = require('superagent');
 
 function retrieveXhrData(cb) {
