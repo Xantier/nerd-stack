@@ -31,7 +31,7 @@ var HelloAction = {
       if(typeof window !== 'undefined') {
          retrieveXhrData(dispatch);
       }else{
-         dispatch('get', 'server side rendering data');
+         dispatch('get', 'Server Rendered Data');
       }
 
    }

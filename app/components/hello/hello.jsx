@@ -8,9 +8,10 @@ var { Link } = Router;
 
 function getHelloString() {
    return {
-      helloString: helloStore.getData()
+      helloString: helloStore.getData().text
    };
 }
+
 
 module.exports = React.createClass({
 
@@ -22,12 +23,10 @@ module.exports = React.createClass({
    getInitialState: function () {
       return getHelloString();
    },
-
    componentDidMount: function () {
       helloStore.addChangeListener('get', this._onChange);
-      helloAction.getData();
+      this.maybeGetData();
    },
-
    componentWillUnmount: function () {
       helloStore.removeChangeListener('get', this._onChange);
    },
@@ -36,6 +35,12 @@ module.exports = React.createClass({
    },
    _onDoubleClick: function () {
       helloAction.create('Tsi tsing');
+   },
+   maybeGetData: function () {
+      if (helloStore.getData().metadata.firstRun) {
+         helloAction.getData();
+      }
+
    },
    contextTypes: {
       router: React.PropTypes.func
