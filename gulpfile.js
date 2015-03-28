@@ -2,7 +2,7 @@
 
 // Imports
 var gulp = require('gulp');
-var jshint = require("gulp-jshint");
+var eslint = require('gulp-eslint');
 var less = require('gulp-less');
 var livereload = require('gulp-livereload');
 var reactify = require('reactify');
@@ -14,6 +14,9 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var minifyCSS = require('gulp-minify-css');
 var nodemon = require('gulp-nodemon');
+var mocha = require('gulp-mocha');
+var istanbul = require('gulp-istanbul');
+var coverage = require('gulp-jsx-coverage');
 
 /**
  * Tasks *
@@ -30,14 +33,14 @@ gulp.task('debug', ['lint', 'test', 'build', 'serve']);
 
 
 var paths = {
-   server    : 'app/config/server.js',
-   tests   : 'test/**/*.js',
-   sources : [ '**/*.js', '!node_modules/**', '!public/vendor/**', '!public/build/**'],
-   client  : {
-      main    : './app/config/render/csr.js',
-      sources : './public/javascripts/**.*.js',
-      build   : './public/build/',
-      basedir : './public/javascripts/'
+   server: 'app/config/server.js',
+   tests: 'test/**/*.js',
+   sources: ['**/*.js', '!node_modules/**', '!public/vendor/**', '!public/build/**'],
+   client: {
+      main: './app/config/render/csr.js',
+      sources: './public/javascripts/**.*.js',
+      build: './public/build/',
+      basedir: './public/javascripts/'
    }
 };
 
@@ -65,13 +68,16 @@ gulp.task('serve', function () {
 
 // Run Javascript linter
 gulp.task('lint', function () {
-   gulp.src(paths.sources)
-         .pipe(jshint())
-         .pipe(jshint.reporter()); // Dump results
+   // Note: To have the process exit with an error code (1) on
+   //  lint error, return the stream and pipe to failOnError last.
+   return gulp.src(['app/**/*.js', 'specgulp lint' +
+   '/**/*.js'])
+         .pipe(eslint())
+         .pipe(eslint.format())
+         .pipe(eslint.failOnError());
 });
-
 // Browserify frontend code and compile React JSX files.
-gulp.task('scripts', function() {
+gulp.task('scripts', function () {
    browserify(paths.client.main, {debug: true})
          .transform(babelify)
          .transform(reactify)
@@ -96,12 +102,48 @@ gulp.task('styles', function () {
 
 // Move HTML files to build folder
 gulp.task('html', function () {
-   gulp.src("public/*.html")
+   gulp.src('public/*.html')
          .pipe(gulp.dest(paths.client.build))
          .pipe(livereload());
 });
 
+// Run tests on server side
+gulp.task('test', function () {
+   gulp.src('spec/*spec.js')
+         .pipe(mocha({reporter: 'nyan'}));
+});
+
+gulp.task('test',
+      coverage.createTask(
+            {
+               src: 'spec/**/*.spec.js',
+               istanbul: {
+                  exclude: /node_modules|test[0-9]/,
+                  coverageVariable: '$$cov_' + new Date().getTime() + '$$',
+                  includeUntested: true
+               },
+               transpile: {
+                  babel: {
+                     include: /\.jsx?$/,
+                     exclude: /node_modules/
+                  }
+               },
+               coverage: {
+                  reporters: ['lcov', 'text'],
+                  directory: 'spec/coverage'
+               },
+               mocha: {
+                  reporter: 'spec'
+               },
+               babel: {
+                  sourceMap: 'inline'
+               }
+            }
+      )
+);
+
+
 // livereload browser on client app changes
-gulp.task('livereload', function(){
-   livereload.listen({ auto: true });
+gulp.task('livereload', function () {
+   livereload.listen({auto: true});
 });

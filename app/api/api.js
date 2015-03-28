@@ -43,7 +43,7 @@ module.exports.get = function (url, dispatch) {
    }
 };
 
-module.exports.post = function(url, payload, dispatch){
+module.exports.post = function (url, payload, dispatch) {
    if (typeof window !== 'undefined') {
       postXhrData(url, payload, dispatch);
    } else {

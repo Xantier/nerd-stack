@@ -30,7 +30,7 @@ module.exports = function (app) {
       });
    });
 
-   // Routes error handling
+   // 404 Error handling
    app.use(function (req, res, next) {
       var err = new Error('Not Found');
       err.status = 404;
