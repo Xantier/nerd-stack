@@ -8,7 +8,6 @@ bookshelf.models = {};
 require('./db/model/User').register(bookshelf);
 
 // TODO: Migrations functions to automatically update DB
-var db = require('./db/schema').tables;
-
+// var db = require('./db/schema').tables;
 
 module.exports = bookshelf;

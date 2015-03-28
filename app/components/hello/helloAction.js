@@ -5,13 +5,13 @@ var api = require('../../api/api');
 
 var HelloAction = {
 
-   create: function (text) {
-      api.post('/user', text, Dispatcher.transmit('create'))
-   },
+  create: function (text) {
+    api.post('/user', text, Dispatcher.transmit('create'));
+  },
 
-   getData: () => {
-      api.get('/user', Dispatcher.transmit('get'));
-   }
+  getData: () => {
+    api.get('/user', Dispatcher.transmit('get'));
+  }
 };
 
 module.exports = HelloAction;

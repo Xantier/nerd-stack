@@ -11,7 +11,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var bookshelf = require('./app/config/bookshelf');
 
-
 var app = express();
 
 // view engine setup
@@ -27,8 +26,8 @@ app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, '/public/build')));
 
 app.use(function (req, res, next) {
-   req.db = bookshelf;
-   next();
+  req.db = bookshelf;
+  next();
 });
 
 var router = require('./app/config/router/router')(app);
@@ -38,23 +37,23 @@ var router = require('./app/config/router/router')(app);
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-   app.use(function (err, req, res, next) {
-      res.status(err.status || 500);
-      res.render('error', {
-         message: err.message,
-         error: err
-      });
-   });
+  app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
-   res.status(err.status || 500);
-   res.render('error', {
-      message: err.message,
-      error: {}
-   });
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
 });
 
 module.exports = app;

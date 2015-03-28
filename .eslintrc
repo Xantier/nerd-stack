@@ -1,6 +1,6 @@
 {
   "env": {
-    "browser": false,
+    "browser": true,
     "node": true,
     "amd": false,
     "mocha": true,
@@ -83,17 +83,17 @@
     ],
     "guard-for-in": [0],
     "handle-callback-err": [0],
+    "indent": [
+      2,
+      2,
+      {"indentSwitchCase": true}
+    ],
     "key-spacing": [
       2,
       {
         "beforeColon": false,
         "afterColon": true
       }
-    ],
-    "quotes": [
-      2,
-      "single",
-      "avoid-escape"
     ],
     "max-depth": [
       0,
@@ -213,7 +213,7 @@
     "no-undef": [2],
     "no-undef-init": [2],
     "no-undefined": [0],
-    "no-underscore-dangle": [2],
+    "no-underscore-dangle": [0],
     "no-unreachable": [2],
     "no-unused-expressions": [2],
     "no-unused-vars": [
@@ -244,6 +244,11 @@
       "always"
     ],
     "padded-blocks": [0],
+    "quotes": [
+      2,
+      "single",
+      "avoid-escape"
+    ],
     "quote-props": [0],
     "radix": [0],
     "semi": [2],
@@ -310,6 +315,21 @@
       2,
       "never",
       {"exceptRange": true}
-    ]
-  }
+    ],
+    "react/display-name": 1,
+    "react/jsx-quotes": 1,
+    "react/jsx-no-undef": 1,
+    "react/jsx-uses-react": 1,
+    "react/jsx-uses-vars": 1,
+    "react/no-did-mount-set-state": 1,
+    "react/no-did-update-set-state": 1,
+    "react/no-multi-comp": 1,
+    "react/prop-types": 1,
+    "react/react-in-jsx-scope": 1,
+    "react/self-closing-comp": 1,
+    "react/wrap-multilines": 1
+  },
+  "plugins": [
+    "react"
+  ]
 }

@@ -6,19 +6,21 @@ var { Link } = Router;
 
 module.exports = React.createClass({
 
-   statics: {
-      fetchData: function(token, params, query) {
-         return {data: "datataaa"}
-      }
-   },
-    render: function() {
-        return (
-            <div className="home">
-                <h2>Home</h2>
-                <ul>
-                    <li><Link to="hello" params={{name: "world"}}>Hello World</Link></li>
-                </ul>
-            </div>
-        );
+  statics: {
+    fetchData: function (token, params, query) {
+      return {data: "datataaa"}
     }
+  },
+  render: function () {
+    return (
+        <div className="home">
+          <h2>Home</h2>
+          <ul>
+            <li>
+              <Link to="hello" params={{name: "world"}}>Hello World</Link>
+            </li>
+          </ul>
+        </div>
+    );
+  }
 });

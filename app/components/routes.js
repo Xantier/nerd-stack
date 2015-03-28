@@ -10,11 +10,11 @@ var Hello = require('./hello/Hello.jsx');
 var NotFound = require('./NotFound.jsx');
 
 module.exports = () => {
-   return [
-      <Route name="index" handler={Index}>
-         <Route name="home" path="/" handler={Home} />
-         <Route name="hello" path="/hello/:name" handler={Hello} />
-      </Route>,
-      <NotFoundRoute name="not-found" handler={NotFound} />
-   ];
+  return [
+    <Route name="index" handler={Index}>
+      <Route name="home" path="/" handler={Home} />
+      <Route name="hello" path="/hello/:name" handler={Hello} />
+    </Route>,
+    <NotFoundRoute name="not-found" handler={NotFound} />
+  ];
 };

@@ -10,8 +10,8 @@ router.get('/user', user.index);
 router.post('/user', user.create);
 
 // catch 404 and forward to error handler
-router.use(function(req, res, next) {
-   res.status(404).send('Incorrect API route');
+router.use(function (req, res) {
+  res.status(404).send('Incorrect API route');
 });
 
 module.exports = router;
