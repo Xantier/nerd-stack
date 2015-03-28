@@ -1,11 +1,13 @@
 'use strict';
 
-var api = require('./api');
 
-module.exports.index = function(req, res){
-   res.send('user');
+module.exports.index = function (req, res) {
+   var User = req.db.models.User;
+   new User().fetch().then(function (collection) {
+      res.send(collection.get('name'));
+   });
 };
 
-module.exports.create = function(req, res){
+module.exports.create = function (req, res) {
    res.send('user');
 };

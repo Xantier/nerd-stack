@@ -1,39 +1,16 @@
-var Dispatcher = require('../../util/dispatcher');
-var request = require('superagent');
+'use strict';
 
-function retrieveXhrData(cb) {
-   let response;
-   request.get('/API/user')
-         .set('Accept', 'application/json')
-         .set('port', 3000)
-         .end(function (err, res) {
-            if (res.ok) {
-               response = JSON.stringify(res.text);
-            } else {
-               response = 'SOMETHING WENT WRONG \\o/ ' + res.text;
-            }
-            cb('get', response);
-         });
-}
-function dispatch(actionType, text) {
-   Dispatcher.dispatch({
-      actionType: actionType,
-      text: text
-   });
-}
+var Dispatcher = require('../../util/dispatcher');
+var api = require('../../api/api');
+
 var HelloAction = {
 
    create: function (text) {
-      dispatch('create', text);
+      api.post('/user', text, Dispatcher.transmit('create'))
    },
 
    getData: () => {
-      if(typeof window !== 'undefined') {
-         retrieveXhrData(dispatch);
-      }else{
-         dispatch('get', 'Server Rendered Data');
-      }
-
+      api.get('/user', Dispatcher.transmit('get'));
    }
 };
 
