@@ -3,7 +3,7 @@ var request = require('superagent');
 
 function retrieveXhrData(cb) {
    let response;
-   request.get('/api/user')
+   request.get('/API/user')
          .set('Accept', 'application/json')
          .set('port', 3000)
          .end(function (err, res) {

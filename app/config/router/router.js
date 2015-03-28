@@ -1,18 +1,15 @@
 'use strict';
 
-var render = require('../ssr');
-var user = require('../api/user');
+var render = require('../render/ssr');
+var api = require('./apiRouter');
 var Cookies = require('cookies');
 var uuid = require('uuid');
 
 module.exports = function (app) {
 
-   app.use('/API/:page', function (req, res, next) {
-      user(req, res);
-   });
+   app.use('/API', api);
 
-// Eventually you will want to have multiple server rendered "front pages" for each
-// different part of the application. Refactor this one to an individual router file
+   // Rendered routes
    app.use('*', function (req, res) {
       var cookies = new Cookies(req, res);
       var token = cookies.get('token') || uuid();
@@ -24,7 +21,7 @@ module.exports = function (app) {
                html: html
             });
          } else {
-            // TODO: Do stack trace error object logging and remove from returns on production runs
+            // TODO: Add stack trace error object logging and remove from returns on production runs
             res.render('error', {
                message: error.message,
                error: error
@@ -33,7 +30,7 @@ module.exports = function (app) {
       });
    });
 
-// catch 404 and forward to error handler
+   // Routes error handling
    app.use(function (req, res, next) {
       var err = new Error('Not Found');
       err.status = 404;

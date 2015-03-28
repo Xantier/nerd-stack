@@ -31,7 +31,7 @@ app.use(function (req, res, next) {
    next();
 });
 
-var router = require('./app/config/router')(app);
+var router = require('./app/config/router/router')(app);
 
 // error handlers
 

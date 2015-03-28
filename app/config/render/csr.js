@@ -3,9 +3,9 @@
 var React = require('react');
 var Router = require('react-router');
 var { Route, NotFoundRoute } = Router;
-var routes = require('./routes');
-var initialData = require('./util/initialData');
-var rehydrate = require('./util/rehydrate');
+var routes = require('../../components/routes');
+var initialData = require('../../util/initialData');
+var rehydrate = require('../../util/rehydrate');
 
 var token = rehydrate();
 

@@ -3,9 +3,9 @@
 //Imports
 var React = require('react');
 var Router = require('react-router');
-var routes = require('./routes');
-var cache = require('./util/cache');
-var initialData = require('./util/initialData');
+var routes = require('../../components/routes');
+var initialData = require('../../util/initialData');
+var cache = require('../../util/cache');
 
 module.exports = (req, token, cb) => {
    var path = req.baseUrl;
