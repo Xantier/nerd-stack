@@ -1,3 +1,4 @@
 /node_modules
 .idea
 nerd-stack.iml
+/spec/coverage
