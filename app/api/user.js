@@ -9,5 +9,5 @@ module.exports.index = function (req, res) {
 };
 
 module.exports.create = function (req, res) {
-   res.send('user');
+   res.send('User creation not implemented yet.');
 };
