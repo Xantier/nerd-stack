@@ -9,7 +9,6 @@ describe('HelloStore', function () {
       var response = helloStore.getData();
       expect(response).to.have.property('text', 'Loading... ');
       expect(response.metadata).to.have.property('firstRun', true);
-    })
+    });
   });
-
 });

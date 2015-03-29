@@ -37,7 +37,6 @@
     "eslint-plugin-react": "^1.6.1",
     "gulp": "^3.8.11",
     "gulp-eslint": "^0.7.0",
-    "gulp-istanbul": "^0.7.0",
     "gulp-jsx-coverage": "^0.1.1",
     "gulp-less": "^3.0.1",
     "gulp-livereload": "^3.8.0",
@@ -49,6 +48,7 @@
     "mocha": "^2.2.1",
     "reactify": "^1.0.0",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "gulp-load-plugins": "~0.9.0"
   }
 }

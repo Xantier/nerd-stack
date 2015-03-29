@@ -77,10 +77,6 @@
       2,
       "after"
     ],
-    "global-strict": [
-      0,
-      "never"
-    ],
     "guard-for-in": [0],
     "handle-callback-err": [0],
     "indent": [
@@ -304,7 +300,7 @@
       0,
       "always"
     ],
-    "strict": [1],
+    "strict": [2],
     "use-isnan": [2],
     "valid-jsdoc": [0],
     "valid-typeof": [2],

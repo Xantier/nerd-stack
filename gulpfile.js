@@ -2,21 +2,14 @@
 
 // Imports
 var gulp = require('gulp');
-var eslint = require('gulp-eslint');
-var less = require('gulp-less');
-var livereload = require('gulp-livereload');
-var reactify = require('reactify');
-var browserify = require('browserify');
-var babelify = require('babelify');
-var uglify = require('gulp-uglify');
-var sourcemaps = require('gulp-sourcemaps');
-var source = require('vinyl-source-stream');
-var buffer = require('vinyl-buffer');
-var minifyCSS = require('gulp-minify-css');
-var nodemon = require('gulp-nodemon');
-var mocha = require('gulp-mocha');
-var istanbul = require('gulp-istanbul');
-var coverage = require('gulp-jsx-coverage');
+var plugins = require("gulp-load-plugins")( { scope: ['devDependencies'], replaceString: /\bgulp[\-.]/});
+plugins.reactify = require('reactify');
+plugins.browserify = require('browserify');
+plugins.babelify = require('babelify');
+plugins.sourceStream = require('vinyl-source-stream');
+plugins.buffer = require('vinyl-buffer');
+
+
 
 /**
  * Tasks *
@@ -27,17 +20,16 @@ var coverage = require('gulp-jsx-coverage');
  **/
 
 gulp.task('default', ['build', 'serve']);
-gulp.task('build', ['scripts', 'styles', 'html']);
+gulp.task('build', ['scripts', 'styles']);
 gulp.task('dev', ['lint', 'build', 'serve']);
 gulp.task('debug', ['lint', 'test', 'build', 'serve']);
 
 var paths = {
   server: 'app/config/server.js',
-  tests: 'test/**/*.js',
-  sources: ['**/*.js', '!node_modules/**', '!public/vendor/**', '!public/build/**'],
+  tests: 'spec/**/*.spec.js',
+  sources: ['app/**/*.js', 'app/**/*.jsx'],
   client: {
     main: './app/config/render/csr.js',
-    sources: './public/javascripts/**.*.js',
     build: './public/build/',
     basedir: './public/javascripts/'
   }
@@ -45,11 +37,11 @@ var paths = {
 
 //run app using nodemon
 gulp.task('serve', function () {
-  var client = ['scripts', 'styles', 'html'];
-  gulp.watch(['app/**/*.js', 'app/**/*.jsx'], client);
+  var client = ['scripts', 'styles'];
+  gulp.watch(paths.sources, client);
   gulp.watch('public/stylesheets/**/*.less', client);
   gulp.watch('views/**/*.jade', client);
-  nodemon({
+  plugins.nodemon({
     script: paths.server,
     env: {
       'NODE_ENV': 'development'
@@ -67,54 +59,39 @@ gulp.task('serve', function () {
 
 // Run Javascript linter
 gulp.task('lint', function () {
-  // Note: To have the process exit with an error code (1) on
-  //  lint error, return the stream and pipe to failOnError last.
-  return gulp.src(['app/**/*.js', 'specgulp lint' +
-  '/**/*.js'])
-      .pipe(eslint())
-      .pipe(eslint.format())
-      .pipe(eslint.failOnError());
+  return gulp.src(['app/**/*.js', 'spec/**/*.js', '!spec/coverage/**'])
+      .pipe(plugins.eslint())
+      .pipe(plugins.eslint.format())
+      .pipe(plugins.eslint.failOnError());
 });
 
 // Browserify frontend code and compile React JSX files.
 gulp.task('scripts', function () {
-  browserify(paths.client.main, {debug: true})
-      .transform(babelify)
-      .transform(reactify)
+  plugins.browserify(paths.client.main, {debug: true})
+      .transform(plugins.babelify)
+      .transform(plugins.reactify)
       .bundle()
-      .pipe(source('js.js'))
-      .pipe(buffer())
-      .pipe(sourcemaps.init({loadMaps: true}))
-      .pipe(uglify())
-      .pipe(sourcemaps.write('./'))
+      .pipe(plugins.sourceStream('js.js'))
+      .pipe(plugins.buffer())
+      .pipe(plugins.sourcemaps.init({loadMaps: true}))
+      .pipe(plugins.uglify())
+      .pipe(plugins.sourcemaps.write('./'))
       .pipe(gulp.dest(paths.client.build))
-      .pipe(livereload());
+      .pipe(plugins.livereload());
 });
 
 // Compile CSS file from less styles
 gulp.task('styles', function () {
   gulp.src(['public/stylesheets/style.less'])
-      .pipe(less())
-      .pipe(minifyCSS())
+      .pipe(plugins.less())
+      .pipe(plugins.minifyCss())
       .pipe(gulp.dest(paths.client.build))
-      .pipe(livereload());
-});
-
-// Move HTML files to build folder
-gulp.task('html', function () {
-  gulp.src('public/*.html')
-      .pipe(gulp.dest(paths.client.build))
-      .pipe(livereload());
+      .pipe(plugins.livereload());
 });
 
 // Run tests on server side
-gulp.task('test', function () {
-  gulp.src('spec/*spec.js')
-      .pipe(mocha({reporter: 'nyan'}));
-});
-
 gulp.task('test',
-    coverage.createTask(
+    plugins.jsxCoverage.createTask(
         {
           src: 'spec/**/*.spec.js',
           istanbul: {
@@ -144,5 +121,5 @@ gulp.task('test',
 
 // livereload browser on client app changes
 gulp.task('livereload', function () {
-  livereload.listen({auto: true});
+  plugins.livereload.listen({auto: true});
 });
