@@ -1,7 +1,7 @@
 'use strict';
 
 // Transpile all ES6 to ES5
-require("babel/register");
+require('babel/register');
 
 var express = require('express');
 var path = require('path');
@@ -23,21 +23,24 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
+
+/*eslint-disable */
 app.use(express.static(path.join(__dirname, '/public/build')));
+/*eslint-enable */
 
 app.use(function (req, res, next) {
   req.db = bookshelf;
   next();
 });
 
-var router = require('./app/config/router/router')(app);
+require('./app/config/router/router')(app);
 
 // error handlers
 
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function (err, req, res, next) {
+  app.use(function (err, req, res) {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
@@ -48,7 +51,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res) {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,

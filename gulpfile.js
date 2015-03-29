@@ -1,15 +1,14 @@
 'use strict';
 
 // Imports
+var debug = require('debug');
 var gulp = require('gulp');
-var plugins = require("gulp-load-plugins")( { scope: ['devDependencies'], replaceString: /\bgulp[\-.]/});
+var plugins = require('gulp-load-plugins')({scope: ['devDependencies'], replaceString: /\bgulp[\-.]/});
 plugins.reactify = require('reactify');
 plugins.browserify = require('browserify');
 plugins.babelify = require('babelify');
 plugins.sourceStream = require('vinyl-source-stream');
 plugins.buffer = require('vinyl-buffer');
-
-
 
 /**
  * Tasks *
@@ -53,13 +52,13 @@ gulp.task('serve', function () {
       .on('start', ['livereload'])
       .on('change', ['livereload'])
       .on('restart', function () {
-        console.log('restarted!');
+        debug.log('restarted!');
       });
 });
 
 // Run Javascript linter
 gulp.task('lint', function () {
-  return gulp.src(['app/**/*.js', 'spec/**/*.js', '!spec/coverage/**'])
+  return gulp.src(['app/**/*.js', 'spec/**/*.js', 'app.js', 'gulpfile.js', '!spec/coverage/**'])
       .pipe(plugins.eslint())
       .pipe(plugins.eslint.format())
       .pipe(plugins.eslint.failOnError());
@@ -89,7 +88,7 @@ gulp.task('styles', function () {
       .pipe(plugins.livereload());
 });
 
-// Run tests on server side
+// Run tests
 gulp.task('test',
     plugins.jsxCoverage.createTask(
         {
