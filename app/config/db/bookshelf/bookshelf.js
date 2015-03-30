@@ -1,11 +1,11 @@
 'use strict';
 
-var knex = require('knex')(require('./env/development').db);
+var knex = require('knex')(require('../../env/development').db);
 var bookshelf = require('bookshelf')(knex);
 bookshelf.models = {};
 
 // Register models
-require('./db/model/User').register(bookshelf);
+require('./model/User').register(bookshelf);
 
 // TODO: Migrations functions to automatically update DB
 // var db = require('./db/schema').tables;

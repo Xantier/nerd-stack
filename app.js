@@ -9,7 +9,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var bookshelf = require('./app/config/bookshelf');
+var db = require('./app/config/db/bookshelf/bookshelf');
 
 var app = express();
 
@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, '/public/build')));
 /*eslint-enable */
 
 app.use(function (req, res, next) {
-  req.db = bookshelf;
+  req.db = db;
   next();
 });
 

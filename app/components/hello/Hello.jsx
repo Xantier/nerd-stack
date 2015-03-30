@@ -33,7 +33,7 @@ module.exports = React.createClass({
     this.setState(getHelloString());
   },
   _onDoubleClick: function () {
-    helloAction.create('Tsi tsing');
+    helloAction.create({name: 'Tsi tsing'});
   },
   maybeGetData: function () {
     if (helloStore.getData().metadata.firstRun) {

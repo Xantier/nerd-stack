@@ -5,8 +5,8 @@ var api = require('../../api/api');
 
 var HelloAction = {
 
-  create: function (text) {
-    api.post('/user', text, Dispatcher.transmit('create'));
+  create: function (payload) {
+    api.post('/user', payload, Dispatcher.transmit('create'));
   },
 
   getData: () => {

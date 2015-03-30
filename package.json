@@ -5,7 +5,7 @@
   "repository": "https://github.com/Spruceslope/nerd",
   "private": true,
   "scripts": {
-    "start": "node ./bin/server"
+    "start": "gulp dev"
   },
   "dependencies": {
     "babel": "^4.7.3",
