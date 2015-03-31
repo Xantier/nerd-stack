@@ -10,7 +10,7 @@ This repository contains all source code for the actual implementation of the sk
 ## Installation ##
 This repository contains all source code for the actual implementation of the skeleton. To start using this, please refer to the installer which let's you choose few options, including your database implementation. 
 
-### #Environment ####
+####Environment ####
 The tools of the trade for this application development stack are node.js, git and your preferred database implementation. 
 You can install node.js for Windows or Mac from https://nodejs.org/download/
 For Linux you can follow instructions on https://github.com/joyent/node/wiki/Installation
