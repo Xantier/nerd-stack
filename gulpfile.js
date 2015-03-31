@@ -11,6 +11,16 @@ plugins.sourceStream = require('vinyl-source-stream');
 plugins.buffer = require('vinyl-buffer');
 
 /**
+ * TODO: Pull this out to somewhere where it can reside while
+ * user decides what database to use.
+**/
+var migrate = require('./app/config/db/bookshelf/migrate');
+gulp.task('migrate', function () {
+  migrate.migrate();
+});
+
+
+/**
  * Tasks *
  * default: Build & start server
  * dev: Build & start server. Start watching file changes and live reload browser if frontend has changed
@@ -58,7 +68,7 @@ gulp.task('serve', function () {
 
 // Run Javascript linter
 gulp.task('lint', function () {
-  return gulp.src(['app/**/*.js', 'spec/**/*.js', 'app.js', 'gulpfile.js', '!spec/coverage/**'])
+  return gulp.src(['app/**/*.js', 'spec/**/*.js', 'app.js', '!spec/coverage/**'])
       .pipe(plugins.eslint())
       .pipe(plugins.eslint.format())
       .pipe(plugins.eslint.failOnError());

@@ -1,11 +1,16 @@
 'use strict';
 
+// TODO: create adapter to handle simplest CRUD operations on each database
 //var db = require('../config/db/adapter');
 
-module.exports.index = function (req, res) {
+module.exports.get = function (req, res) {
   var User = req.db.models.User;
   new User().fetch().then(function (collection) {
-    res.send(collection.get('name'));
+    if (collection) {
+      res.send(collection.get('name'));
+    } else {
+      res.send('Nothing found');
+    }
   });
 };
 

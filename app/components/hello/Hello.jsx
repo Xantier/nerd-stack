@@ -2,6 +2,7 @@
 
 var React = require('react');
 var Router = require('react-router');
+var Thing = require('../thing/Thing.jsx');
 var helloStore = require('./helloStore');
 var helloAction = require('./helloAction');
 var { Link } = Router;
@@ -50,6 +51,7 @@ module.exports = React.createClass({
         <div className="hello">
           <h2>Hello {name}</h2>
           <h2  onDoubleClick={this._onDoubleClick}>Hello, {this.state.helloString}</h2>
+          <Thing />
           <ul>
             <li>
               <Link to="home">Go Home</Link>
