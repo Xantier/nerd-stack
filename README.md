@@ -1,8 +1,18 @@
 # NERD stack #
 
-Application skeleton using hipster techniques of web development. This starter app is built using Node.js / IO.js, Express and React. To make backend implementation complete this starter pack also contains a database connector and example models using your favorite database. 
+The NERD stack provides you with an application skeleton with [Node.js](https://nodejs.org/), [Express](http://expressjs.com/), [React](https://facebook.github.io/react/) and database connectivity. It provides user with an opportunity to start quickly developing both large and small scale [isomorphic javascript](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) web applications using [Flux](https://facebook.github.io/flux/) architecture. The skeleton has in place implementations for:
 
-The purpose of this application skeleton is to empower developers to be able to start developing their node.js + React easily but still maintaining enough wiggle room to not get constrained into heavy frameworks.
+- A server backend using Node.js and Express
+- View layer rendered by Facebook's React framework 
+- Establish database connectivity and perform standard CRUD operations
+- Isomorphic application architecture sharing resources on server and client
+- Unidirectional control flow using Flux architecture
+- Gulp build tasks to run the server with automatic restarts and livereload
+- Frontend resource bundling and sourcemaps
+- Sourcecode linting to ensure code quality
+- Test runner and test coverage reporting with Mocha and Istanbul
+
+The purpose of this application skeleton is to empower developers to be able to start developing their Node.js + React easily but still maintaining enough wiggle room to not get constrained into heavy frameworks.
 
 This repository contains all source code for the actual implementation of the skeleton. To start using this, please refer to the installer which let's you choose few options, including your database implementation. 
 
@@ -44,3 +54,10 @@ gulp build ```` To build the latest frontend resources
 and
 ```` node /config/server.js ```` To start the server.
 It is recommended to use something like supervisor to run the application when uptime is important.
+
+
+
+#Licence#
+
+
+[The MIT License](http://opensource.org/licenses/mit-license.php)
