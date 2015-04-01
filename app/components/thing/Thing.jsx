@@ -1,18 +1,20 @@
 'use strict';
 
 var React = require('react');
+var thingStore = require('./thingStore');
+var thingAction = require('./thingAction');
 
 module.exports = React.createClass({
   getInitialState: function() {
-    return {value: 'Hello!'};
+    return thingStore.getData();
   },
-  handleChange: function(event) {
-    this.setState({value: event.target.value});
+  _handleChange: function(event) {
+    thingAction.create({value: event.target.value});
   },
   render: function() {
     var value = this.state.value;
     return (
-        <input type="text" value={value} onChange={this.handleChange} />
+        <input type="text" value={value} onBlur={this._handleChange} />
     )
   }
 });

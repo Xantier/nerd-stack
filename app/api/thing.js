@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports.index = function (req, res) {
+module.exports.get = function (req, res) {
   var Thing = req.db.models.Thing;
   new Thing().fetch().then(function (collection) {
     res.send(collection.get('name'));
