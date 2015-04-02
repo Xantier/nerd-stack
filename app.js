@@ -4,6 +4,7 @@
 require('babel/register');
 
 var express = require('express');
+var passport = require('passport');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -12,6 +13,9 @@ var bodyParser = require('body-parser');
 var db = require('./app/config/db/bookshelf/bookshelf');
 
 var app = express();
+
+// Bootstrap passport config
+require('./app/config/db/bookshelf/passport')(passport, db);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,6 +26,13 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+app.use(require('express-session')({
+  secret: 'wat is this thing?',
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 
 /*eslint-disable */

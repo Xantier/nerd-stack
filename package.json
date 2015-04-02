@@ -28,7 +28,11 @@
     "serve-favicon": "~2.2.0",
     "superagent": "^1.1.0",
     "uuid": "^2.0.1",
-    "when": "^3.7.2"
+    "when": "^3.7.2",
+    "passport": "~0.2.1",
+    "bcrypt-nodejs": "0.0.3",
+    "passport-local": "~1.0.0",
+    "express-session": "~1.10.4"
   },
   "devDependencies": {
     "babelify": "^5.0.4",
