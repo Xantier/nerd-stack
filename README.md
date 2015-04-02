@@ -50,9 +50,13 @@ gulp dev
 
 When you are happy with your application and plan to run it without development mode  you can invoke the following commands:
 ````
-gulp build ```` To build the latest frontend resources
-and
-```` node /config/server.js ```` To start the server.
+gulp build 
+```` 
+To build the latest frontend resources and
+```` 
+node /config/server.js 
+```` 
+To start the server.
 It is recommended to use something like supervisor to run the application when uptime is important.
 
 
