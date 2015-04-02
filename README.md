@@ -6,7 +6,7 @@ The NERD stack provides you with an application skeleton with [Node.js](https://
 - View layer rendered by Facebook's React framework 
 - Establish database connectivity and perform standard CRUD operations
 - Isomorphic application architecture sharing resources on server and client
-- Unidirectional control flow using Flux architecture
+- Unidirectional data flow using Flux architecture
 - Gulp build tasks to run the server with automatic restarts and livereload
 - Frontend resource bundling and sourcemaps
 - Sourcecode linting to ensure code quality
