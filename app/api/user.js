@@ -4,8 +4,10 @@
 //var db = require('../config/db/adapter');
 
 module.exports.get = function (req, res) {
-  var User = req.db.models.User;
-  new User().fetch().then(function (collection) {
+  var User = new req.db.models.User(
+      {id: req.user.id}
+  );
+  User.fetch().then(function (collection) {
     if (collection) {
       res.send(collection.get('name'));
     } else {

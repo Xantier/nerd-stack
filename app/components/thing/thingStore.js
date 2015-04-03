@@ -3,26 +3,29 @@
 var IndexDispatcher = require('../../util/dispatcher');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
-var text = 'Loading... ';
+var things;
 var metadata = {firstRun: true};
 
-function setText(newText) {
+function setText(_things) {
   if (metadata.firstRun) {
     metadata.firstRun = false;
   }
-  text = newText;
+  things = _things;
+}
+function create(/*response*/){
+  // Do something with returned response
 }
 
 var ThingStore = assign({}, EventEmitter.prototype, {
   getData: function () {
     return {
-      text: text,
+      data: things,
       metadata: metadata
     };
   },
 
-  emitChange: function () {
-    this.emit('get');
+  emitChange: function (actionType) {
+    this.emit(actionType);
   },
 
   addChangeListener: function (event, callback) {
@@ -37,17 +40,17 @@ var ThingStore = assign({}, EventEmitter.prototype, {
 // Register callback to handle all updates
 IndexDispatcher.register(function (action) {
   switch (action.actionType) {
-    case 'create':
-      setText(action.text);
+    case 'createThing':
+      create(action.text);
       break;
-    case 'get':
-      setText(action.text);
+    case 'getThings':
+      setText(JSON.parse(action.text));
       break;
 
     default:
     // no op
   }
-  ThingStore.emitChange();
+  ThingStore.emitChange(action.actionType);
 });
 
 module.exports = ThingStore;

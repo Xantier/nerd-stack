@@ -6,11 +6,11 @@ var api = require('../../api/api');
 var ThingAction = {
 
   create: function (payload) {
-    api.post('/thing', payload, Dispatcher.transmit('create'));
+    api.post('/thing', payload, Dispatcher.transmit('createThing'));
   },
 
   getData: () => {
-    api.get('/thing', Dispatcher.transmit('get'));
+    api.get('/thing', Dispatcher.transmit('getThings'));
   }
 };
 

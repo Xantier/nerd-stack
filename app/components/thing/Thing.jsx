@@ -1,20 +1,58 @@
 'use strict';
 
 var React = require('react');
+var ThingList = require('./ThingList.jsx');
 var thingStore = require('./thingStore');
 var thingAction = require('./thingAction');
 
+function getThings() {
+  return {
+    things: thingStore.getData().data
+  };
+}
+
 module.exports = React.createClass({
-  getInitialState: function() {
-    return thingStore.getData();
+  statics: {
+    fetchData: function () {
+      thingAction.getData();
+    }
   },
-  _handleChange: function(event) {
-    thingAction.create({value: event.target.value});
+  // Possibly server rendered data
+  // TODO: Refactor srd to be props instead?
+  getInitialState: function () {
+    return getThings();
   },
-  render: function() {
-    var value = this.state.value;
+  componentDidMount: function () {
+    thingStore.addChangeListener('getThings', this._onChange);
+    thingStore.addChangeListener('createThing', this._onChange);
+    this._maybeGetData();
+  },
+  componentWillUnmount: function () {
+    thingStore.removeChangeListener('getThings', this._onChange);
+    thingStore.addChangeListener('createThing', this._onChange);
+  },
+  _handleChange: function () {
+    thingAction.create({name: this.state.name});
+  },
+  _onChange: function () {
+    this.setState(getThings());
+  },
+  _setChangedText: function(event){
+    this.setState({name: event.target.value});
+  },
+  _maybeGetData: function () {
+    if (thingStore.getData().metadata.firstRun) {
+      thingAction.getData();
+    }
+  },
+  render: function () {
     return (
-        <input type="text" value={value} onBlur={this._handleChange} />
+        <div>
+          <input type="text" onChange={this._setChangedText} />
+          <button name="createThing" onClick={this._handleChange}>Create Thing</button>
+          <br/>Current Things
+          <ThingList things={this.state.things} />
+        </div>
     )
   }
 });

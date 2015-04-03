@@ -10,7 +10,7 @@ function getXhrData(url, cb) {
       .set('port', 3000)
       .end(function (err, res) {
         if (res.ok) {
-          response = JSON.stringify(res.text);
+          response = res.text;
         } else {
           response = 'SOMETHING WENT WRONG \\o/ ' + res.text;
         }
@@ -28,7 +28,7 @@ function postXhrData(url, payload, cb) {
       .send(payload)
       .end(function (err, res) {
         if (res.ok) {
-          response = JSON.stringify(res.text);
+          response = res.text;
         } else {
           response = 'SOMETHING WENT WRONG \\o/ ' + res.text;
         }
@@ -42,7 +42,7 @@ module.exports.get = function (url, dispatch) {
   if (typeof window !== 'undefined') {
     getXhrData(url, dispatch);
   } else {
-    dispatch('Server Rendered Data');
+    dispatch('[{"id": "1", "name": "Unimplemented server rendered DB fetch Wrapper"}]');
   }
 };
 
