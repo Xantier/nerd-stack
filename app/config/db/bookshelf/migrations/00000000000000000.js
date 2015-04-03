@@ -15,6 +15,7 @@ module.exports.up = function (knex, Promise) {
     knex.schema.createTable('User', function (table) {
       table.bigIncrements('id').primary().unsigned();
       table.string('name', 50);
+      table.string('password', 255);
     })
   ]);
 };

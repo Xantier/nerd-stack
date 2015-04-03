@@ -1,10 +1,10 @@
 'use strict';
 
 var request = require('superagent');
+const url_prefix = '/API';
 
 function getXhrData(url, cb) {
   let response;
-  const url_prefix = '/API';
   request.get(url_prefix + url)
       .set('Accept', 'application/json')
       .set('port', 3000)
@@ -14,13 +14,14 @@ function getXhrData(url, cb) {
         } else {
           response = 'SOMETHING WENT WRONG \\o/ ' + res.text;
         }
-        cb(response);
+        if (cb) {
+          cb(response);
+        }
       });
 }
 
 function postXhrData(url, payload, cb) {
   let response;
-  const url_prefix = '/API';
   request.post(url_prefix + url)
       .set('Accept', 'application/json')
       .set('port', 3000)
@@ -31,7 +32,9 @@ function postXhrData(url, payload, cb) {
         } else {
           response = 'SOMETHING WENT WRONG \\o/ ' + res.text;
         }
-        cb(response);
+        if (cb) {
+          cb(response);
+        }
       });
 }
 

@@ -10,11 +10,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var db = require('./app/config/db/bookshelf/bookshelf');
 
 var app = express();
 
-// Bootstrap passport config
+// TODO: Extract DB and passport config to a file
+var db = require('./app/config/db/bookshelf/bookshelf');
 require('./app/config/db/bookshelf/passport')(passport, db);
 
 // view engine setup
@@ -44,7 +44,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-require('./app/config/router/router')(app);
+require('./app/config/router/router')(app, passport);
 
 // error handlers
 
