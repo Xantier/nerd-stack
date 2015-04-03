@@ -5,12 +5,12 @@ var api = require('../../api/api');
 
 var HelloAction = {
 
-  create: function (payload) {
-    api.post('/user', payload, Dispatcher.transmit('create'));
+  create: function (token, payload) {
+    return api.post(token, '/user', payload, Dispatcher.transmit('create'));
   },
 
-  getData: () => {
-    api.get('/user', Dispatcher.transmit('get'));
+  getData: (token) => {
+    return api.get(token, '/user', Dispatcher.transmit('get'));
   }
 };
 

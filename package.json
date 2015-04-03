@@ -32,7 +32,8 @@
     "passport": "~0.2.1",
     "bcrypt-nodejs": "0.0.3",
     "passport-local": "~1.0.0",
-    "express-session": "~1.10.4"
+    "express-session": "~1.10.4",
+    "connect-flash": "~0.1.1"
   },
   "devDependencies": {
     "babelify": "^5.0.4",

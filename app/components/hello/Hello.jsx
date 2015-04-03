@@ -15,14 +15,11 @@ function getHelloString() {
   };
 }
 
-var Hello = module.exports = React.createClass({
+var Hello = React.createClass({
   statics: {
     children : [Thing],
-    fetchData: function () {
-      helloAction.getData();
-      this.children.forEach(function(child){
-        child.fetchData();
-      })
+    fetchData: function (token) {
+      return helloAction.getData(token);
     }
   },
   // Possibly server rendered data
@@ -67,3 +64,5 @@ var Hello = module.exports = React.createClass({
     );
   }
 });
+
+module.exports = Hello;

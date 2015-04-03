@@ -19,24 +19,25 @@ module.exports = function (passport, db) {
     });
   });
 
-  passport.use('register', function (req, res, next) {
-    var user = req.body;
-    var usernamePromise = new req.db.models.User({name: user.username}).fetch();
+  passport.use('register', new LocalStrategy({
+        passReqToCallback: true
+      }, function (req, username, password, done) {
+        var user = req.body;
+        var dbUser = new req.db.models.User({name: username}).fetch();
 
-    return usernamePromise.then(function (model) {
-      if (model) {
-        res.render('register', {title: 'register', errorMessage: 'username already exists'});
-      } else {
-        var password = user.password;
-        var hash = bcrypt.hashSync(password);
-
-        var signUpUser = new req.db.models.User({name: user.username, password: hash});
-        signUpUser.save().then(function (savedmodel) {
-          next(savedmodel);
+        return dbUser.then(function (model) {
+          if (model) {
+            return done(null, false, req.flash('message', 'User Already Exists'));
+          } else {
+            var hash = bcrypt.hashSync(password);
+            var newUser = new req.db.models.User({name: user.username, password: hash});
+            newUser.save().then(function (savedUser) {
+              return done(null, savedUser, req.flash('message', 'User Saved'));
+            });
+          }
         });
-      }
-    });
-  });
+      })
+  );
 
   // use local strategy
   passport.use('signin', new LocalStrategy(

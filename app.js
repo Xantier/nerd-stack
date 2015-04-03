@@ -10,12 +10,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var flash = require('connect-flash');
 var app = express();
 
 // TODO: Extract DB and passport config to a file
 var db = require('./app/config/db/bookshelf/bookshelf');
 require('./app/config/db/bookshelf/passport')(passport, db);
+// TODO: Extract DB and passport config to a file
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,6 +34,7 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 
 /*eslint-disable */

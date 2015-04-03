@@ -7,7 +7,12 @@ module.exports = (token, routerState) => {
   return all(routerState.routes.filter((route) => {
     return route.handler.fetchData;
   }).reduce((promises, route) => {
-    promises[route.name] = route.handler.fetchData(token, params, query);
+    promises[route.handler.displayName] = route.handler.fetchData(token, params, query);
+    if (route.handler.children) {
+      route.handler.children.forEach(function (child) {
+        promises[child.displayName] = child.fetchData(token);
+      });
+    }
     return promises;
   }, {}));
 };

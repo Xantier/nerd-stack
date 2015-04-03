@@ -11,10 +11,10 @@ function getThings() {
   };
 }
 
-module.exports = React.createClass({
+var Thing = React.createClass({
   statics: {
-    fetchData: function () {
-      thingAction.getData();
+    fetchData: function (token) {
+      return thingAction.getData(token);
     }
   },
   // Possibly server rendered data
@@ -37,7 +37,7 @@ module.exports = React.createClass({
   _onChange: function () {
     this.setState(getThings());
   },
-  _setChangedText: function(event){
+  _setChangedText: function (event) {
     this.setState({name: event.target.value});
   },
   _maybeGetData: function () {
@@ -50,9 +50,12 @@ module.exports = React.createClass({
         <div>
           <input type="text" onChange={this._setChangedText} />
           <button name="createThing" onClick={this._handleChange}>Create Thing</button>
-          <br/>Current Things
+          <br/>
+          Current Things
           <ThingList things={this.state.things} />
         </div>
     )
   }
 });
+
+module.exports = Thing;

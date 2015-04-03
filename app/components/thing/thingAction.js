@@ -5,12 +5,12 @@ var api = require('../../api/api');
 
 var ThingAction = {
 
-  create: function (payload) {
-    api.post('/thing', payload, Dispatcher.transmit('createThing'));
+  create: function (token, payload) {
+    return api.post(token, '/thing', payload, Dispatcher.transmit('createThing'));
   },
 
-  getData: () => {
-    api.get('/thing', Dispatcher.transmit('getThings'));
+  getData: (token) => {
+    return api.get(token, '/thing', Dispatcher.transmit('getThings'));
   }
 };
 
