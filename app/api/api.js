@@ -6,6 +6,8 @@ const url_prefix = '/API';
 const DUMMY_DATA = '[{"id": "1", "name": "You are seeing this because this data is rendered on the server side and rehydrated on the browser.' +
     ' DB fetch wrapper is not yet implemented for server rendering"}]';
 
+//TODO: Refactor this to be more usable. Move cache handling to somewhere else
+
 function getXhrData(token, url, cb) {
   let response;
   request.get(url_prefix + url)
@@ -73,4 +75,19 @@ module.exports.post = function (token, url, payload, dispatch) {
     dispatch(DUMMY_DATA);
     return DUMMY_DATA;
   }
+};
+
+module.exports.del = function (url, dispatch) {
+  request.del(url_prefix + url)
+      .set('port', 3000)
+      .end(function (err, res) {
+        if (res.ok) {
+          dispatch('Deleted');
+        } else {
+          dispatch('Failed to delete');
+        }
+      });
+};
+module.exports.put = function (/*url, payload, dispatch*/) {
+  //TODO: Needs to be implemented
 };

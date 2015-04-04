@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var thingAction = require('./thingAction');
 
 var ThingList = React.createClass({
   render: function () {
@@ -10,9 +11,25 @@ var ThingList = React.createClass({
     return (
         <ul>
         {this.props.things.map(function (thing) {
-          return <li key={thing.id}>{thing.name}</li>
-        })}
+          return <ThingItem item={thing} />
+        }.bind(this))}
         </ul>
+    )
+  }
+});
+
+var ThingItem = React.createClass({
+  _delete: function () {
+    thingAction.del(this.props.item.id);
+  },
+  render: function () {
+    return (
+        <li key={this.props.item.id}>
+          <span>{this.props.item.name}
+            <span onDoubleClick={this._delete}>Delete</span>
+          </span>
+
+        </li>
     )
   }
 });

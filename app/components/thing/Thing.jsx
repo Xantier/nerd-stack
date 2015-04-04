@@ -4,6 +4,7 @@ var React = require('react');
 var ThingList = require('./ThingList.jsx');
 var thingStore = require('./thingStore');
 var thingAction = require('./thingAction');
+var actions = require('./thingConstants').ActionTypes;
 
 function getThings() {
   return {
@@ -23,13 +24,17 @@ var Thing = React.createClass({
     return getThings();
   },
   componentDidMount: function () {
-    thingStore.addChangeListener('getThings', this._onChange);
-    thingStore.addChangeListener('createThing', this._onChange);
+    thingStore.addChangeListener(actions.GET_THINGS, this._onChange);
+    thingStore.addChangeListener(actions.CREATE_THING, this._onChange);
+    thingStore.addChangeListener(actions.DELETE_THING, this._onChange);
+    thingStore.addChangeListener(actions.UPDATE_THING, this._onChange);
     this._maybeGetData();
   },
   componentWillUnmount: function () {
-    thingStore.removeChangeListener('getThings', this._onChange);
-    thingStore.addChangeListener('createThing', this._onChange);
+    thingStore.removeChangeListener(actions.GET_THINGS, this._onChange);
+    thingStore.removeChangeListener(actions.CREATE_THING, this._onChange);
+    thingStore.removeChangeListener(actions.DELETE_THING, this._onChange);
+    thingStore.removeChangeListener(actions.UPDATE_THING, this._onChange);
   },
   _handleChange: function () {
     thingAction.create({name: this.state.name});

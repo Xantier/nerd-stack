@@ -9,8 +9,13 @@ var thing = require('../../api/thing');
 
 router.get('/user', user.get);
 router.post('/user', user.create);
+
 router.get('/thing', thing.get);
 router.post('/thing', thing.create);
+router.put('/thing/:id', thing.update);
+/*eslint-disable */
+router.delete('/thing/:id', thing.del);
+/*eslint-enable */
 
 // catch 404 and forward to error handler
 router.use(function (req, res) {
