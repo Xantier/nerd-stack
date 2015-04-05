@@ -14,7 +14,7 @@ module.exports = React.createClass({
               Sign In
             </input>
           </form>
-          <Link to="register">Sign In</Link>
+          <Link to="register">Register</Link>
         </div>
     )
   }

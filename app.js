@@ -48,7 +48,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-require('./app/config/router/router')(app, passport);
+require('./app/router/router')(app, passport);
 
 // error handlers
 

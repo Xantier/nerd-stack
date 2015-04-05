@@ -2,9 +2,10 @@
 
 var React = require('react');
 var Router = require('react-router');
-var Thing = require('../thing/Thing.jsx');
+var ThingContainer = require('../thing/ThingContainer.jsx');
 var helloStore = require('./helloStore');
 var helloAction = require('./helloAction');
+var HelloConstants = require('./helloConstants').HelloConstants;
 var { Route, Link, RouteHandler } = Router;
 
 function getHelloString() {
@@ -15,27 +16,23 @@ function getHelloString() {
 
 var Hello = React.createClass({
   statics: {
-    children: [Thing],
-    fetchData: function (token, req) {
+    children: [ThingContainer],
+    load: function (token, req) {
       return helloAction.getData(token, this.displayName, req);
     }
   },
-  // Possibly server rendered data
   getInitialState: function () {
     return getHelloString();
   },
   componentDidMount: function () {
-    helloStore.addChangeListener('get', this._onChange);
+    helloStore.addChangeListener(HelloConstants.GET, this._onChange);
     this._maybeGetData();
   },
   componentWillUnmount: function () {
-    helloStore.removeChangeListener('get', this._onChange);
+    helloStore.removeChangeListener(HelloConstants.GET, this._onChange);
   },
   _onChange: function () {
     this.setState(getHelloString());
-  },
-  _onDoubleClick: function () {
-    helloAction.create({name: 'Tsi tsing'});
   },
   _maybeGetData: function () {
     if (helloStore.getData().metadata.firstRun) {
@@ -50,8 +47,8 @@ var Hello = React.createClass({
     return (
         <div className="hello">
           <h2>Hello {name}</h2>
-          <h2  onDoubleClick={this._onDoubleClick}>Hello, {this.state.helloString}</h2>
-          <Thing ref="thing" data={this.state.things} />
+          <h2>Hello, {this.state.helloString}</h2>
+          <ThingContainer />
           <ul>
             <li>
               <Link to="home">Go Home</Link>

@@ -4,12 +4,12 @@ var all = require('when/keys').all;
 
 module.exports = (token, routerState, req) => {
   return all(routerState.routes.filter((route) => {
-    return route.handler.fetchData;
+    return route.handler.load;
   }).reduce((promises, route) => {
-    promises[route.handler.displayName] = route.handler.fetchData(token, req);
+    promises[route.handler.displayName] = route.handler.load(token, req);
     if (route.handler.children) {
       route.handler.children.forEach(function (child) {
-        promises[child.displayName] = child.fetchData(token, req);
+        promises[child.displayName] = child.load(token, req);
       });
     }
     return promises;

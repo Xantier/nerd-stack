@@ -2,9 +2,9 @@
 
 var React = require('react');
 var Router = require('react-router');
-var routes = require('../../components/routes');
-var initialData = require('../../util/initialData');
-var rehydrate = require('../../util/rehydrate');
+var routes = require('../components/routes');
+var dataLoader = require('../util/dataLoader');
+var rehydrate = require('../util/rehydrate');
 
 var token = rehydrate.rehydrate();
 
@@ -16,7 +16,7 @@ var renderState = {
 
 var render = () => {
   var { element, Handler, routerState } = renderState;
-  initialData(token, routerState).then((data) => {
+  dataLoader(token, routerState).then((data) => {
     React.render(<Handler params={data} />, element);
   });
 };

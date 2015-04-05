@@ -1,7 +1,7 @@
 var keyMirror = require('keymirror');
 
 module.exports = {
-  ActionTypes: keyMirror({
+  ThingConstants: keyMirror({
     GET_THINGS: null,
     CREATE_THING: null,
     UPDATE_THING: null,

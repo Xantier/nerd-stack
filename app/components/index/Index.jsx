@@ -2,7 +2,7 @@
 
 var React = require('react');
 var Router = require('react-router');
-var { RouteHandler } = Router;
+var { RouteHandler, Link } = Router;
 
 module.exports = React.createClass({
   render: function () {
@@ -10,6 +10,7 @@ module.exports = React.createClass({
         <div className="container">
           <h1>Welcome</h1>
           <RouteHandler {...this.props}/>
+          <a href="/logout">logout</a>
         </div>
     );
   }

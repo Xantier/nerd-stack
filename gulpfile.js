@@ -38,7 +38,7 @@ var paths = {
   tests: 'spec/**/*.spec.js',
   sources: ['app/**/*.js', 'app/**/*.jsx'],
   client: {
-    main: './app/config/render/csr.js',
+    main: './app/render/csr.js',
     build: './public/build/',
     basedir: './public/javascripts/'
   }

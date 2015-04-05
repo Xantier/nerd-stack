@@ -3,8 +3,8 @@
 //Imports
 var React = require('react');
 var Router = require('react-router');
-var routes = require('../../components/routes');
-var initialData = require('../../util/initialData');
+var routes = require('../components/routes');
+var dataLoader = require('../util/dataLoader');
 
 module.exports = (req, token, cb) => {
   var path = req.originalUrl;
@@ -25,7 +25,7 @@ module.exports = (req, token, cb) => {
       cb({message: 'Unable to find path ' + state.path});
       return;
     }
-    initialData(token, state, req).then((data) => {
+    dataLoader(token, state, req).then((data) => {
       var clientToken = {token, data: data};
       var html = React.renderToString(<Handler params={data} />);
       cb(null, html, clientToken);

@@ -3,7 +3,7 @@
 var IndexDispatcher = require('../../util/dispatcher');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
-var actions = require('./thingConstants').ActionTypes;
+var ThingConstants = require('./thingConstants').ThingConstants;
 var _ = require('lodash');
 
 var things;
@@ -51,13 +51,13 @@ var ThingStore = assign({}, EventEmitter.prototype, {
 // Register callback to handle all updates
 IndexDispatcher.register(function (action) {
   switch (action.actionType) {
-    case actions.CREATE_THING:
+    case ThingConstants.CREATE_THING:
       create(action.text);
       break;
-    case actions.GET_THINGS:
+    case ThingConstants.GET_THINGS:
       setText(action.text);
       break;
-    case actions.DELETE_THING:
+    case ThingConstants.DELETE_THING:
       remove(action.text);
       break;
 

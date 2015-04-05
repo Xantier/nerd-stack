@@ -3,12 +3,10 @@
 var IndexDispatcher = require('../../util/dispatcher');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
+var HelloConstants = require('./helloConstants').HelloConstants;
+
 var text = 'Loading... ';
 var metadata = {firstRun: true};
-
-function create(/*payload*/) {
-  // TODO: Do something with payload.
-}
 
 function setText(newText) {
   if (metadata.firstRun) {
@@ -41,13 +39,9 @@ var HelloStore = assign({}, EventEmitter.prototype, {
 // Register callback to handle all updates
 IndexDispatcher.register(function (action) {
   switch (action.actionType) {
-    case 'create':
-      create(action.text);
-      break;
-    case 'get':
+    case HelloConstants.GET:
       setText(action.text);
       break;
-
     default:
     // no op
   }

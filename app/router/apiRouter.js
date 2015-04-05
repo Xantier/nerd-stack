@@ -4,8 +4,8 @@ var express = require('express');
 var router = express.Router();
 
 // Route imports
-var user = require('../../api/user');
-var thing = require('../../api/thing');
+var user = require('../api/user');
+var thing = require('../api/thing');
 
 function respond(req, res) {
   res.send(JSON.stringify(res.payload));

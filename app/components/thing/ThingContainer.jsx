@@ -4,7 +4,7 @@ var React = require('react');
 var ThingList = require('./ThingList.jsx');
 var thingStore = require('./thingStore');
 var thingAction = require('./thingAction');
-var actions = require('./thingConstants').ActionTypes;
+var ThingConstants = require('./thingConstants').ThingConstants;
 
 function getThings() {
   return {
@@ -12,9 +12,9 @@ function getThings() {
   };
 }
 
-var Thing = React.createClass({
+var ThingContainer = React.createClass({
   statics: {
-    fetchData: function (token, req) {
+    load: function (token, req) {
       return thingAction.getData(token, this.displayName, req);
     }
   },
@@ -22,17 +22,15 @@ var Thing = React.createClass({
     return getThings();
   },
   componentDidMount: function () {
-    thingStore.addChangeListener(actions.GET_THINGS, this._onChange);
-    thingStore.addChangeListener(actions.CREATE_THING, this._onChange);
-    thingStore.addChangeListener(actions.DELETE_THING, this._onChange);
-    thingStore.addChangeListener(actions.UPDATE_THING, this._onChange);
+    Object.keys(ThingConstants).forEach(function(key){
+      thingStore.addChangeListener(key, this._onChange);
+    }.bind(this));
     this._maybeGetData();
   },
   componentWillUnmount: function () {
-    thingStore.removeChangeListener(actions.GET_THINGS, this._onChange);
-    thingStore.removeChangeListener(actions.CREATE_THING, this._onChange);
-    thingStore.removeChangeListener(actions.DELETE_THING, this._onChange);
-    thingStore.removeChangeListener(actions.UPDATE_THING, this._onChange);
+    Object.keys(ThingConstants).forEach(function(key){
+      thingStore.removeChangeListener(key, this._onChange);
+    }.bind(this));
   },
   _handleChange: function (e) {
     e.preventDefault();
@@ -54,7 +52,7 @@ var Thing = React.createClass({
         <div>
           <form action="/API/thing" method="post" onSubmit={this._handleChange}>
             <input name="name" type="text" onChange={this._setChangedText} />
-            <button >Create Thing</button>
+            <button>Create Thing</button>
           </form>
           <br/>
           Current Things
@@ -64,4 +62,4 @@ var Thing = React.createClass({
   }
 });
 
-module.exports = Thing;
+module.exports = ThingContainer;

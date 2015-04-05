@@ -28,5 +28,3 @@ exports.expire = (token, key) => {
   ensureTokenKey(token);
   delete cache[token][key];
 };
-
-exports.cache = cache;
