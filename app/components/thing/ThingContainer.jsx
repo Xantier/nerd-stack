@@ -32,7 +32,7 @@ var ThingContainer = React.createClass({
       thingStore.removeChangeListener(key, this._onChange);
     }.bind(this));
   },
-  _handleChange: function (e) {
+  _createThing: function (e) {
     e.preventDefault();
     thingAction.create({name: this.state.name});
   },
@@ -47,16 +47,19 @@ var ThingContainer = React.createClass({
       thingAction.getData();
     }
   },
+  _modify: function(id, payload){
+    thingAction.update(id, payload);
+  },
   render: function () {
     return (
         <div>
-          <form action="/API/thing" method="post" onSubmit={this._handleChange}>
+          <form action="/API/thing" method="post" onSubmit={this._createThing}>
             <input name="name" type="text" onChange={this._setChangedText} />
             <button>Create Thing</button>
           </form>
           <br/>
           Current Things
-          <ThingList things={this.state.things} />
+          <ThingList things={this.state.things} _modify={this._modify} editState={false} />
         </div>
     )
   }

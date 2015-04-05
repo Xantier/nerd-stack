@@ -21,26 +21,6 @@ function getXhrData(url, cb) {
       });
 }
 
-function postXhrData(url, payload, cb) {
-  let response;
-  request.post(url_prefix + url)
-      .type('application/json')
-      .set('Accept', 'application/json')
-      .set('port', 3000)
-      .send(payload)
-      .end(function (err, res) {
-        if (res.ok) {
-          response = res.text;
-        } else {
-          response = 'SOMETHING WENT WRONG \\o/ ' + res.text;
-        }
-        if (cb) {
-          cb(JSON.parse(response));
-          return response;
-        }
-      });
-}
-
 module.exports.get = function (url, dispatch, req) {
   if (typeof window !== 'undefined') {
     return getXhrData(url, dispatch);
@@ -54,7 +34,23 @@ module.exports.get = function (url, dispatch, req) {
 };
 
 module.exports.post = function (url, payload, dispatch) {
-  return postXhrData(url, payload, dispatch);
+  let response;
+  request.post(url_prefix + url)
+      .type('application/json')
+      .set('Accept', 'application/json')
+      .set('port', 3000)
+      .send(payload)
+      .end(function (err, res) {
+        if (res.ok) {
+          response = res.text;
+        } else {
+          response = 'SOMETHING WENT WRONG \\o/ ' + res.text;
+        }
+        if (dispatch) {
+          dispatch(JSON.parse(response));
+          return response;
+        }
+      });
 };
 
 module.exports.del = function (url, dispatch) {
@@ -69,6 +65,22 @@ module.exports.del = function (url, dispatch) {
         }
       });
 };
-module.exports.put = function (/*url, payload, dispatch*/) {
-  //TODO: Needs to be implemented
+module.exports.put = function (url, payload, dispatch) {
+  let response;
+  request.put(url_prefix + url)
+      .type('application/json')
+      .set('Accept', 'application/json')
+      .set('port', 3000)
+      .send(payload)
+      .end(function (err, res) {
+        if (res.ok) {
+          response = res.text;
+        } else {
+          response = 'SOMETHING WENT WRONG \\o/ ' + res.text;
+        }
+        if (dispatch) {
+          dispatch(JSON.parse(response));
+          return response;
+        }
+      });
 };

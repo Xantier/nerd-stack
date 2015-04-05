@@ -52,11 +52,20 @@ module.exports.del = function (req, res) {
 
 module.exports.update = function (req, res) {
   var Thing = req.db.models.Thing;
-  new Thing().fetchOne({id: req.params.id})
-      .then(function (collection) {
-        res.send(collection.toJSON());
-      })
-      .otherwise(function (err) {
-        res.status(500).json({error: true, data: {message: err.message}});
+  Thing.forge({id: req.params.id})
+      .fetch({require: true})
+      .then(function (thing) {
+        thing.set({name: req.body.name}).save()
+            .then(function (savedThing) {
+              var data = {error: false, data: savedThing};
+              if (req.is('application/json')) {
+                res.json(data);
+              } else {
+                res.redirect(req.get('Referrer'));
+              }
+            })
+            .otherwise(function (err) {
+              res.status(500).json({error: true, data: {message: err.message}});
+            });
       });
 };

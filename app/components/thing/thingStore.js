@@ -27,6 +27,15 @@ function remove(response) {
   }
 }
 
+function update(response) {
+  if (response.data) {
+    _.remove(things, function (thing) {
+      return thing.id === response.data.id;
+    });
+    things.push(response.data);
+  }
+}
+
 var ThingStore = assign({}, EventEmitter.prototype, {
   getData: function () {
     return {
@@ -59,6 +68,9 @@ IndexDispatcher.register(function (action) {
       break;
     case ThingConstants.DELETE_THING:
       remove(action.text);
+      break;
+    case ThingConstants.UPDATE_THING:
+      update(action.text);
       break;
 
     default:
