@@ -5,11 +5,9 @@ var React = require('react');
 var Router = require('react-router');
 var routes = require('../../components/routes');
 var initialData = require('../../util/initialData');
-var cache = require('../../util/cache');
 
 module.exports = (req, token, cb) => {
-  var path = req.baseUrl;
-
+  var path = req.originalUrl;
   var router = Router.create({
     routes: routes(),
     location: path,
@@ -27,8 +25,8 @@ module.exports = (req, token, cb) => {
       cb({message: 'Unable to find path ' + state.path});
       return;
     }
-    initialData(token, state).then((data) => {
-      var clientToken = {token, data: cache.clean(token)};
+    initialData(token, state, req).then((data) => {
+      var clientToken = {token, data: data};
       var html = React.renderToString(<Handler params={data} />);
       cb(null, html, clientToken);
     });

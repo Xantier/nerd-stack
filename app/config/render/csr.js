@@ -6,7 +6,7 @@ var routes = require('../../components/routes');
 var initialData = require('../../util/initialData');
 var rehydrate = require('../../util/rehydrate');
 
-var token = rehydrate();
+var token = rehydrate.rehydrate();
 
 var renderState = {
   element: document.getElementById('content'),

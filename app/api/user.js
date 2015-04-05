@@ -3,16 +3,17 @@
 // TODO: create adapter to handle simplest CRUD operations on each database
 //var db = require('../config/db/adapter');
 
-module.exports.get = function (req, res) {
+module.exports.get = function (req, res, next) {
   var User = new req.db.models.User(
       {id: req.user.id}
   );
-  User.fetch().then(function (collection) {
+  return User.fetch().then(function (collection) {
     if (collection) {
-      res.send(collection.get('name'));
+      res.payload = collection.get('name');
     } else {
-      res.send('Nothing found');
+      res.payload = 'Nothing found';
     }
+    return next();
   });
 };
 

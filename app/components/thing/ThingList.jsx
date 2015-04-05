@@ -11,7 +11,7 @@ var ThingList = React.createClass({
     return (
         <ul>
         {this.props.things.map(function (thing) {
-          return <ThingItem item={thing} />
+          return <ThingItem item={thing}  key={thing.id}/>
         }.bind(this))}
         </ul>
     )
@@ -19,16 +19,18 @@ var ThingList = React.createClass({
 });
 
 var ThingItem = React.createClass({
-  _delete: function () {
+  _delete: function (e) {
+    e.preventDefault();
     thingAction.del(this.props.item.id);
   },
   render: function () {
     return (
-        <li key={this.props.item.id}>
+        <li>
           <span>{this.props.item.name}
-            <span onDoubleClick={this._delete}>Delete</span>
+            <a  onClick={this._delete} href={"/API/thing/" + this.props.item.id + "?_method=DELETE"}>
+              Delete thing
+            </a>
           </span>
-
         </li>
     )
   }

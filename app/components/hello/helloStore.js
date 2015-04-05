@@ -25,8 +25,8 @@ var HelloStore = assign({}, EventEmitter.prototype, {
     };
   },
 
-  emitChange: function () {
-    this.emit('get');
+  emitChange: function (actionType) {
+    this.emit(actionType);
   },
 
   addChangeListener: function (event, callback) {
@@ -51,7 +51,7 @@ IndexDispatcher.register(function (action) {
     default:
     // no op
   }
-  HelloStore.emitChange();
+  HelloStore.emitChange(action.actionType);
 });
 
 module.exports = HelloStore;

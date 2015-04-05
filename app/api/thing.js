@@ -1,10 +1,11 @@
 'use strict';
 
-module.exports.get = function (req, res) {
-  var Thing = req.db.models.Thing;
-  new Thing().fetchAll({user_id: req.user.id})
+module.exports.get = function (req, res, next) {
+  var Thing = new req.db.models.Thing();
+  return Thing.fetchAll({user_id: req.user.id})
       .then(function (collection) {
-        res.send(collection.toJSON());
+        res.payload = collection.toJSON();
+        return next();
       })
       .otherwise(function (err) {
         res.status(500).json({error: true, data: {message: err.message}});
@@ -18,7 +19,12 @@ module.exports.create = function (req, res) {
     user_id: req.user.id
   }).save()
       .then(function (thing) {
-        res.json({error: false, data: {id: thing.get('id')}});
+        var data = {error: false, data: thing};
+        if (req.is('application/json')) {
+          res.json(data);
+        } else {
+          res.redirect(req.get('Referrer'));
+        }
       })
       .otherwise(function (err) {
         res.status(500).json({error: true, data: {message: err.message}});
@@ -31,7 +37,12 @@ module.exports.del = function (req, res) {
       .fetch({require: true})
       .then(function (thing) {
         thing.destroy().then(function () {
-          res.json({error: false, data: {message: 'Thing deleted'}});
+          var data = {error: false, data: {message: 'Thing deleted', id: req.params.id}};
+          if (req.get('content-type') === 'application/json') {
+            res.json(data);
+          } else {
+            res.redirect(req.get('Referrer'));
+          }
         });
       })
       .otherwise(function (err) {

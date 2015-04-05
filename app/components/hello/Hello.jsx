@@ -7,8 +7,6 @@ var helloStore = require('./helloStore');
 var helloAction = require('./helloAction');
 var { Route, Link, RouteHandler } = Router;
 
-
-
 function getHelloString() {
   return {
     helloString: helloStore.getData().text
@@ -17,9 +15,9 @@ function getHelloString() {
 
 var Hello = React.createClass({
   statics: {
-    children : [Thing],
-    fetchData: function (token) {
-      return helloAction.getData(token);
+    children: [Thing],
+    fetchData: function (token, req) {
+      return helloAction.getData(token, this.displayName, req);
     }
   },
   // Possibly server rendered data

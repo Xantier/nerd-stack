@@ -14,12 +14,10 @@ function getThings() {
 
 var Thing = React.createClass({
   statics: {
-    fetchData: function (token) {
-      return thingAction.getData(token);
+    fetchData: function (token, req) {
+      return thingAction.getData(token, this.displayName, req);
     }
   },
-  // Possibly server rendered data
-  // TODO: Refactor srd to be props instead?
   getInitialState: function () {
     return getThings();
   },
@@ -36,7 +34,8 @@ var Thing = React.createClass({
     thingStore.removeChangeListener(actions.DELETE_THING, this._onChange);
     thingStore.removeChangeListener(actions.UPDATE_THING, this._onChange);
   },
-  _handleChange: function () {
+  _handleChange: function (e) {
+    e.preventDefault();
     thingAction.create({name: this.state.name});
   },
   _onChange: function () {
@@ -53,8 +52,10 @@ var Thing = React.createClass({
   render: function () {
     return (
         <div>
-          <input type="text" onChange={this._setChangedText} />
-          <button name="createThing" onClick={this._handleChange}>Create Thing</button>
+          <form action="/API/thing" method="post" onSubmit={this._handleChange}>
+            <input name="name" type="text" onChange={this._setChangedText} />
+            <button >Create Thing</button>
+          </form>
           <br/>
           Current Things
           <ThingList things={this.state.things} />

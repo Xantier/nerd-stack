@@ -7,10 +7,14 @@ var router = express.Router();
 var user = require('../../api/user');
 var thing = require('../../api/thing');
 
-router.get('/user', user.get);
+function respond(req, res) {
+  res.send(JSON.stringify(res.payload));
+}
+
+router.get('/user', user.get, respond);
 router.post('/user', user.create);
 
-router.get('/thing', thing.get);
+router.get('/thing', thing.get, respond);
 router.post('/thing', thing.create);
 router.put('/thing/:id', thing.update);
 /*eslint-disable */

@@ -1,6 +1,6 @@
 var cache = require('./cache');
 
-module.exports = () => {
+module.exports.rehydrate = () => {
   var data = window.__DATA__.data;
   var token = window.__DATA__.token;
   if (data) {

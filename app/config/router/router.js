@@ -46,6 +46,11 @@ module.exports = function (app, passport) {
     failureFlash: true
   }));
 
+  app.get('/logout', function (req, res) {
+    req.logout();
+    res.redirect('/');
+  });
+
   var auth = function (req, res, next) {
     if (!req.isAuthenticated()) {
       res.redirect('/signin');

@@ -4,6 +4,7 @@ var IndexDispatcher = require('../../util/dispatcher');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 var actions = require('./thingConstants').ActionTypes;
+var _ = require('lodash');
 
 var things;
 var metadata = {firstRun: true};
@@ -14,8 +15,16 @@ function setText(_things) {
   }
   things = _things;
 }
-function create(/*response*/){
-  // Do something with returned response
+function create(response) {
+  things.push(response.data);
+}
+
+function remove(response) {
+  if (response.data) {
+    _.remove(things, function (thing) {
+      return thing.id === response.data.id;
+    });
+  }
 }
 
 var ThingStore = assign({}, EventEmitter.prototype, {
@@ -46,7 +55,10 @@ IndexDispatcher.register(function (action) {
       create(action.text);
       break;
     case actions.GET_THINGS:
-      setText(JSON.parse(action.text));
+      setText(action.text);
+      break;
+    case actions.DELETE_THING:
+      remove(action.text);
       break;
 
     default:

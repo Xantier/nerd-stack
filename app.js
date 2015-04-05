@@ -10,7 +10,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var flash = require('connect-flash');
+var methodOverride = require('method-override');
+
 var app = express();
 
 // TODO: Extract DB and passport config to a file
@@ -24,9 +25,11 @@ app.set('view engine', 'jade');
 
 app.use(favicon(__dirname + '/views/favicon.ico'));
 app.use(logger('dev'));
+app.use(methodOverride('_method', {methods: ['POST', 'GET']}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+
 app.use(require('express-session')({
   secret: 'wat is this thing?',
   resave: false,
@@ -34,7 +37,6 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 
 /*eslint-disable */
