@@ -1,7 +1,7 @@
 'use strict';
 
-var knex = require('knex')(require('../../env/development').db);
-var bookshelf = require('bookshelf')(knex);
+const knex = require('knex')(require('../../env/development').db);
+let bookshelf = require('bookshelf')(knex);
 bookshelf.models = {};
 
 // Register models

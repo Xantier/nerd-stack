@@ -1,13 +1,13 @@
 'use strict';
 
-var IndexDispatcher = require('../../util/dispatcher');
-var EventEmitter = require('events').EventEmitter;
-var assign = require('object-assign');
-var ThingConstants = require('./thingConstants').ThingConstants;
-var _ = require('lodash');
+const IndexDispatcher = require('../../util/dispatcher');
+const EventEmitter = require('events').EventEmitter;
+const assign = require('object-assign');
+const ThingConstants = require('./thingConstants').ThingConstants;
+const _ = require('lodash');
 
-var things;
-var metadata = {firstRun: true};
+let things;
+let metadata = {firstRun: true};
 
 function setText(_things) {
   if (metadata.firstRun) {
@@ -15,6 +15,7 @@ function setText(_things) {
   }
   things = _things;
 }
+
 function create(response) {
   things.push(response.data);
 }
@@ -36,7 +37,7 @@ function update(response) {
   }
 }
 
-var ThingStore = assign({}, EventEmitter.prototype, {
+const ThingStore = assign({}, EventEmitter.prototype, {
   getData: function () {
     return {
       data: things,

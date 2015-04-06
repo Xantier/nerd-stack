@@ -1,12 +1,12 @@
 'use strict';
 
-var IndexDispatcher = require('../../util/dispatcher');
-var EventEmitter = require('events').EventEmitter;
-var assign = require('object-assign');
-var HelloConstants = require('./helloConstants').HelloConstants;
+const IndexDispatcher = require('../../util/dispatcher');
+const EventEmitter = require('events').EventEmitter;
+const assign = require('object-assign');
+const HelloConstants = require('./helloConstants').HelloConstants;
 
-var text = 'Loading... ';
-var metadata = {firstRun: true};
+let text = 'Loading... ';
+let metadata = {firstRun: true};
 
 function setText(newText) {
   if (metadata.firstRun) {
@@ -15,7 +15,7 @@ function setText(newText) {
   text = newText;
 }
 
-var HelloStore = assign({}, EventEmitter.prototype, {
+const HelloStore = assign({}, EventEmitter.prototype, {
   getData: function () {
     return {
       text: text,

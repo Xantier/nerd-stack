@@ -1,10 +1,10 @@
 'use strict';
 
 // TODO: create adapter to handle simplest CRUD operations on each database
-//var db = require('../config/db/adapter');
+// var db = require('../config/db/adapter');
 
 module.exports.get = function (req, res, next) {
-  var User = new req.db.models.User(
+  const User = new req.db.models.User(
       {id: req.user.id}
   );
   return User.fetch().then(function (collection) {
@@ -18,7 +18,7 @@ module.exports.get = function (req, res, next) {
 };
 
 module.exports.create = function (req, res) {
-  var User = req.db.models.User;
+  const User = req.db.models.User;
   User.forge({
     name: req.body.name
   }).save()

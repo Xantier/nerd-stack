@@ -1,7 +1,7 @@
 'use strict';
 
-var React = require('react');
-var {Link} = require('react-router');
+const React = require('react');
+const {Link} = require('react-router');
 
 module.exports = React.createClass({
   render: function () {
@@ -11,10 +11,10 @@ module.exports = React.createClass({
             <input name="username" type="username" placeholder="username" required={true}/>
             <input name="password" type="password" placeholder="Password" required={true}/>
             <input type="submit">
-              Sign In
+              Register
             </input>
           </form>
-          <Link to="register">Register</Link>
+          <Link to="signin">Sign In</Link>
         </div>
     )
   }

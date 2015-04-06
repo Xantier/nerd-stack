@@ -1,13 +1,14 @@
 'use strict';
 
-var React = require('react');
-var thingAction = require('./thingAction');
+const React = require('react');
+const thingAction = require('./thingAction');
 
-var ThingList = React.createClass({
+const ThingList = React.createClass({
   render: function () {
-    if (!this.props.things || this.props.things.length === 0) {
+    if (!this.props.things || !this.props.things.length) {
       return null;
     }
+
     return (
         <ul>
         {this.props.things.map(function (thing) {
@@ -18,7 +19,7 @@ var ThingList = React.createClass({
   }
 });
 
-var ThingItem = React.createClass({
+const ThingItem = React.createClass({
   getInitialState: function () {
     return {editing: false};
   },

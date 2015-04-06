@@ -1,6 +1,6 @@
 'use strict';
 
-var db = {
+const db = {
   Users: {
     id: {type: 'increments', nullable: false, primary: true},
     name: {type: 'string', maxlength: 150, nullable: false}

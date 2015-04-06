@@ -1,21 +1,19 @@
 'use strict';
 
-// Transpile all ES6 to ES5
-require('babel/register');
+const express = require('express');
+const flash = require('connect-flash');
+const passport = require('passport');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 
-var express = require('express');
-var passport = require('passport');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
-
-var app = express();
+let app = express();
 
 // TODO: Extract DB and passport config to a file
-var db = require('./app/config/db/bookshelf/bookshelf');
+let db = require('./app/config/db/bookshelf/bookshelf');
 require('./app/config/db/bookshelf/passport')(passport, db);
 // TODO: Extract DB and passport config to a file
 
@@ -29,6 +27,7 @@ app.use(methodOverride('_method', {methods: ['POST', 'GET']}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+app.use(flash());
 
 app.use(require('express-session')({
   secret: 'wat is this thing?',

@@ -1,8 +1,10 @@
-var cache = require('./cache');
+'use strict';
+
+let cache = require('./cache');
 
 module.exports.rehydrate = () => {
-  var data = window.__DATA__.data;
-  var token = window.__DATA__.token;
+  const data = window.__DATA__.data;
+  const token = window.__DATA__.token;
   if (data) {
     Object.keys(data).forEach((key) => {
       cache.set(token, key, data[key]);

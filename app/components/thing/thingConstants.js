@@ -1,4 +1,6 @@
-var keyMirror = require('keymirror');
+'use strict';
+
+const keyMirror = require('keymirror');
 
 module.exports = {
   ThingConstants: keyMirror({

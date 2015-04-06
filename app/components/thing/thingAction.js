@@ -1,13 +1,13 @@
 'use strict';
 
-var Dispatcher = require('../../util/dispatcher');
-var api = require('../../api/api');
-var cache = require('../../util/cache');
-var ThingConstants = require('./thingConstants').ThingConstants;
+const Dispatcher = require('../../util/dispatcher');
+const api = require('../../api/api');
+const ThingConstants = require('./thingConstants').ThingConstants;
+let cache = require('../../util/cache');
 
-var ThingAction = {
+const ThingAction = {
   getData: (token, displayName, req) => {
-    var cached = cache.get(token, displayName);
+    const cached = cache.get(token, displayName);
     if (cached) {
       Dispatcher.transmit(ThingConstants.GET_THINGS)(cached);
       return cached;

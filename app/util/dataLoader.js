@@ -1,6 +1,6 @@
 'use strict';
 
-var all = require('when/keys').all;
+const all = require('when/keys').all;
 
 module.exports = (token, routerState, req) => {
   return all(routerState.routes.filter((route) => {

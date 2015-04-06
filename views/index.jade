@@ -2,6 +2,9 @@ extends layout
 
 block content
     #content
+        - if(message !== 'undefined')
+            p #{message.error}
+            p #{message.success}
         #app!=html
         script.
             __DATA__ = !{data}

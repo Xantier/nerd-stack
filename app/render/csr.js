@@ -1,25 +1,25 @@
 'use strict';
 
-var React = require('react');
-var Router = require('react-router');
-var routes = require('../components/routes');
-var dataLoader = require('../util/dataLoader');
-var rehydrate = require('../util/rehydrate');
+const React = require('react');
+const Router = require('react-router');
+const routes = require('../components/routes');
+const dataLoader = require('../util/dataLoader');
+const rehydrate = require('../util/rehydrate');
 
-var token = rehydrate.rehydrate();
+const token = rehydrate.rehydrate();
 
-var renderState = {
+const renderState = {
   element: document.getElementById('content'),
   Handler: null,
   routerState: null
 };
 
-var render = () => {
-  var { element, Handler, routerState } = renderState;
+function render() {
+  let { element, Handler, routerState } = renderState;
   dataLoader(token, routerState).then((data) => {
     React.render(<Handler params={data} />, element);
   });
-};
+}
 
 Router.run(routes(), Router.HistoryLocation, function (Handler, routerState) {
   renderState.Handler = Handler;

@@ -1,6 +1,6 @@
 'use strict';
 
-var request = require('superagent');
+const request = require('superagent');
 const url_prefix = '/API';
 
 function getXhrData(url, cb) {
@@ -9,6 +9,9 @@ function getXhrData(url, cb) {
       .set('Accept', 'application/json')
       .set('port', 3000)
       .end(function (err, res) {
+        if (err) {
+          response = 'SOMETHING WENT WRONG \\o/ ' + err.message;
+        }
         if (res.ok) {
           response = res.text;
         } else {
@@ -21,19 +24,18 @@ function getXhrData(url, cb) {
       });
 }
 
-module.exports.get = function (url, dispatch, req) {
+export function get(url, dispatch, req) {
   if (typeof window !== 'undefined') {
     return getXhrData(url, dispatch);
-  } else {
-    var res = {};
-    return require('./' + url).get(req, res, function () {
-      dispatch(res.payload);
-      return res.payload;
-    });
   }
-};
+  let res = {};
+  return require('./' + url).get(req, res, function () {
+    dispatch(res.payload);
+    return res.payload;
+  });
+}
 
-module.exports.post = function (url, payload, dispatch) {
+export function post(url, payload, dispatch) {
   let response;
   request.post(url_prefix + url)
       .type('application/json')
@@ -41,6 +43,9 @@ module.exports.post = function (url, payload, dispatch) {
       .set('port', 3000)
       .send(payload)
       .end(function (err, res) {
+        if (err) {
+          response = 'SOMETHING WENT WRONG \\o/ ' + err.message;
+        }
         if (res.ok) {
           response = res.text;
         } else {
@@ -51,21 +56,27 @@ module.exports.post = function (url, payload, dispatch) {
           return response;
         }
       });
-};
+}
 
-module.exports.del = function (url, dispatch) {
+export function del(url, dispatch) {
   request.del(url_prefix + url)
       .type('application/json')
       .set('port', 3000)
       .end(function (err, res) {
+        let response;
+        if (err) {
+          response = 'SOMETHING WENT WRONG \\o/ ' + err.message;
+        }
         if (res.ok) {
-          dispatch(JSON.parse(res.text));
+          response = res.text;
+          dispatch(JSON.parse(response));
         } else {
           dispatch('Failed to delete');
         }
       });
-};
-module.exports.put = function (url, payload, dispatch) {
+}
+
+export function put(url, payload, dispatch) {
   let response;
   request.put(url_prefix + url)
       .type('application/json')
@@ -73,6 +84,9 @@ module.exports.put = function (url, payload, dispatch) {
       .set('port', 3000)
       .send(payload)
       .end(function (err, res) {
+        if (err) {
+          response = 'SOMETHING WENT WRONG \\o/ ' + err.message;
+        }
         if (res.ok) {
           response = res.text;
         } else {
@@ -83,4 +97,4 @@ module.exports.put = function (url, payload, dispatch) {
           return response;
         }
       });
-};
+}

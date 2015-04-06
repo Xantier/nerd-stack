@@ -1,12 +1,12 @@
 'use strict';
 
-var cache = {};
+let cache = {};
 
-var ensureTokenKey = (token) => {
+function ensureTokenKey(token) {
   if (!cache[token]) {
     cache[token] = {};
   }
-};
+}
 
 exports.set = (token, key, data) => {
   ensureTokenKey(token);
@@ -19,7 +19,7 @@ exports.get = (token, key) => {
 };
 
 exports.clean = (token) => {
-  var data = cache[token];
+  const data = cache[token];
   delete cache[token];
   return data;
 };

@@ -34,7 +34,10 @@
     "passport-local": "~1.0.0",
     "express-session": "~1.10.4",
     "keymirror": "~0.1.1",
-    "method-override": "~2.3.2"
+    "method-override": "~2.3.2",
+    "use-strict": "~1.0.0",
+    "express-flash": "0.0.2",
+    "connect-flash": "~0.1.1"
   },
   "devDependencies": {
     "babelify": "^5.0.4",

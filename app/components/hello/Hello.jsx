@@ -1,12 +1,12 @@
 'use strict';
 
-var React = require('react');
-var Router = require('react-router');
-var ThingContainer = require('../thing/ThingContainer.jsx');
-var helloStore = require('./helloStore');
-var helloAction = require('./helloAction');
-var HelloConstants = require('./helloConstants').HelloConstants;
-var { Route, Link, RouteHandler } = Router;
+const React = require('react');
+const Router = require('react-router');
+const ThingContainer = require('../thing/ThingContainer.jsx');
+const helloStore = require('./helloStore');
+const helloAction = require('./helloAction');
+const HelloConstants = require('./helloConstants').HelloConstants;
+const { Route, Link, RouteHandler } = Router;
 
 function getHelloString() {
   return {
@@ -14,7 +14,7 @@ function getHelloString() {
   };
 }
 
-var Hello = React.createClass({
+const Hello = React.createClass({
   statics: {
     children: [ThingContainer],
     load: function (token, req) {

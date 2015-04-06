@@ -1,21 +1,20 @@
 'use strict';
 
-//Imports
-var React = require('react');
-var Router = require('react-router');
-var routes = require('../components/routes');
-var dataLoader = require('../util/dataLoader');
+const React = require('react');
+const Router = require('react-router');
+const routes = require('../components/routes');
+const dataLoader = require('../util/dataLoader');
 
 module.exports = (req, token, cb) => {
-  var path = req.originalUrl;
-  var router = Router.create({
+  const path = req.originalUrl;
+  const router = Router.create({
     routes: routes(),
     location: path,
     onAbort: function (redirect) {
       cb({redirect});
     },
     onError: function (err) {
-      //TODO: Logging, Don't return err.
+      // TODO: Logging, Don't return err.
       return err;
     }
   });
@@ -26,8 +25,8 @@ module.exports = (req, token, cb) => {
       return;
     }
     dataLoader(token, state, req).then((data) => {
-      var clientToken = {token, data: data};
-      var html = React.renderToString(<Handler params={data} />);
+      const clientToken = {token, data: data};
+      const html = React.renderToString(<Handler params={data} />);
       cb(null, html, clientToken);
     });
   });

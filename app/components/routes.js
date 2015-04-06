@@ -1,15 +1,15 @@
 'use strict';
 
-var React = require('react');
-var Router = require('react-router');
-var { Route, NotFoundRoute } = Router;
+const React = require('react');
+const Router = require('react-router');
+const { Route, NotFoundRoute } = Router;
 
-var Index = require('./index/Index.jsx');
-var Signin = require('./index/Signin.jsx');
-var Register = require('./index/Register.jsx');
-var Home = require('./home/Home.jsx');
-var Hello = require('./hello/Hello.jsx');
-var NotFound = require('./NotFound.jsx');
+const Index = require('./index/Index.jsx');
+const Signin = require('./index/Signin.jsx');
+const Register = require('./index/Register.jsx');
+const Home = require('./home/Home.jsx');
+const Hello = require('./hello/Hello.jsx');
+const NotFound = require('./NotFound.jsx');
 
 module.exports = () => {
   return [

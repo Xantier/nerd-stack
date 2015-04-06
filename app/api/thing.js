@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports.get = function (req, res, next) {
-  var Thing = new req.db.models.Thing();
+  const Thing = new req.db.models.Thing();
   return Thing.fetchAll({user_id: req.user.id})
       .then(function (collection) {
         res.payload = collection.toJSON();
@@ -13,13 +13,13 @@ module.exports.get = function (req, res, next) {
 };
 
 module.exports.create = function (req, res) {
-  var Thing = req.db.models.Thing;
+  const Thing = req.db.models.Thing;
   Thing.forge({
     name: req.body.name,
     user_id: req.user.id
   }).save()
       .then(function (thing) {
-        var data = {error: false, data: thing};
+        const data = {error: false, data: thing};
         if (req.is('application/json')) {
           res.json(data);
         } else {
@@ -32,12 +32,12 @@ module.exports.create = function (req, res) {
 };
 
 module.exports.del = function (req, res) {
-  var Thing = req.db.models.Thing;
+  const Thing = req.db.models.Thing;
   Thing.forge({id: req.params.id})
       .fetch({require: true})
       .then(function (thing) {
         thing.destroy().then(function () {
-          var data = {error: false, data: {message: 'Thing deleted', id: req.params.id}};
+          const data = {error: false, data: {message: 'Thing deleted', id: req.params.id}};
           if (req.get('content-type') === 'application/json') {
             res.json(data);
           } else {
@@ -51,13 +51,13 @@ module.exports.del = function (req, res) {
 };
 
 module.exports.update = function (req, res) {
-  var Thing = req.db.models.Thing;
+  const Thing = req.db.models.Thing;
   Thing.forge({id: req.params.id})
       .fetch({require: true})
       .then(function (thing) {
         thing.set({name: req.body.name}).save()
             .then(function (savedThing) {
-              var data = {error: false, data: savedThing};
+              const data = {error: false, data: savedThing};
               if (req.is('application/json')) {
                 res.json(data);
               } else {

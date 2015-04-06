@@ -1,7 +1,7 @@
 'use strict';
 
-var React = require('react');
-var {Link} = require('react-router');
+const React = require('react');
+const {Link} = require('react-router');
 
 module.exports = React.createClass({
   render: function () {

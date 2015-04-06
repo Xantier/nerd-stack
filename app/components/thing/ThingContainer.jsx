@@ -1,10 +1,10 @@
 'use strict';
 
-var React = require('react');
-var ThingList = require('./ThingList.jsx');
-var thingStore = require('./thingStore');
-var thingAction = require('./thingAction');
-var ThingConstants = require('./thingConstants').ThingConstants;
+const React = require('react');
+const ThingList = require('./ThingList.jsx');
+const thingStore = require('./thingStore');
+const thingAction = require('./thingAction');
+const ThingConstants = require('./thingConstants').ThingConstants;
 
 function getThings() {
   return {
@@ -12,7 +12,7 @@ function getThings() {
   };
 }
 
-var ThingContainer = React.createClass({
+const ThingContainer = React.createClass({
   statics: {
     load: function (token, req) {
       return thingAction.getData(token, this.displayName, req);
