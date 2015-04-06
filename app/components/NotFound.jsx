@@ -1,10 +1,10 @@
 'use strict';
 
-const React = require('react');
-const Router = require('react-router');
-const { Link } = Router;
+import React from 'react';
+import { Link } from 'react-router';
 
 module.exports = React.createClass({
+  displayName: 'NotFound',
   render: function () {
     return (
         <div className="hello">

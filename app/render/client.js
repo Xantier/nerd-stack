@@ -1,12 +1,13 @@
 'use strict';
 
-const React = require('react');
-const Router = require('react-router');
-const routes = require('../components/routes');
-const dataLoader = require('../util/dataLoader');
-const rehydrate = require('../util/rehydrate');
+import React from 'react';
+import Router from 'react-router';
+import routes from '../components/routes';
+import dataLoader from '../util/dataLoader';
+import {get as getCached} from '../util/cache';
+import rehydrate from '../util/rehydrate';
 
-const token = rehydrate.rehydrate();
+const token = rehydrate();
 
 const renderState = {
   element: document.getElementById('content'),
@@ -17,7 +18,7 @@ const renderState = {
 function render() {
   let { element, Handler, routerState } = renderState;
   dataLoader(token, routerState).then((data) => {
-    React.render(<Handler params={data} />, element);
+    React.render(<Handler params={data} loggedIn={getCached(token, 'loggedIn')} />, element);
   });
 }
 

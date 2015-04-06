@@ -19,7 +19,6 @@ gulp.task('migrate', function () {
   migrate.migrate();
 });
 
-
 /**
  * Tasks *
  * default: Build & start server
@@ -38,7 +37,7 @@ var paths = {
   tests: 'spec/**/*.spec.js',
   sources: ['app/**/*.js', 'app/**/*.jsx'],
   client: {
-    main: './app/render/csr.js',
+    main: './app/render/client.js',
     build: './public/build/',
     basedir: './public/javascripts/'
   }

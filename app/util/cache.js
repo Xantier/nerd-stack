@@ -8,23 +8,23 @@ function ensureTokenKey(token) {
   }
 }
 
-exports.set = (token, key, data) => {
+export function set(token, key, data) {
   ensureTokenKey(token);
   cache[token][key] = data;
-};
+}
 
-exports.get = (token, key) => {
+export function get(token, key) {
   ensureTokenKey(token);
   return cache[token][key];
-};
+}
 
-exports.clean = (token) => {
+export function clean(token) {
   const data = cache[token];
   delete cache[token];
   return data;
-};
+}
 
-exports.expire = (token, key) => {
+export function expire(token, key) {
   ensureTokenKey(token);
   delete cache[token][key];
-};
+}

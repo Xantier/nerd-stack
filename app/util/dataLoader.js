@@ -1,8 +1,8 @@
 'use strict';
 
-const all = require('when/keys').all;
+import {all} from 'when/keys';
 
-module.exports = (token, routerState, req) => {
+export default (token, routerState, req) => {
   return all(routerState.routes.filter((route) => {
     return route.handler.load;
   }).reduce((promises, route) => {

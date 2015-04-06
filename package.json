@@ -43,6 +43,7 @@
     "babelify": "^5.0.4",
     "browserify": "^9.0.3",
     "chai": "^2.2.0",
+    "eslint": "~0.18.0",
     "eslint-plugin-react": "^1.6.1",
     "gulp": "^3.8.11",
     "gulp-eslint": "^0.7.0",

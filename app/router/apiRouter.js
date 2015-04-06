@@ -1,10 +1,11 @@
 'use strict';
 
-const router = require('express').Router();
+import {Router} from 'express';
+let router = Router();
 
 // Route imports
-const user = require('../api/user');
-const thing = require('../api/thing');
+import user from '../services/user';
+import thing from '../services/thing';
 
 function respond(req, res) {
   res.send(JSON.stringify(res.payload));
@@ -23,4 +24,4 @@ router.use(function (req, res) {
   res.status(404).send('Incorrect API route');
 });
 
-module.exports = router;
+export default router;

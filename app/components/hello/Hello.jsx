@@ -1,63 +1,54 @@
 'use strict';
 
-const React = require('react');
-const Router = require('react-router');
-const ThingContainer = require('../thing/ThingContainer.jsx');
-const helloStore = require('./helloStore');
-const helloAction = require('./helloAction');
-const HelloConstants = require('./helloConstants').HelloConstants;
-const { Route, Link, RouteHandler } = Router;
+import React from 'react';
+import ThingContainer from '../thing/ThingContainer.jsx';
+import HelloStore from './HelloStore';
+import HelloActions from './HelloActions';
+import {HelloConstants} from './HelloConstants';
+import { Route, Link, RouteHandler } from 'react-router';
 
 function getHelloString() {
   return {
-    helloString: helloStore.getData().text
+    user: HelloStore.getData().text
   };
 }
 
-const Hello = React.createClass({
+export default React.createClass({
+  displayName: 'Hello',
   statics: {
     children: [ThingContainer],
     load: function (token, req) {
-      return helloAction.getData(token, this.displayName, req);
+      return HelloActions.getData(token, this.displayName, req);
     }
   },
   getInitialState: function () {
     return getHelloString();
   },
   componentDidMount: function () {
-    helloStore.addChangeListener(HelloConstants.GET, this._onChange);
+    HelloStore.addChangeListener(HelloConstants.GET, this._onChange);
     this._maybeGetData();
   },
   componentWillUnmount: function () {
-    helloStore.removeChangeListener(HelloConstants.GET, this._onChange);
+    HelloStore.removeChangeListener(HelloConstants.GET, this._onChange);
   },
   _onChange: function () {
     this.setState(getHelloString());
   },
   _maybeGetData: function () {
-    if (helloStore.getData().metadata.firstRun) {
-      helloAction.getData();
+    if (HelloStore.getData().metadata.firstRun) {
+      HelloActions.getData();
     }
   },
   contextTypes: {
     router: React.PropTypes.func
   },
   render: function () {
-    var name = this.context.router.getCurrentParams().name;
     return (
         <div className="hello">
-          <h2>Hello {name}</h2>
-          <h2>Hello, {this.state.helloString}</h2>
+          <h2>Hello {this.state.user}, here are all your things.</h2>
           <ThingContainer />
-          <ul>
-            <li>
-              <Link to="home">Go Home</Link>
-            </li>
-          </ul>
           <RouteHandler/>
         </div>
     );
   }
 });
-
-module.exports = Hello;

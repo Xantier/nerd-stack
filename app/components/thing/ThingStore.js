@@ -1,10 +1,10 @@
 'use strict';
 
-const IndexDispatcher = require('../../util/dispatcher');
-const EventEmitter = require('events').EventEmitter;
-const assign = require('object-assign');
-const ThingConstants = require('./thingConstants').ThingConstants;
-const _ = require('lodash');
+import IndexDispatcher from '../../util/dispatcher';
+import assign from 'object-assign';
+import _ from 'lodash';
+import {ThingConstants} from './ThingConstants';
+import {EventEmitter} from 'events';
 
 let things;
 let metadata = {firstRun: true};
@@ -80,4 +80,4 @@ IndexDispatcher.register(function (action) {
   ThingStore.emitChange(action.actionType);
 });
 
-module.exports = ThingStore;
+export default ThingStore;

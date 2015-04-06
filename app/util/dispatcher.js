@@ -1,6 +1,6 @@
 'use strict';
 
-const Dispatcher = require('flux').Dispatcher;
+import {Dispatcher} from 'flux';
 const IndexDispatcher = new Dispatcher();
 
 IndexDispatcher.transmit = function (actionType) {
@@ -12,4 +12,4 @@ IndexDispatcher.transmit = function (actionType) {
   };
 };
 
-module.exports = IndexDispatcher;
+export default IndexDispatcher;

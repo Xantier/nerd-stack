@@ -1,6 +1,6 @@
 'use strict';
 
-const db = {
+export default {
   Users: {
     id: {type: 'increments', nullable: false, primary: true},
     name: {type: 'string', maxlength: 150, nullable: false}
@@ -11,5 +11,3 @@ const db = {
     userId: {type: 'foreignKey', references: 'Users.id'}
   }
 };
-
-module.exports.tables = db;

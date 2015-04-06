@@ -1,10 +1,11 @@
 'use strict';
 
-const React = require('react');
-const {Link} = require('react-router');
+import React from 'react';
+import {Link} from 'react-router';
 
-module.exports = React.createClass({
-  render: function () {
+export default React.createClass({
+  displayName: 'Register',
+  render() {
     return (
         <div>
           <form method="post" action="/register">
@@ -14,8 +15,12 @@ module.exports = React.createClass({
               Register
             </input>
           </form>
-          <Link to="signin">Sign In</Link>
+          <ul>
+            <li>
+              <Link to="signin">Sign In</Link>
+            </li>
+          </ul>
         </div>
-    )
+    );
   }
 });

@@ -1,6 +1,6 @@
 'use strict';
 
-const request = require('superagent');
+import request from 'superagent';
 const url_prefix = '/API';
 
 function getXhrData(url, cb) {
@@ -24,7 +24,7 @@ function getXhrData(url, cb) {
       });
 }
 
-export function get(url, dispatch, req) {
+export function httpGet(url, dispatch, req) {
   if (typeof window !== 'undefined') {
     return getXhrData(url, dispatch);
   }
@@ -35,7 +35,7 @@ export function get(url, dispatch, req) {
   });
 }
 
-export function post(url, payload, dispatch) {
+export function httpPost(url, payload, dispatch) {
   let response;
   request.post(url_prefix + url)
       .type('application/json')
@@ -58,7 +58,7 @@ export function post(url, payload, dispatch) {
       });
 }
 
-export function del(url, dispatch) {
+export function httpDel(url, dispatch) {
   request.del(url_prefix + url)
       .type('application/json')
       .set('port', 3000)
@@ -76,7 +76,7 @@ export function del(url, dispatch) {
       });
 }
 
-export function put(url, payload, dispatch) {
+export function httpPut(url, payload, dispatch) {
   let response;
   request.put(url_prefix + url)
       .type('application/json')

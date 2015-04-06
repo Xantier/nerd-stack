@@ -1,8 +1,11 @@
 'use strict';
 
-const Knex = require('knex');
-const config = require('../../env/development');
-let knex = Knex.initialize(config.db);
+// Still ES5
+/*eslint-disable */
+
+var Knex = require('knex');
+var config = require('../../env/development');
+var knex = Knex.initialize(config.db);
 
 module.exports.migrate = function () {
   knex.migrate.latest(config.db.migrations)
@@ -10,3 +13,4 @@ module.exports.migrate = function () {
     knex.destroy();
   });
 };
+/*eslint-enable */

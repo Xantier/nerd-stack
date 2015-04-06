@@ -1,9 +1,9 @@
 'use strict';
 
-const IndexDispatcher = require('../../util/dispatcher');
-const EventEmitter = require('events').EventEmitter;
-const assign = require('object-assign');
-const HelloConstants = require('./helloConstants').HelloConstants;
+import IndexDispatcher from '../../util/dispatcher';
+import {EventEmitter} from 'events';
+import assign from 'object-assign';
+import {HelloConstants} from './HelloConstants';
 
 let text = 'Loading... ';
 let metadata = {firstRun: true};
@@ -48,4 +48,4 @@ IndexDispatcher.register(function (action) {
   HelloStore.emitChange(action.actionType);
 });
 
-module.exports = HelloStore;
+export default HelloStore;

@@ -1,9 +1,9 @@
 'use strict';
 
-const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require('bcrypt-nodejs');
+import {Strategy as LocalStrategy} from 'passport-local';
+import bcrypt from 'bcrypt-nodejs';
 
-module.exports = function (passport, db) {
+export default function (passport, db) {
   passport.serializeUser(function (user, done) {
     done(null, user.id);
   });
@@ -51,4 +51,4 @@ module.exports = function (passport, db) {
               throw error;
             });
       }));
-};
+}

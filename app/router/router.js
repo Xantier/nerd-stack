@@ -1,37 +1,12 @@
 'use strict';
 
-const render = require('../render/ssr');
-const api = require('./apiRouter');
-const Cookies = require('cookies');
-const uuid = require('uuid');
+import render from '../render/server';
+import api from './apiRouter';
 
-function renderWithReact(req, res) {
-  const cookies = new Cookies(req, res);
-  const token = cookies.get('token') || uuid();
-  cookies.set('token', token, {maxAge: 30 * 24 * 60 * 60});
-  render(req, token, function (error, html, clientToken) {
-    if (!error) {
-      res.render('index', {
-        data: JSON.stringify(clientToken),
-        html: html,
-        message: {
-          error: req.flash('error'),
-          success: req.flash('success')
-        }
-      });
-    } else {
-      // TODO: Add stack trace error object logging and remove from returns on production runs
-      res.render('error', {
-        message: error.message,
-        error: error
-      });
-    }
-  });
-}
-module.exports = function (app, passport) {
+export default function (app, passport) {
 
   app.get('/signin', function (req, res) {
-    renderWithReact(req, res);
+    render(req, res);
   });
 
   app.post('/signin', passport.authenticate('signin', {
@@ -41,11 +16,11 @@ module.exports = function (app, passport) {
   }));
 
   app.get('/register', function (req, res) {
-    renderWithReact(req, res);
+    render(req, res);
   });
 
   app.post('/register', passport.authenticate('register', {
-    successRedirect: '/signin',
+    successRedirect: '/',
     failureRedirect: '/register',
     failureFlash: true,
     successFlash: true
@@ -69,7 +44,7 @@ module.exports = function (app, passport) {
 
   // Rendered routes
   app.use('*', auth, function (req, res) {
-    renderWithReact(req, res);
+    render(req, res);
   });
 
   // 404 Error handling
@@ -78,4 +53,4 @@ module.exports = function (app, passport) {
     err.status = 404;
     next(err);
   });
-};
+}

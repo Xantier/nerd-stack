@@ -1,16 +1,24 @@
 'use strict';
 
-const React = require('react');
-const Router = require('react-router');
-const { RouteHandler, Link } = Router;
+import React from 'react';
+import { RouteHandler } from 'react-router';
+import LogoutButton from './LogoutButton.jsx';
 
-module.exports = React.createClass({
-  render: function () {
+export default React.createClass({
+  displayName: 'Index',
+  propTypes: {
+    loggedIn: React.PropTypes.bool.isRequired
+  },
+  render() {
+    let logoutButton;
+    if (this.props.loggedIn) {
+      logoutButton = <LogoutButton />;
+    }
     return (
         <div className="container">
           <h1>Welcome</h1>
           <RouteHandler {...this.props}/>
-          <a href="/logout">logout</a>
+          {logoutButton}
         </div>
     );
   }

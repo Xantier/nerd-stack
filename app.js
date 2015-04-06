@@ -37,10 +37,7 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
-
-/*eslint-disable */
 app.use(express.static(path.join(__dirname, '/public/build')));
-/*eslint-enable */
 
 app.use(function (req, res, next) {
   req.db = db;

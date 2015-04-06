@@ -1,8 +1,8 @@
 'use strict';
 
-const keyMirror = require('keymirror');
+import keyMirror from 'keymirror';
 
-module.exports = {
+export default {
   HelloConstants: keyMirror({
     GET: null
   })
