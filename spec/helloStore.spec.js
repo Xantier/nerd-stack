@@ -1,7 +1,7 @@
 'use strict';
 
 const expect = require('chai').expect;
-let helloStore = require('../app/components/hello/helloStore');
+let helloStore = require('../app/components/hello/HelloStore');
 
 describe('HelloStore', function () {
   describe('getData()', function () {
