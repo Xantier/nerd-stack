@@ -24,15 +24,20 @@ function renderWithReact(req, token, cb) {
   });
 
   router.run((Handler, state) => {
+    let context = {
+      user: req.user,
+      db: req.db
+    };
     if (state.routes.length === 0 || state.routes[0].name === 'not-found') {
       cb({message: 'Unable to find path ' + state.path});
       return;
     }
     cleanCache(token);
-    dataLoader(token, state, req).then((data) => {
+    dataLoader(token, state, context).then((data) => {
+      context.data = data;
       data.loggedIn = loggedIn;
       const clientToken = {token, data: data};
-      const html = React.renderToString(<Handler params={data} loggedIn={loggedIn} />);
+      const html = React.renderToString(<Handler context={context} loggedIn={loggedIn} />);
       cb(null, html, clientToken);
     });
   });

@@ -5,6 +5,7 @@ import Thing from './Thing.jsx';
 import ThingStore from './ThingStore';
 import ThingActions from './ThingActions';
 import {ThingConstants} from './ThingConstants';
+import ContextMixin from '../../util/ContextMixin';
 
 function getThings() {
   return {
@@ -15,10 +16,11 @@ function getThings() {
 export default React.createClass({
   displayName: 'ThingContainer',
   statics: {
-    load: function (token, req) {
-      return ThingActions.getData(token, this.displayName, req);
+    load: function (token, context) {
+      return ThingActions.getData(token, this.displayName, context);
     }
   },
+  mixins: [ContextMixin],
   getInitialState: function () {
     return getThings();
   },

@@ -24,13 +24,12 @@ function getXhrData(url, cb) {
       });
 }
 
-export function httpGet(url, dispatch, req) {
+export function httpGet(url, dispatch, context) {
   if (typeof window !== 'undefined') {
     return getXhrData(url, dispatch);
   }
   let res = {};
-  return require('./' + url).get(req, res, function () {
-    dispatch(res.payload);
+  return require('./' + url).get(context, res, function () {
     return res.payload;
   });
 }

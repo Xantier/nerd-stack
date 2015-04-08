@@ -4,6 +4,7 @@ import React from 'react';
 import ThingContainer from '../thing/ThingContainer.jsx';
 import HelloStore from './HelloStore';
 import HelloActions from './HelloActions';
+import ContextMixin from '../../util/ContextMixin';
 import {HelloConstants} from './HelloConstants';
 import { Route, Link, RouteHandler } from 'react-router';
 
@@ -15,15 +16,18 @@ function getHelloString() {
 
 export default React.createClass({
   displayName: 'Hello',
+  propTypes: {
+    context: React.PropTypes.object.isRequired
+  },
   statics: {
     children: [ThingContainer],
-    load: function (token, req) {
-      return HelloActions.getData(token, this.displayName, req);
+    load: function (token, context) {
+
+      return HelloActions.getData(token, this.displayName, context);
     }
   },
-  getInitialState: function () {
-    return getHelloString();
-  },
+  mixins: [ContextMixin],
+
   componentDidMount: function () {
     HelloStore.addChangeListener(HelloConstants.GET, this._onChange);
     this._maybeGetData();
@@ -38,9 +42,6 @@ export default React.createClass({
     if (HelloStore.getData().metadata.firstRun) {
       HelloActions.getData();
     }
-  },
-  contextTypes: {
-    router: React.PropTypes.func
   },
   render: function () {
     return (
