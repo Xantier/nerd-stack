@@ -14,9 +14,12 @@ export default React.createClass({
     data: React.PropTypes.object
   },
   getChildContext: function () {
-    return {
-      data: this.props.context.data
-    };
+    if (this.props.context) {
+      return {
+        data: this.props.context.data
+      };
+    }
+    return null;
   },
   render() {
     let logoutButton;

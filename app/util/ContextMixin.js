@@ -8,10 +8,7 @@ export default {
   },
   getInitialState: function () {
     if (this.context && this.context.data) {
-      console.log(this.context);
-      var data = this.context.data[this.constructor.displayName];
-      console.log(data);
-      return data;
+      return this.context.data[this.constructor.displayName];
     }
     return {};
   }

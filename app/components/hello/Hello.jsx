@@ -16,9 +16,6 @@ function getHelloString() {
 
 export default React.createClass({
   displayName: 'Hello',
-  propTypes: {
-    context: React.PropTypes.object.isRequired
-  },
   statics: {
     children: [ThingContainer],
     load: function (token, context) {
