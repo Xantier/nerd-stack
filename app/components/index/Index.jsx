@@ -7,7 +7,16 @@ import LogoutButton from './LogoutButton.jsx';
 export default React.createClass({
   displayName: 'Index',
   propTypes: {
-    loggedIn: React.PropTypes.bool.isRequired
+    loggedIn: React.PropTypes.bool.isRequired,
+    context: React.PropTypes.object
+  },
+  childContextTypes: {
+    data: React.PropTypes.object
+  },
+  getChildContext: function () {
+    return {
+      data: this.props.context.data
+    };
   },
   render() {
     let logoutButton;

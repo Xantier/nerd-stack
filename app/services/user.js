@@ -8,9 +8,9 @@ export default {
     );
     return User.fetch().then(function (collection) {
       if (collection) {
-        res.payload = collection.get('name');
+        res.payload = {user: collection.get('name')};
       } else {
-        res.payload = 'Nothing found';
+        res.payload = {user: 'Nothing found'};
       }
       return next();
     });

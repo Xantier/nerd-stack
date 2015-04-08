@@ -8,9 +8,7 @@ import {ThingConstants} from './ThingConstants';
 import ContextMixin from '../../util/ContextMixin';
 
 function getThings() {
-  return {
-    things: ThingStore.getData().data
-  };
+  return ThingStore.getData().data;
 }
 
 export default React.createClass({
@@ -21,9 +19,6 @@ export default React.createClass({
     }
   },
   mixins: [ContextMixin],
-  getInitialState: function () {
-    return getThings();
-  },
   componentDidMount() {
     Object.keys(ThingConstants).forEach(function (key) {
       ThingStore.addChangeListener(key, this._onChange);
