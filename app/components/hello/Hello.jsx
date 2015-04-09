@@ -9,9 +9,7 @@ import {HelloConstants} from './HelloConstants';
 import { Route, Link, RouteHandler } from 'react-router';
 
 function getHelloString() {
-  return {
-    user: HelloStore.getData().text
-  };
+  return HelloStore.getData().data;
 }
 
 export default React.createClass({
@@ -19,12 +17,13 @@ export default React.createClass({
   statics: {
     children: [ThingContainer],
     load: function (token, context) {
-
       return HelloActions.getData(token, this.displayName, context);
     }
   },
   mixins: [ContextMixin],
-
+  getInitialState(){
+    return getHelloString();
+  },
   componentDidMount: function () {
     HelloStore.addChangeListener(HelloConstants.GET, this._onChange);
     this._maybeGetData();

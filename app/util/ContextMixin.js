@@ -6,10 +6,9 @@ export default {
   contextTypes: {
     data: React.PropTypes.object
   },
-  getInitialState: function () {
+  componentWillMount(){
     if (this.context && this.context.data) {
-      return this.context.data[this.constructor.displayName];
+      this.setState(this.context.data[this.constructor.displayName]);
     }
-    return {};
   }
 };

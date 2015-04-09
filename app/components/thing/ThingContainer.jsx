@@ -19,47 +19,43 @@ export default React.createClass({
     }
   },
   mixins: [ContextMixin],
+  getInitialState() {
+    return getThings();
+  },
   componentDidMount() {
     Object.keys(ThingConstants).forEach(function (key) {
       ThingStore.addChangeListener(key, this._onChange);
     }.bind(this));
     this._maybeGetData();
   },
-
   componentWillUnmount() {
     Object.keys(ThingConstants).forEach(function (key) {
       ThingStore.removeChangeListener(key, this._onChange);
     }.bind(this));
   },
-
   _createThing(e) {
     e.preventDefault();
     ThingActions.create({name: this.state.name});
   },
-
   _onChange() {
     this.setState(getThings());
   },
-
   _setChangedText(event) {
     this.setState({name: event.target.value});
   },
-
   _maybeGetData() {
     if (ThingStore.getData().metadata.firstRun) {
       ThingActions.getData();
     }
   },
-
   _modify(id, payload) {
     ThingActions.update(id, payload);
   },
-
   render() {
     let thingList;
     if (this.state.things && this.state.things.length) {
       thingList = this.state.things.map(function (thing) {
-        return <Thing item={thing} key={thing.id} _modify={this._modify} editState={false}/>
+        return <Thing item={thing} key={thing.id} _modify={this._modify} editState={false} />
       }.bind(this));
     }
 

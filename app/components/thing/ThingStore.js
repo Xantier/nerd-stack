@@ -6,7 +6,7 @@ import _ from 'lodash';
 import {ThingConstants} from './ThingConstants';
 import {EventEmitter} from 'events';
 
-let things;
+let things = {things: []};
 let metadata = {firstRun: true};
 
 function setText(_things) {
@@ -17,12 +17,12 @@ function setText(_things) {
 }
 
 function create(response) {
-  things.push(response.data);
+  things.things.push(response.data);
 }
 
 function remove(response) {
   if (response.data) {
-    _.remove(things, function (thing) {
+    _.remove(things.things, function (thing) {
       return thing.id === response.data.id;
     });
   }
@@ -30,10 +30,10 @@ function remove(response) {
 
 function update(response) {
   if (response.data) {
-    _.remove(things, function (thing) {
+    _.remove(things.things, function (thing) {
       return thing.id === response.data.id;
     });
-    things.push(response.data);
+    things.things.push(response.data);
   }
 }
 

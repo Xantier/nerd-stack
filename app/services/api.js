@@ -30,6 +30,9 @@ export function httpGet(url, dispatch, context) {
   }
   let res = {};
   return require('./' + url).get(context, res, function () {
+    /* Don't dispatch on server rendering.
+     * We don't want our stores to be populated
+     */
     return res.payload;
   });
 }
