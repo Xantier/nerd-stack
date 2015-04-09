@@ -17,8 +17,9 @@ const renderState = {
 
 function render() {
   let { element, Handler, routerState } = renderState;
-  dataLoader(token, routerState).then((data) => {
-    React.render(<Handler params={data} loggedIn={getCached(token, 'loggedIn')} />, element);
+  // This rehydrates our stores through our initial data load methods.
+  dataLoader(token, routerState).then(() => {
+    React.render(<Handler loggedIn={getCached(token, 'loggedIn')} />, element);
   });
 }
 

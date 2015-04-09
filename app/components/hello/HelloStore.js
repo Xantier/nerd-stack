@@ -5,7 +5,7 @@ import {EventEmitter} from 'events';
 import assign from 'object-assign';
 import {HelloConstants} from './HelloConstants';
 
-let text = 'Loading... ';
+let text = {user: 'Loading... '};
 let metadata = {firstRun: true};
 
 function setText(newText) {
@@ -18,7 +18,7 @@ function setText(newText) {
 const HelloStore = assign({}, EventEmitter.prototype, {
   getData: function () {
     return {
-      text: text,
+      data: text,
       metadata: metadata
     };
   },

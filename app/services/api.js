@@ -24,13 +24,15 @@ function getXhrData(url, cb) {
       });
 }
 
-export function httpGet(url, dispatch, req) {
+export function httpGet(url, dispatch, context) {
   if (typeof window !== 'undefined') {
     return getXhrData(url, dispatch);
   }
   let res = {};
-  return require('./' + url).get(req, res, function () {
-    dispatch(res.payload);
+  return require('./' + url).get(context, res, function () {
+    /* Don't dispatch on server rendering.
+     * We don't want our stores to be populated
+     */
     return res.payload;
   });
 }

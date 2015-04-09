@@ -7,7 +7,7 @@ export default {
     return Things.query({where: {'user_id': req.user.id}})
         .fetch()
         .then(function (collection) {
-          res.payload = collection.toJSON();
+          res.payload = {things: collection.toJSON()};
           return next();
         })
         .otherwise(function (err) {
