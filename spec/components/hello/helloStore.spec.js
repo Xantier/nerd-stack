@@ -7,7 +7,7 @@ const Dispatcher = require('../../../app/util/dispatcher');
 describe('HelloStore', function () {
   it('should return default values of Loading and firstRun true', function () {
     const response = helloStore.getData();
-    expect(response).to.have.property('text', 'Loading... ');
+    expect(response.data).to.have.property('user', 'Loading... ');
     expect(response.metadata).to.have.property('firstRun', true);
   });
   describe('Listener Testing', function () {
