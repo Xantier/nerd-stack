@@ -1,12 +1,12 @@
 'use strict';
 
-let Knex = require('knex');
-let config = require('../../env/development');
-let knex = Knex.initialize(config.db);
+import Knex from 'knex';
+import config from '../config.json';
+const knex = Knex.initialize(config.bookshelf.postgresql);
 
 export default function () {
-  knex.migrate.latest(config.db.migrations)
+  knex.migrate.latest(config.bookshelf.migrations)
       .then(function () {
-    knex.destroy();
-  });
+        knex.destroy();
+      });
 }

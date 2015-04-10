@@ -1,9 +1,9 @@
 'use strict';
 
 import knex from 'knex';
-import config from '../../env/development';
+import config from '../config.json';
 import Bookshelf from 'bookshelf'
-const knexConfig = knex(config.db);
+const knexConfig = knex(config.bookshelf.postgresql);
 let bookshelf = new Bookshelf(knexConfig);
 
 bookshelf.models = {};

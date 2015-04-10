@@ -1,0 +1,60 @@
+{
+  "bookshelf": {
+    "init": "/bookshelf/bookshelf",
+    "passport" : "/bookshelf/passport",
+    "migrations": {
+      "directory": "app/config/db/bookshelf/migrations",
+      "tableName": "schema_version"
+    },
+    "postgresql": {
+      "client": "pg",
+      "connection": {
+        "host": "127.0.0.1",
+        "user": "postgres",
+        "password": "salasana",
+        "database": "nerd",
+        "charset": "utf8"
+      }
+    },
+    "mysql": {
+      "client": "mysql",
+      "connection": {
+        "host": "127.0.0.1",
+        "user": "root",
+        "password": "",
+        "database": "nerd",
+        "charset": "utf8"
+      }
+    },
+    "sqlite": {
+      "client": "sqlite3",
+      "connection": {
+        "filename": "/data/nerd.db"
+      }
+    }
+  },
+  "mongodb": {
+    "init": "/mongo/mongo",
+    "passport" : "/mongo/passport",
+    "congig": {
+      "production": {
+        "user": "nerd",
+        "pass": "salasana",
+        "host": "localhost",
+        "database": "nerd-stack-prod"
+      },
+      "development": {
+        "user": "nerd",
+        "pass": "salasana",
+        "host": "localhost",
+        "database": "nerd-stack-dev"
+      },
+      "test": {
+        "user": "nerd",
+        "pass": "salasana",
+        "host": "localhost",
+        "database": "nerd-stack-test"
+      }
+    }
+  }
+}

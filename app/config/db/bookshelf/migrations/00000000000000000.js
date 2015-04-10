@@ -1,11 +1,11 @@
 'use strict';
 
 /**
- * Naming convention for migration files is ISO date, hours, minutes, seconds, milliseconds
+ * Naming convention for migration files is date, hours, minutes, seconds, milliseconds
  * 4+2+2+2+2+2+3 = 17 numbers e.g. 20150331211015325
  **/
 
-module.exports.up = function (knex, Promise) {
+export function up(knex, Promise) {
   return Promise.all([
     knex.schema.createTable('Thing', function (table) {
       table.bigIncrements('id').primary().unsigned();
@@ -18,11 +18,11 @@ module.exports.up = function (knex, Promise) {
       table.string('password', 255);
     })
   ]);
-};
+}
 
-module.exports.down = function (knex, Promise) {
+export function down(knex, Promise) {
   return Promise.all([
     knex.schema.dropTable('User'),
     knex.schema.dropTable('Thing')
   ]);
-};
+}

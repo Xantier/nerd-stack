@@ -9,13 +9,9 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const db = require('./app/config/db/init')(passport);
 
 let app = express();
-
-// TODO: Extract DB and passport config to a file
-let db = require('./app/config/db/bookshelf/bookshelf');
-require('./app/config/db/bookshelf/passport')(passport, db);
-// TODO: Extract DB and passport config to a file
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
