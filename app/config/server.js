@@ -1,8 +1,5 @@
 'use strict';
 
-// Transpile all ES6 to ES5
-require('babel/register');
-
 const debug = require('debug')('NERD-seed:server');
 const port = normalizePort(process.env.PORT || '3000');
 let app = require('./../../app');

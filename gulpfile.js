@@ -14,9 +14,10 @@ plugins.buffer = require('vinyl-buffer');
  * TODO: Pull this out to somewhere where it can reside while
  * user decides what database to use.
 **/
-var migrate = require('./app/config/db/bookshelf/migrate');
+
 gulp.task('migrate', function () {
-  migrate.migrate();
+  require('babel/register');
+  require('./app/config/db/bookshelf/migrate')();
 });
 
 /**
@@ -33,7 +34,7 @@ gulp.task('dev', ['lint', 'build', 'serve']);
 gulp.task('debug', ['lint', 'test', 'build', 'serve']);
 
 var paths = {
-  server: 'app/config/server.js',
+  server: 'run.js',
   tests: 'spec/**/*.spec.js',
   sources: ['app/**/*.js', 'app/**/*.jsx'],
   client: {
