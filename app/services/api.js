@@ -1,6 +1,8 @@
 'use strict';
 
 import request from 'superagent';
+import {handleServerRequest} from './serverMediator';
+import {get as getCached} from '../util/cache';
 const url_prefix = '/API';
 
 function getXhrData(url, cb) {
@@ -25,16 +27,18 @@ function getXhrData(url, cb) {
 }
 
 export function httpGet(url, dispatch, context) {
-  if (typeof window !== 'undefined') {
-    return getXhrData(url, dispatch);
+  if (typeof window === 'undefined') {
+    return handleServerRequest(url, context);
   }
-  let res = {};
-  return require('./' + url).get(context, res, function () {
-    /* Don't dispatch on server rendering.
-     * We don't want our stores to be populated
-     */
-    return res.payload;
-  });
+  if (context) {
+    const cached = getCached(context.token, context.displayName);
+    if (cached) {
+      // Rehydrates store with cached data
+      dispatch(cached);
+    }
+  } else {
+    getXhrData(url, dispatch);
+  }
 }
 
 export function httpPost(url, payload, dispatch) {

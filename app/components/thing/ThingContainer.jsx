@@ -14,8 +14,8 @@ function getThings() {
 export default React.createClass({
   displayName: 'ThingContainer',
   statics: {
-    load: function (token, context) {
-      return ThingActions.getData(token, this.displayName, context);
+    load: function (context) {
+      return ThingActions.getData(context);
     }
   },
   mixins: [ContextMixin],

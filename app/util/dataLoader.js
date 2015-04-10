@@ -7,7 +7,9 @@ let context;
 function handleChildren(promises, children) {
   if (children) {
     children.forEach(function (child) {
-      promises[child.displayName] = child.load(token, context);
+      context.displayName = child.displayName;
+      context.token = token;
+      promises[child.displayName] = child.load(context);
       handleChildren(promises, child.children);
     });
   }
@@ -16,11 +18,13 @@ function handleChildren(promises, children) {
 
 export default (_token, routerState, _context) => {
   token = _token;
-  context = _context;
+  context = _context || {};
   return all(routerState.routes.filter((route) => {
     return route.handler.load;
   }).reduce(function fillPromises(promises, route) {
-    promises[route.handler.displayName] = route.handler.load(token, context);
+    context.displayName = route.handler.displayName;
+    context.token = token;
+    promises[route.handler.displayName] = route.handler.load(context);
     return handleChildren(promises, route.handler.children);
   }, {}));
 };

@@ -40,7 +40,8 @@ var paths = {
   client: {
     main: './app/render/client.js',
     build: './public/build/',
-    basedir: './public/javascripts/'
+    basedir: './public/javascripts/',
+    ignore: './app/services/serverMediator.js'
   }
 };
 
@@ -55,9 +56,9 @@ gulp.task('serve', function () {
     env: {
       'NODE_ENV': 'development'
     },
-    watch: ['*.js', '*.jsx'],
+    watch: [paths.sources, paths.tests],
     ext: ['js', 'jsx'],
-    ignore: [paths.client.sources, 'public/build/**', '*.xml']
+    ignore: [paths.client.sources, 'public/build/**', '*.xml', 'node_modules/**']
   })
       .on('start', ['livereload'])
       .on('change', ['livereload'])
@@ -77,6 +78,7 @@ gulp.task('lint', function () {
 // Browserify frontend code and compile React JSX files.
 gulp.task('scripts', function () {
   plugins.browserify(paths.client.main, {debug: true})
+      .ignore(paths.client.ignore)
       .transform(plugins.babelify)
       .transform(plugins.reactify)
       .bundle()

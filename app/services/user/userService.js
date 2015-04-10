@@ -16,7 +16,7 @@ export default {
     });
   },
 
-  create(req, res) {
+  add(req, res) {
     const User = req.db.models.User;
     User.forge({
       name: req.body.name

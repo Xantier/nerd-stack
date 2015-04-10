@@ -16,8 +16,8 @@ export default React.createClass({
   displayName: 'Hello',
   statics: {
     children: [ThingContainer],
-    load: function (token, context) {
-      return HelloActions.getData(token, this.displayName, context);
+    load: function (context) {
+      return HelloActions.getData(context);
     }
   },
   mixins: [ContextMixin],

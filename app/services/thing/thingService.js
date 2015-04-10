@@ -14,7 +14,7 @@ export default {
           res.status(500).json({error: true, data: {message: err.message}});
         });
   },
-  create(req, res) {
+  add(req, res) {
     const Thing = req.db.models.Thing;
     Thing.forge({
       name: req.body.name,
@@ -52,7 +52,7 @@ export default {
         });
   },
 
-  update(req, res) {
+  set(req, res) {
     const Thing = req.db.models.Thing;
     Thing.forge({id: req.params.id})
         .fetch({require: true})
