@@ -37,11 +37,8 @@ function renderWithReact(req, token, cb) {
       context.data = data;
       data.loggedIn = loggedIn;
       const clientToken = {token, data: data};
-      setTimeout(function () {
-        const html = React.renderToString(<Handler context={context} loggedIn={loggedIn} />);
-        cb(null, html, clientToken);
-      }, 2000);
-
+      const html = React.renderToString(<Handler context={context} loggedIn={loggedIn} />);
+      cb(null, html, clientToken);
     });
   });
 }
