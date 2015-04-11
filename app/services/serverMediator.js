@@ -18,5 +18,4 @@ export function handleServerRequest(url, context) {
       return res.payload;
     });
   }
-  return undefined;
 }

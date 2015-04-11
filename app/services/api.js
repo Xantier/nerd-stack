@@ -9,6 +9,7 @@ function getXhrData(url, cb) {
   let response;
   request.get(url_prefix + url)
       .set('Accept', 'application/json')
+      .set('X-Requested-With', 'XMLHttpRequest')
       .set('port', 3000)
       .end(function (err, res) {
         if (err) {
@@ -46,6 +47,7 @@ export function httpPost(url, payload, dispatch) {
   request.post(url_prefix + url)
       .type('application/json')
       .set('Accept', 'application/json')
+      .set('X-Requested-With', 'XMLHttpRequest')
       .set('port', 3000)
       .send(payload)
       .end(function (err, res) {
@@ -67,6 +69,7 @@ export function httpPost(url, payload, dispatch) {
 export function httpDel(url, dispatch) {
   request.del(url_prefix + url)
       .type('application/json')
+      .set('X-Requested-With', 'XMLHttpRequest')
       .set('port', 3000)
       .end(function (err, res) {
         let response;
@@ -87,6 +90,7 @@ export function httpPut(url, payload, dispatch) {
   request.put(url_prefix + url)
       .type('application/json')
       .set('Accept', 'application/json')
+      .set('X-Requested-With', 'XMLHttpRequest')
       .set('port', 3000)
       .send(payload)
       .end(function (err, res) {
