@@ -10,12 +10,13 @@ export function getThingsById(db, id, cb) {
   });
 }
 export function addThingToUser(db, payload, cb) {
-  const User = db.models.User;
+  const User = db.model('User');
   return User.findById(payload.user.id, function (err, user) {
     if (err) {
       return cb(err, null);
     }
-    const ThingSchema = new db.model('Thing');
+    const ThingSchema = db.model('Thing').schema;
+    console.log(ThingSchema);
     const Thing = new ThingSchema({name: payload.thing.name});
     Thing.save(function (err2, thing) {
       if (err2) {
