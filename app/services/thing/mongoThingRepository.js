@@ -1,28 +1,37 @@
 'use strict';
 
 export function getThingsById(db, id, cb) {
-  const Things = new db.models.Things();
-  return Things.query({where: {'user_id': id}})
-      .fetch()
-      .then(function (collection) {
-        return cb(null, collection.toJSON());
-      })
-      .otherwise(function (err) {
-        return cb(err, null);
-      });
+  const User = db.model('User');
+  return User.findById(id, function (err, user) {
+    if (err) {
+      return cb(err, null);
+    }
+    return cb(null, user.things);
+  });
 }
 export function addThingToUser(db, payload, cb) {
-  const Thing = db.models.Thing;
-  Thing.forge({
-    name: payload.thing.name,
-    user_id: payload.user.id
-  }).save()
-      .then(function (thing) {
-        cb(null, thing);
-      })
-      .otherwise(function (err) {
-        cb(err, null);
-      });
+  const User = db.models.User;
+  return User.findById(payload.user.id, function (err, user) {
+    if (err) {
+      return cb(err, null);
+    }
+    const ThingSchema = new db.model('Thing');
+    const Thing = new ThingSchema({name: payload.thing.name});
+    Thing.save(function (err2, thing) {
+      if (err2) {
+        cb(err2, null);
+      } else {
+        user.things.push(Thing);
+        user.save(function (err3) {
+          if (err3) {
+            cb(err3, null);
+          } else {
+            cb(null, thing);
+          }
+        });
+      }
+    });
+  });
 }
 export function deleteThing(db, id, cb) {
   const Thing = db.models.Thing;

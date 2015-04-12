@@ -1,4 +1,5 @@
 {
+  "db": "mongodb",
   "bookshelf": {
     "init": "/bookshelf/bookshelf",
     "passport" : "/bookshelf/passport",
@@ -36,24 +37,21 @@
   "mongodb": {
     "init": "/mongo/mongo",
     "passport" : "/mongo/passport",
-    "congig": {
+    "config": {
       "production": {
         "user": "nerd",
         "pass": "salasana",
-        "host": "localhost",
-        "database": "nerd-stack-prod"
+        "db": "mongodb://localhost/nerd-stack-prod"
       },
       "development": {
         "user": "nerd",
         "pass": "salasana",
-        "host": "localhost",
-        "database": "nerd-stack-dev"
+        "db": "mongodb://localhost/nerd-stack-dev"
       },
       "test": {
         "user": "nerd",
         "pass": "salasana",
-        "host": "localhost",
-        "database": "nerd-stack-test"
+        "db": "mongodb://localhost/nerd-stack-test"
       }
     }
   }

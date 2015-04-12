@@ -17,4 +17,4 @@ Thing.register(bookshelf);
 // TODO: Migrations functions to automatically update DB
 // var db = import from'./db/schema').tables;
 
-module.exports = bookshelf;
+export default bookshelf;
