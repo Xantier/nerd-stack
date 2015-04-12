@@ -15,8 +15,7 @@ export function addThingToUser(db, payload, cb) {
     if (err) {
       return cb(err, null);
     }
-    const ThingSchema = db.model('Thing').schema;
-    console.log(ThingSchema);
+    const ThingSchema = db.model('Thing');
     const Thing = new ThingSchema({name: payload.thing.name});
     Thing.save(function (err2, thing) {
       if (err2) {

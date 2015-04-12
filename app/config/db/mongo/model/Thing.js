@@ -6,6 +6,5 @@ export default class Thing {
       name: {type: String, default: ''}
     });
     mongoose.model('Thing', ThingSchema);
-    mongoose.models.Thing = ThingSchema;
   }
 }
