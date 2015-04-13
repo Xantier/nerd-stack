@@ -1,6 +1,7 @@
 'use strict';
 
-import * as thingDAO from './bookshelfThingRepository';
+//import * as thingDAO from './bookshelfThingRepository';
+import * as thingDAO from './mongoThingRepository';
 import respond from '../responder.js';
 
 export default {
@@ -10,7 +11,7 @@ export default {
         res.payload = {error: true, data: {message: err.message}};
         res.status(500).json({error: true, data: {message: err.message}});
       } else {
-        res.payload = {things: collection.toJSON()};
+        res.payload = {things: collection};
       }
       return next();
     });

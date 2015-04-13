@@ -5,7 +5,7 @@ export function getThingsById(db, id, cb) {
   return Things.query({where: {'user_id': id}})
       .fetch()
       .then(function (collection) {
-        return cb(null, collection);
+        return cb(null, collection.toJSON());
       })
       .otherwise(function (err) {
         return cb(err, null);

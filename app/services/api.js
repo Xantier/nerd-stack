@@ -38,6 +38,7 @@ export function httpGet(url, dispatch, context) {
       dispatch(cached);
     }
   } else {
+    // Fills store with retrieved data
     getXhrData(url, dispatch);
   }
 }
