@@ -3,7 +3,7 @@
 import mongoose from 'mongoose';
 import config from '../config.json';
 
-const mongopt = config.mongodb.config.development;
+const mongopt = config.mongo.config.development;
 const options = {
   db: {native_parser: true},
   server: {poolSize: 5},

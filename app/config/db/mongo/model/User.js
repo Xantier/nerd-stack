@@ -1,6 +1,7 @@
 'use strict';
 
-export default class User {
+export default
+class User {
   static register(mongoose) {
     let UserSchema = new mongoose.Schema({
       name: {type: String, default: ''},
@@ -9,6 +10,9 @@ export default class User {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Thing'
       }]
+    });
+    UserSchema.virtual('id').get(function () {
+      return this._id;
     });
     mongoose.model('User', UserSchema);
   }

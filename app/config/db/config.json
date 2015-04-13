@@ -1,5 +1,5 @@
 {
-  "db": "mongodb",
+  "db": "mongo",
   "bookshelf": {
     "init": "/bookshelf/bookshelf",
     "passport" : "/bookshelf/passport",
@@ -34,7 +34,7 @@
       }
     }
   },
-  "mongodb": {
+  "mongo": {
     "init": "/mongo/mongo",
     "passport" : "/mongo/passport",
     "config": {

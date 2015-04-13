@@ -2,11 +2,13 @@
 
 export function getUser(db, id, cb) {
   const User = db.model('User');
-  return User.findById(id, function (err, user) {
-    if (err) {
-      return cb(err, null);
-    }
-    return cb(null, user.name);
+  return new Promise(function (resolve, reject) {
+    User.findById(id, function (err, user) {
+      if (err) {
+        return reject(cb(err, null));
+      }
+      return resolve(cb(null, user.name));
+    });
   });
 }
 
