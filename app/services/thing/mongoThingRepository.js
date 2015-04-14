@@ -17,59 +17,42 @@ function mapToObjects(things) {
 
 export function getThingsById(db, id, cb) {
   const User = db.model('User');
-  return new Promise(function (resolve, reject) {
-    User.findById(id, function (userErr, user) {
-      if (userErr) {
-        return reject(cb(userErr, null));
-      }
-      db.model('Thing').find({
-        '_id': {$in: user.things}
-      }, function (err, things) {
-        if (err) {
-          return reject(cb(err, null));
-        }
-        const thingsWithId = mapToObjects(things);
-        return resolve(cb(null, thingsWithId));
-      });
-    });
+  return User.findById(id).exec().then(function (user) {
+    return db.model('Thing').find({
+      '_id': {$in: user.things}
+    }).exec();
+  }).then(function (things) {
+    const thingsWithId = mapToObjects(things);
+    return cb(null, thingsWithId);
+  }).onReject(function (err) {
+    return cb(err, null);
   });
 }
 
 export function addThingToUser(db, payload, cb) {
   const User = db.model('User');
-  return User.findById(payload.user.id, function (loadErr, user) {
-    if (loadErr) {
-      return cb(loadErr, null);
-    }
-    const ThingSchema = db.model('Thing');
-    const Thing = new ThingSchema({name: payload.thing.name});
-    Thing.save(function (thingErr, thing) {
-      if (thingErr) {
-        cb(thingErr, null);
-      } else {
-        user.things.push(Thing);
-        user.save(function (userErr) {
-          if (userErr) {
-            cb(userErr, null);
-          } else {
-            const thingWithId = mapToObject(thing);
-            cb(null, thingWithId);
-          }
-        });
-      }
-    });
+  const ThingSchema = db.model('Thing');
+  const Thing = new ThingSchema({name: payload.thing.name});
+  let thingWithId;
+  return Thing.save().then(function (thing) {
+    thingWithId = mapToObject(thing);
+    return User.findById(payload.user.id).exec();
+  }).then(function (user) {
+    user.things.push(Thing);
+    return user.save();
+  }).then(function () {
+    cb(null, thingWithId);
+  }).onReject(function (err) {
+    cb(err, null);
   });
 }
 
 export function deleteThing(db, id, cb) {
   const Thing = db.model('Thing');
-  Thing.findById(id, function (err, thing) {
-    if (err) {
-      cb(err);
-    }
-    thing.remove(function (deletionErr) {
-      if (deletionErr) {
-        cb(deletionErr);
+  Thing.findById(id).exec().then(function (thing) {
+    thing.remove(function (err) {
+      if (err) {
+        cb(err);
       } else {
         cb(null);
       }
@@ -79,19 +62,13 @@ export function deleteThing(db, id, cb) {
 
 export function updateThing(db, payload, cb) {
   const Thing = db.model('Thing');
-  Thing.findById(payload.thingId, function (err, thing) {
-    if (err) {
-      cb(err);
-    } else {
-      thing.name = payload.thing.name;
-      thing.save(function (saveErr, savedThing) {
-        if (saveErr) {
-          cb(err, null);
-        } else {
-          const thingWithId = mapToObject(savedThing);
-          cb(null, thingWithId);
-        }
-      });
-    }
+  Thing.findById(payload.thingId).exec().then(function (thing) {
+    thing.name = payload.thing.name;
+    return thing.save();
+  }).then(function (savedThing) {
+    const thingWithId = mapToObject(savedThing);
+    cb(null, thingWithId);
+  }).onReject(function (err) {
+    cb(err, null);
   });
 }

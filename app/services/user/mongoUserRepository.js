@@ -2,23 +2,19 @@
 
 export function getUser(db, id, cb) {
   const User = db.model('User');
-  return new Promise(function (resolve, reject) {
-    User.findById(id, function (err, user) {
-      if (err) {
-        return reject(cb(err, null));
-      }
-      return resolve(cb(null, user.name));
-    });
-  });
+  return User.findById(id).exec()
+      .then(function (user) {
+        return cb(null, user.name);
+      }).onReject(function (err) {
+        return cb(err, null);
+      });
 }
 
 export function addUser(db, payload, cb) {
   const User = new db.model('User')({name: payload.name});
-  User.save(function (err, user) {
-    if (err) {
-      cb(err, null);
-    } else {
-      cb(null, user._id);
-    }
+  User.save().then(function (user) {
+    cb(null, user._id);
+  }).onReject(function (err) {
+    return cb(err, null);
   });
 }
