@@ -14,8 +14,6 @@ The NERD stack provides you with an application skeleton with [Node.js](https://
 
 The purpose of this application skeleton is to empower developers to be able to start developing their Node.js + React easily but still maintaining enough wiggle room to not get constrained into heavy frameworks.
 
-This repository contains all source code for the actual implementation of the skeleton. To start using this, please refer to the installer which let's you choose few options, including your database implementation. 
-
 
 ## Installation ##
 This repository contains all source code for the actual implementation of the skeleton. To start using this, please refer to the installer [still under construction] which let's you choose few options, including your database implementation. 
