@@ -42,6 +42,26 @@ The application contains multiple implementations of databases. After you have d
 ####Configuration####
 You can select your database implementation by modifying configuration file called config.json in app/config/ folder. In the file replace the db attribute with your chosen implementation. Actual DB settings are listed below under their respective names. Please make sure to setup your system how you have configured your database itself. Good things to change are hostname, database name and user credentials.
 
+##Running##
+
+To run this application you can install this app with usual commands:
+````
+git clone :repository
+npm install
+gulp dev
+````
+
+When you are happy with your application and plan to run it without development mode  you can invoke the following commands:
+````
+gulp build 
+```` 
+To build the latest frontend resources and
+```` 
+node /config/server.js 
+```` 
+To start the server.
+It is recommended to use something like supervisor to run the application when uptime is important.
+
 
 
 #Licence#
