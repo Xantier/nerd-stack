@@ -18,7 +18,7 @@ This repository contains all source code for the actual implementation of the sk
 
 
 ## Installation ##
-This repository contains all source code for the actual implementation of the skeleton. To start using this, please refer to the installer which let's you choose few options, including your database implementation. 
+This repository contains all source code for the actual implementation of the skeleton. To start using this, please refer to the installer [still under construction] which let's you choose few options, including your database implementation. 
 
 ####Environment ####
 The tools of the trade for this application development stack are node.js, git and your preferred database implementation. 
@@ -37,7 +37,11 @@ The application contains multiple implementations of databases. After you have d
 - [MongoDB](http://docs.mongodb.org/manual/installation/#installation-guides)
 - [Neo4j](http://neo4j.com/docs/stable/server-installation.html) 
 - [Redis (Windows not officially supported)](http://redis.io/download)
-- [RethinkDB (Not available on Windows)](http://rethinkdb.com/docs/install/ )
+- [RethinkDB (Not available on Windows)](http://rethinkdb.com/docs/install/)
+
+##Configuration##
+You can select your database implementation by modifying configuration file called config.json in app/config/ folder. In the file replace the db attribute with your chosen implementation. Actual DB settings are listed below under their respective names. Please make sure to setup your system how you have configured your database itself. Good things to change are hostname, database name and user credentials.
+
 
 ##Running##
 
