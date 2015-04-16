@@ -9,7 +9,7 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
-const db = require('./app/config/db/init')(passport);
+const db = require('./app/config/db')(passport);
 
 let app = express();
 

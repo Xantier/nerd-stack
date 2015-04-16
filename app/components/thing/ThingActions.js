@@ -1,7 +1,7 @@
 'use strict';
 
 import Dispatcher from '../../util/dispatcher';
-import {httpGet, httpPost, httpPut, httpDel} from '../../services/api';
+import {httpGet, httpPost, httpPut, httpDel} from '../../services/fetcher';
 import {ThingConstants} from './ThingConstants';
 
 export default class ThingActions {

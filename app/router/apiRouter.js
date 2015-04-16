@@ -4,8 +4,8 @@ import {Router} from 'express';
 let router = new Router();
 
 // Route imports
-import user from '../services/user/userService';
-import thing from '../services/thing/thingService';
+import user from '../services/userService';
+import thing from '../services/thingService';
 
 function respond(req, res) {
   res.send(JSON.stringify(res.payload));

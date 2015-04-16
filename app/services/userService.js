@@ -1,7 +1,7 @@
 'use strict';
 
-//import * as userDAO from './bookshelfUserRepository';
-import * as userDAO from './mongoUserRepository';
+import config from '../config/config.json';
+import * as userDAO from '../data/bookshelf/persistence/userRepository';
 
 export default {
   get(req, res, next) {

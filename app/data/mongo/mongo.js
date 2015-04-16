@@ -1,7 +1,7 @@
 'use strict';
 
 import mongoose from 'mongoose';
-import config from '../config.json';
+import config from '../../config/config.json';
 
 const mongopt = config.mongo.config.development;
 const options = {

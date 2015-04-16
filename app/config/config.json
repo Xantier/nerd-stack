@@ -1,10 +1,10 @@
 {
   "db": "mongo",
   "bookshelf": {
-    "init": "/bookshelf/bookshelf",
-    "passport" : "/bookshelf/passport",
+    "init": "data/bookshelf/bookshelf",
+    "passport" : "data/bookshelf/passport",
     "migrations": {
-      "directory": "app/config/db/bookshelf/migrations",
+      "directory": "app/data/bookshelf/migrations",
       "tableName": "schema_version"
     },
     "postgresql": {
@@ -35,8 +35,8 @@
     }
   },
   "mongo": {
-    "init": "/mongo/mongo",
-    "passport" : "/mongo/passport",
+    "init": "data/mongo/mongo",
+    "passport" : "data/mongo/passport",
     "config": {
       "production": {
         "user": "nerd",

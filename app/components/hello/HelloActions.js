@@ -1,7 +1,7 @@
 'use strict';
 
 import Dispatcher from '../../util/dispatcher';
-import {httpGet} from '../../services/api';
+import {httpGet} from '../../services/fetcher';
 import {HelloConstants} from './HelloConstants';
 import { get as getCached} from '../../util/cache';
 

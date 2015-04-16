@@ -1,8 +1,8 @@
 'use strict';
 
-//import * as thingDAO from './bookshelfThingRepository';
-import * as thingDAO from './mongoThingRepository';
-import respond from '../responder.js';
+import config from '../config/config.json';
+import * as thingDAO from '../data/bookshelf/persistence/thingRepository';
+import respond from './responder.js';
 
 export default {
   get(req, res, next) {
