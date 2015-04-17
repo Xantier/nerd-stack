@@ -1,0 +1,26 @@
+'use strict';
+
+export default
+class Thing {
+  static register(nohm) {
+    nohm.model('Thing', {
+      idGenerator: 'increment',
+      properties: {
+        name: {
+          type: 'string',
+          unique: true,
+          validations: [
+            'notEmpty'
+          ]
+        },
+        password: {
+          type: 'string',
+          unique: true,
+          validations: [
+            'notEmpty'
+          ]
+        }
+      }
+    });
+  }
+}
