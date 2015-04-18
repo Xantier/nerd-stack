@@ -9,6 +9,7 @@ class User {
         name: {
           type: 'string',
           unique: true,
+          index: true,
           validations: [
             'notEmpty'
           ]

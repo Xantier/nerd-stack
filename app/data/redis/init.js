@@ -8,19 +8,21 @@ const opt = config.redis;
 
 let client = redis.createClient(opt.port, opt.host, opt.options);
 client.auth(opt.password);
-nohm.setClient(client);
+client.on('connect', function () {
+  nohm.setClient(client);
+});
 
 /**
  * Global error handling for redis
-client.on('error', function (err) {
+ client.on('error', function (err) {
   console.log('Error ' + err);
 });
-*/
+ */
 
 // Register models
 import User from './model/User';
-User.register(mongoose);
+User.register(nohm);
 import Thing from './model/Thing'
-Thing.register(mongoose);
+Thing.register(nohm);
 
-export default mongoose;
+export default nohm;
