@@ -60,7 +60,7 @@
     ],
     "curly": [
       2,
-      "all"
+      "multi-line"
     ],
     "default-case": 2,
     "dot-notation": [
@@ -227,7 +227,7 @@
       }
     ],
     "no-use-before-define": 2,
-    "no-var" : 2,
+    "no-var": 2,
     "no-void": 0,
     "no-warning-comments": [
       0,

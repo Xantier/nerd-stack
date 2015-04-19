@@ -38,7 +38,9 @@
     "use-strict": "~1.0.0",
     "uuid": "^2.0.1",
     "when": "^3.7.2",
-    "mongoose": "~4.0.1"
+    "mongoose": "~4.0.1",
+    "nohm": "~0.9.6",
+    "redis": "~0.12.1"
   },
   "devDependencies": {
     "babelify": "^5.0.4",

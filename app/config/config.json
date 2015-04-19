@@ -1,7 +1,7 @@
 {
-  "db": "mongo",
+  "db": "redis",
   "bookshelf": {
-    "init": "data/bookshelf/bookshelf",
+    "init": "data/bookshelf/init",
     "passport" : "data/bookshelf/passport",
     "migrations": {
       "directory": "app/data/bookshelf/migrations",
@@ -35,7 +35,7 @@
     }
   },
   "mongo": {
-    "init": "data/mongo/mongo",
+    "init": "data/mongo/init",
     "passport" : "data/mongo/passport",
     "config": {
       "production": {
@@ -53,6 +53,16 @@
         "pass": "salasana",
         "db": "mongodb://localhost/nerd-stack-test"
       }
+    }
+  },
+  "redis":{
+    "init": "data/redis/init",
+    "passport" : "data/redis/passport",
+    "port":6379,
+    "host":"127.0.0.1",
+    "password":"erittainsalainensalasanajokaontehtypitkaksikoskabruteforceredisinkanssaonkohtalaisennopeata",
+    "options":{
+
     }
   }
 }
