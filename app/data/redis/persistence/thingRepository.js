@@ -1,37 +1,28 @@
 'use strict';
 
 function mapToObject(thing) {
-  let obj = thing.toObject();
-  obj.id = thing._id;
+  let obj = {};
+  obj.id = thing.id;
+  obj.name = thing.name.value;
   return obj;
 }
 
-function mapToObjects(things) {
-  if (!things) {
-    return things;
-  }
-  return things.map(function (thing) {
-    return mapToObject(thing);
-  });
-}
-
 export function getThingsById(db, id, cb) {
-  let User = db.factory('User');
-  return User.load(id, function (err) {
-    if (err) return cb(err, null);
-    return User.getAll('Thing', 'hasThings', function (getAllErr, thingIds) {
-      console.log(thingIds);
-      if (getAllErr) return cb(getAllErr, null);
+  let Thing = db.factory('Thing');
+  return new Promise(function (resolve, reject) {
+    Thing.find({user_id: id}, function (err, thingIds) {
+      if (err) return cb(err, null);
       let things = [];
+      if (!thingIds.length) return resolve(cb(null, things));
       let count = 0;
       thingIds.forEach(function (thingId) {
-        db.factory('Thing', thingId, function (thingErr, props) {
-          if (thingErr) return cb(thingErr, null);
+        Thing.load(thingId, function (thingErr, props) {
+          if (thingErr) return reject(cb(thingErr, null));
           let thing = props;
           thing.id = thingId;
           things.push(thing);
           if (++count === thingIds.length) {
-            return cb(null, things);
+            return resolve(cb(null, things));
           }
         });
       });
@@ -40,44 +31,40 @@ export function getThingsById(db, id, cb) {
 }
 
 export function addThingToUser(db, payload, cb) {
-  let User = db.factory('User');
   let Thing = db.factory('Thing');
   Thing.p('name', payload.thing.name);
-  return User.find(payload.user.id, function (err) {
+  Thing.p('user_id', payload.user.id);
+  Thing.save(function (err) {
     if (err) cb(err, null);
-    User.link(Thing, {
-      name: 'hasThings'
-    });
-    return User.save(function (saveErr, linkErr, linkedObjectErr) {
-      if (saveErr) cb(saveErr, null);
-      if (linkErr) cb(linkErr, null);
-      if (linkedObjectErr) cb(linkedObjectErr, null);
-    });
+    const thingWithId = mapToObject(Thing.properties);
+    cb(null, thingWithId);
   });
+
 }
 
 export function deleteThing(db, id, cb) {
-  const Thing = db.model('Thing');
-  Thing.findById(id).exec().then(function (thing) {
-    thing.remove(function (err) {
-      if (err) {
-        cb(err);
-      } else {
-        cb(null);
-      }
-    });
+  let Thing = db.factory('Thing');
+  Thing.id = id;
+  Thing.remove(function (err) {
+    if (err) {
+      cb(err);
+    } else {
+      cb(null);
+    }
   });
 }
 
 export function updateThing(db, payload, cb) {
-  const Thing = db.model('Thing');
-  Thing.findById(payload.thingId).exec().then(function (thing) {
-    thing.name = payload.thing.name;
-    return thing.save();
-  }).then(function (savedThing) {
-    const thingWithId = mapToObject(savedThing);
-    cb(null, thingWithId);
-  }).onReject(function (err) {
-    cb(err, null);
+  const Thing = db.factory('Thing');
+  Thing.id = payload.thingId;
+  Thing.load(payload.thingId, function (err) {
+    if (err) cb(err, null);
+    Thing.p('name', payload.thing.name);
+    Thing.save(function (saveErr) {
+      if (saveErr) cb(saveErr, null);
+      const thingWithId = mapToObject(Thing.properties);
+      cb(null, thingWithId);
+    });
   });
+
 }

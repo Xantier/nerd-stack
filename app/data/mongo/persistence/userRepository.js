@@ -9,12 +9,3 @@ export function getUser(db, id, cb) {
         return cb(err, null);
       });
 }
-
-export function addUser(db, payload, cb) {
-  const User = new db.model('User')({name: payload.name});
-  User.save().then(function (user) {
-    cb(null, user._id);
-  }).onReject(function (err) {
-    return cb(err, null);
-  });
-}

@@ -13,9 +13,9 @@ class Thing {
             'notEmpty'
           ]
         },
-        password: {
-          type: 'string',
-          unique: true,
+        user_id: {
+          type: 'integer',
+          index: true,
           validations: [
             'notEmpty'
           ]

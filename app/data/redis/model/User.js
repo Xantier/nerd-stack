@@ -16,7 +16,6 @@ class User {
         },
         password: {
           type: 'string',
-          unique: true,
           validations: [
             'notEmpty'
           ]

@@ -51,7 +51,7 @@ module.exports = function (passport, db) {
           if (err) {
             return done(err);
           }
-          if (!ids) {
+          if (!ids || !ids.length) {
             return done(null, false, {message: 'Unknown user'});
           }
           db.factory('User').load(ids[0], function (loadErr) {
