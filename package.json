@@ -40,7 +40,9 @@
     "when": "^3.7.2",
     "mongoose": "~4.0.1",
     "nohm": "~0.9.6",
-    "redis": "~0.12.1"
+    "redis": "~0.12.1",
+    "rethinkdb": "~2.0.0",
+    "thinky": "~2.0.2"
   },
   "devDependencies": {
     "babelify": "^5.0.4",
