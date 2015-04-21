@@ -1,7 +1,6 @@
 'use strict';
 
-export default
-class Thing {
+export default class Thing {
   static register(mongoose) {
     let ThingSchema = new mongoose.Schema({
       name: {type: String, default: ''}

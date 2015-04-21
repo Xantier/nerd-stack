@@ -9,10 +9,9 @@ module.exports = function (passport, db) {
   });
 
   passport.deserializeUser(function (id, done) {
-    let user = db.factory('User');
-    user.load(id, function (err) {
-      const dbUser = this.allProperties();
-      done(err, dbUser);
+    let user = db.models.user;
+    user.get(id).run().then(function (dbUser) {
+      done(null, dbUser);
     });
   });
 
