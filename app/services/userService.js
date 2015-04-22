@@ -1,7 +1,7 @@
 'use strict';
 
 import config from '../config/config.json';
-import * as userDAO from '../data/redis/persistence/userRepository';
+import * as userDAO from '../data/rethinkdb/persistence/userRepository';
 
 export default {
   get(req, res, next) {

@@ -3,7 +3,7 @@
 import {Strategy as LocalStrategy} from 'passport-local';
 import bcrypt from 'bcrypt-nodejs';
 
-module.exports = function (passport, db) {
+export default function (passport, db) {
   passport.serializeUser(function (user, done) {
     done(null, user.id);
   });
@@ -18,24 +18,19 @@ module.exports = function (passport, db) {
   passport.use('register', new LocalStrategy({passReqToCallback: true},
           function (req, username, password, done) {
             const user = req.body;
-            db.factory('User').find({
-              name: username
-            }, function (err, ids) {
-              if (err) {
-                return done(null, false, {message: 'Error trying to check for user existence'});
-              }
-              if (ids.length) {
+            db.models.user.filter({name: username}).run().then(function (result) {
+              if (result.length) {
                 return done(null, false, {message: 'User Already Exists.'});
               }
               const hash = bcrypt.hashSync(password);
-              const userSchema = db.factory('User');
-              userSchema.p('name', user.username);
-              userSchema.p('password', hash);
-              userSchema.save(function (saveErr) {
-                if (saveErr) {
-                  throw saveErr;
-                }
-                return done(null, userSchema, {message: 'User Registered.'});
+              const newUser = new db.models.user({
+                name: user.username,
+                password: hash
+              });
+              newUser.save().then(function (savedUser) {
+                return done(null, savedUser, {message: 'User Registered.'});
+              }).error(function (err) {
+                return done(err);
               });
             });
           }
@@ -44,26 +39,16 @@ module.exports = function (passport, db) {
 
   passport.use('signin', new LocalStrategy(
       function (username, password, done) {
-        db.factory('User').find({
-          name: username
-        }, function (err, ids) {
-          if (err) {
-            return done(err);
+        db.models.user.filter({name: username}).run().then(function (user) {
+          if (!user.length) {
+            return done(null, false, {message: 'Unknown user.'});
           }
-          if (!ids || !ids.length) {
-            return done(null, false, {message: 'Unknown user'});
+          if (!bcrypt.compareSync(password, user.password)) {
+            return done(null, false, {message: 'Invalid username or password.'});
           }
-          db.factory('User').load(ids[0], function (loadErr) {
-            const user = this.allProperties();
-            if (loadErr) {
-              return done(loadErr);
-            }
-            if (!bcrypt.compareSync(password, user.password)) {
-              return done(null, false, {message: 'Invalid password'});
-            }
-            return done(null, user);
-          });
+          return done(null, user);
+        }).error(function (err) {
+          return done(err);
         });
-      }
-  ));
-};
+      }));
+}

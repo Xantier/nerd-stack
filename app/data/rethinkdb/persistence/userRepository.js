@@ -1,13 +1,10 @@
 'use strict';
 
 export function getUser(db, id, cb) {
-  const User = db.factory('User');
-  return new Promise(function (resolve, reject) {
-    User.load(id, function (err, user) {
-      if (err) {
-        return reject(cb(err, null));
-      }
-      return resolve(cb(null, user.name));
-    });
-  });
+  return db.models.user.get(id)
+      .then(function (user) {
+        return cb(null, user.name);
+      }).otherwise(function (err) {
+        return cb(err, null);
+      });
 }
