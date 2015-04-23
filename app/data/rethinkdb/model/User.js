@@ -8,6 +8,6 @@ export default class User {
       password: thinky.type.string().min(1)
     });
     Users.ensureIndex('name');
-    thinky.models.thing.belongsTo(Users, 'user', 'user_id', 'id');
+    Users.hasMany(thinky.models.thing, 'things', 'id', 'user_id');
   }
 }
