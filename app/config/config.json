@@ -1,5 +1,5 @@
 {
-  "db": "redis",
+  "db": "rethinkdb",
   "bookshelf": {
     "init": "data/bookshelf/init",
     "passport" : "data/bookshelf/passport",
@@ -64,5 +64,13 @@
     "options":{
 
     }
+  },
+  "rethinkdb": {
+    "init": "data/rethinkdb/init",
+    "passport" : "data/rethinkdb/passport",
+    "host": "localhost",
+    "port": 28015,
+    "authKey": "",
+    "db": "nerd_stack_dev"
   }
 }

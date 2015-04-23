@@ -28,6 +28,8 @@ export default function (passport, db) {
           const newUser = new req.db.models.User({name: user.username, password: hash});
           newUser.save().then(function (savedUser) {
             return done(null, savedUser, {message: 'User Registered.'});
+          }).otherwise(function (err) {
+            return done(err);
           });
         });
       })
@@ -36,19 +38,17 @@ export default function (passport, db) {
   passport.use('signin', new LocalStrategy(
       function (username, password, done) {
         const User = db.models.User.forge({name: username});
-        User.fetch()
-            .then(function (data) {
-              if (data === null) {
-                return done(null, false, {message: 'Unknown user.'});
-              }
-              const user = data.toJSON();
-              if (!bcrypt.compareSync(password, user.password)) {
-                return done(null, false, {message: 'Invalid username or password.'});
-              }
-              return done(null, user);
-            })
-            .otherwise(function (error) {
-              throw error;
-            });
+        User.fetch().then(function (data) {
+          if (data === null) {
+            return done(null, false, {message: 'Unknown user.'});
+          }
+          const user = data.toJSON();
+          if (!bcrypt.compareSync(password, user.password)) {
+            return done(null, false, {message: 'Invalid username or password.'});
+          }
+          return done(null, user);
+        }).otherwise(function (err) {
+          return done(err);
+        });
       }));
 }

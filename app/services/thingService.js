@@ -1,7 +1,7 @@
 'use strict';
 
 import config from '../config/config.json';
-import * as thingDAO from '../data/redis/persistence/thingRepository';
+import * as thingDAO from '../data/rethinkdb/persistence/thingRepository';
 import respond from './responder.js';
 
 export default {
