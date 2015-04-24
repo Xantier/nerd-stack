@@ -6,6 +6,7 @@ const passport = require('passport');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
+const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
@@ -24,6 +25,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(flash());
+app.use(helmet());
 
 app.use(require('express-session')({
   secret: 'wat is this thing?',

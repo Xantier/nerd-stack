@@ -42,7 +42,8 @@
     "nohm": "~0.9.6",
     "redis": "~0.12.1",
     "rethinkdb": "~2.0.0",
-    "thinky": "~2.0.2"
+    "thinky": "~2.0.2",
+    "helmet": "~0.8.0"
   },
   "devDependencies": {
     "babelify": "^5.0.4",
