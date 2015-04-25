@@ -32,6 +32,7 @@ app.use(require('express-session')({
   resave: false,
   saveUninitialized: false
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));

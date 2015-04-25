@@ -29,7 +29,7 @@ gulp.task('migrate', function () {
  **/
 
 gulp.task('default', ['build', 'serve']);
-gulp.task('build', ['scripts', 'styles']);
+gulp.task('build', ['scripts']);
 gulp.task('dev', ['lint', 'build', 'serve']);
 gulp.task('debug', ['lint', 'test', 'build', 'serve']);
 
@@ -47,9 +47,8 @@ var paths = {
 
 //run app using nodemon
 gulp.task('serve', function () {
-  var client = ['scripts', 'styles'];
+  var client = ['scripts'];
   gulp.watch(paths.sources, client);
-  gulp.watch('public/stylesheets/**/*.less', client);
   gulp.watch('views/**/*.jade', client);
   plugins.nodemon({
     script: paths.server,
@@ -87,15 +86,6 @@ gulp.task('scripts', function () {
       .pipe(plugins.sourcemaps.init({loadMaps: true}))
       .pipe(plugins.uglify())
       .pipe(plugins.sourcemaps.write('./'))
-      .pipe(gulp.dest(paths.client.build))
-      .pipe(plugins.livereload());
-});
-
-// Compile CSS file from less styles
-gulp.task('styles', function () {
-  gulp.src(['public/stylesheets/style.less'])
-      .pipe(plugins.less())
-      .pipe(plugins.minifyCss())
       .pipe(gulp.dest(paths.client.build))
       .pipe(plugins.livereload());
 });

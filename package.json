@@ -43,7 +43,9 @@
     "redis": "~0.12.1",
     "rethinkdb": "~2.0.0",
     "thinky": "~2.0.2",
-    "helmet": "~0.8.0"
+    "helmet": "~0.8.0",
+    "radium": "~0.10.2",
+    "color": "~0.8.0"
   },
   "devDependencies": {
     "babelify": "^5.0.4",
