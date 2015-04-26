@@ -3,7 +3,7 @@
 import React from 'react';
 import { RouteHandler } from 'react-router';
 import LogoutButton from './LogoutButton.jsx';
-import NavBar from './NavBar.jsx';
+import NavBar from './Nav/NavBar.jsx';
 
 export default React.createClass({
   displayName: 'Index',
@@ -29,14 +29,15 @@ export default React.createClass({
     ];
     if (this.props.loggedIn) {
       logoutButton = <LogoutButton />;
-      links.push({key: 'Profile', link: '/profile'}, {key: 'Logout', link: '/logout'});
+      links.unshift({key: 'Profile', link: '/profile'});
+      links.push({key: 'Logout', link: '/logout'});
     } else {
       links.push({key: 'Register', link: '/register'}, {key: 'Signin', link: '/signin'});
     }
     return (
         <div>
           <NavBar links={links}/>
-          <div className="container">
+          <div>
             <h1>Welcome</h1>
             <RouteHandler {...this.props}/>
           {logoutButton}
