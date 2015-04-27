@@ -2,14 +2,14 @@
 
 import React from 'react';
 import ThingContainer from '../thing/ThingContainer.jsx';
-import HelloStore from './HelloStore';
-import HelloActions from './HelloActions';
+import UserStore from '../user/UserStore';
+import UserActions from '../user/UserActions';
 import ContextMixin from '../../util/ContextMixin';
-import {HelloConstants} from './HelloConstants';
+import {UserConstants} from '../user/UserConstants';
 import { Route, Link, RouteHandler } from 'react-router';
 
 function getHelloString() {
-  return HelloStore.getData().data;
+  return UserStore.getData().data;
 }
 
 export default React.createClass({
@@ -17,7 +17,7 @@ export default React.createClass({
   statics: {
     children: [ThingContainer],
     load: function (context) {
-      return HelloActions.getData(context);
+      return UserActions.getData(context);
     }
   },
   mixins: [ContextMixin],
@@ -25,18 +25,18 @@ export default React.createClass({
     return getHelloString();
   },
   componentDidMount: function () {
-    HelloStore.addChangeListener(HelloConstants.GET, this._onChange);
+    UserStore.addChangeListener(UserConstants.GET, this._onChange);
     this._maybeGetData();
   },
   componentWillUnmount: function () {
-    HelloStore.removeChangeListener(HelloConstants.GET, this._onChange);
+    UserStore.removeChangeListener(UserConstants.GET, this._onChange);
   },
   _onChange: function () {
     this.setState(getHelloString());
   },
   _maybeGetData: function () {
-    if (HelloStore.getData().metadata.firstRun) {
-      HelloActions.getData();
+    if (UserStore.getData().metadata.firstRun) {
+      UserActions.getData();
     }
   },
   render: function () {

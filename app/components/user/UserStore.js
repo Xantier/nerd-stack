@@ -3,7 +3,7 @@
 import IndexDispatcher from '../../util/dispatcher';
 import {EventEmitter} from 'events';
 import assign from 'object-assign';
-import {HelloConstants} from './HelloConstants';
+import {UserConstants} from './UserConstants';
 
 let text = {user: 'Loading... '};
 let metadata = {firstRun: true};
@@ -15,7 +15,7 @@ function setText(newText) {
   text = newText;
 }
 
-const HelloStore = assign({}, EventEmitter.prototype, {
+const UserStore = assign({}, EventEmitter.prototype, {
   getData: function () {
     return {
       data: text,
@@ -39,13 +39,13 @@ const HelloStore = assign({}, EventEmitter.prototype, {
 // Register callback to handle all updates
 IndexDispatcher.register(function (action) {
   switch (action.actionType) {
-    case HelloConstants.GET:
+    case UserConstants.GET:
       setText(action.text);
       break;
     default:
     // no op
   }
-  HelloStore.emitChange(action.actionType);
+  UserStore.emitChange(action.actionType);
 });
 
-export default HelloStore;
+export default UserStore;

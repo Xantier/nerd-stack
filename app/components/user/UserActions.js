@@ -2,7 +2,7 @@
 
 import Dispatcher from '../../util/dispatcher';
 import {httpGet} from '../../services/fetcher';
-import {HelloConstants} from './HelloConstants';
+import {HelloConstants} from './UserConstants';
 import { get as getCached} from '../../util/cache';
 
 export default

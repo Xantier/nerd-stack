@@ -5,7 +5,8 @@ import { Route, NotFoundRoute } from 'react-router';
 import Index from './index/Index.jsx';
 import Signin from './index/Signin.jsx';
 import Register from './index/Register.jsx';
-import Hello from './hello/Hello.jsx';
+import Hello from './index/Hello.jsx';
+import Profile from './user/Profile.jsx';
 import NotFound from './NotFound.jsx';
 
 export default function () {
@@ -13,6 +14,7 @@ export default function () {
     <Route name="index" handler={Index}>
       <Route name="signin" path="/signin" handler={Signin}/>
       <Route name="register" path="/register" handler={Register}/>
+      <Route name="profile" path="/profile" handler={Profile}/>
       <Route name="hello" path="/" handler={Hello} />
     </Route>,
     <NotFoundRoute name="not-found" handler={NotFound} />

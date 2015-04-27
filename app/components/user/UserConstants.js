@@ -3,7 +3,7 @@
 import keyMirror from 'keymirror';
 
 export default {
-  HelloConstants: keyMirror({
+  UserConstants: keyMirror({
     GET: null
   })
 };
