@@ -17,6 +17,9 @@ export default function (passport, db) {
 
   passport.use('register', new LocalStrategy({passReqToCallback: true},
           function (req, username, password, done) {
+            if (password !== req.body.password2) {
+              return done(null, false, {message: 'Passwords don\'t match'});
+            }
             const user = req.body;
             db.models.user.filter({name: username}).run().then(function (result) {
               if (result.length) {

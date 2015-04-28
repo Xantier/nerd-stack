@@ -10,7 +10,8 @@ export default React.createClass({
         <div>
           <form method="post" action="/register">
             <input name="username" type="username" placeholder="username" required={true}/>
-            <input name="password" type="password" placeholder="Password" required={true}/>
+            <input name="password" type="password" placeholder="Password" required={true} />
+            <input name="password2" type="password2" placeholder="Password again" required={true} />
             <input type="submit">
               Register
             </input>
