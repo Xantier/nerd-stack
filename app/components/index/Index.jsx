@@ -3,7 +3,7 @@
 import React from 'react';
 import { RouteHandler } from 'react-router';
 import LogoutButton from './LogoutButton.jsx';
-import NavBar from './Nav/NavBar.jsx';
+import NavBar from './nav/NavBar.jsx';
 
 export default React.createClass({
   displayName: 'Index',
@@ -38,7 +38,6 @@ export default React.createClass({
         <div>
           <NavBar links={links}/>
           <div>
-            <h1>Welcome</h1>
             <RouteHandler {...this.props}/>
           {logoutButton}
           </div>

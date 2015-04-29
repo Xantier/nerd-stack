@@ -2,25 +2,38 @@
 
 import React from 'react';
 import {Link} from 'react-router';
+import { StyleResolverMixin } from 'radium';
+import Label from '../common/Label.jsx';
+import Input from '../common/Input.jsx';
+import Submit from '../common/Submit.jsx';
+
+const formStyles = {
+  float: 'left',
+  maxWidth: '300px',
+  margin: '30px auto',
+  padding: '10px 20px',
+  background: '#f4f7f8',
+  borderRadius: '8px'
+};
 
 export default React.createClass({
   displayName: 'Register',
+  mixins: [StyleResolverMixin],
   render() {
     return (
         <div>
-          <form method="post" action="/register">
-            <input name="username" type="username" placeholder="username" required={true}/>
-            <input name="password" type="password" placeholder="Password" required={true} />
-            <input name="password2" type="password2" placeholder="Password again" required={true} />
-            <input type="submit">
-              Register
-            </input>
+          <form style={this.buildStyles(formStyles)} method="post" action="/register">
+            <fieldset>
+              <legend>Register</legend>
+              <Label htmlFor="username" text="Username" />
+              <Input name="username" type="username" placeholder="Username" required={true} />
+              <Label htmlFor="password" text="Password" />
+              <Input name="password" type="password" placeholder="Password" required={true} />
+              <Label htmlFor="password2" text="Password Again" />
+              <Input name="password2" type="password" placeholder="Password Again" required={true} />
+              <Submit name="Register" />
+            </fieldset>
           </form>
-          <ul>
-            <li>
-              <Link to="signin">Sign In</Link>
-            </li>
-          </ul>
         </div>
     );
   }
