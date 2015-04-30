@@ -2,10 +2,31 @@
 
 import React from 'react';
 import Thing from './Thing.jsx';
+import Input from '../common/Input.jsx';
+import Submit from '../common/Submit.jsx';
+import { StyleResolverMixin } from 'radium';
 import ThingStore from './ThingStore';
 import ThingActions from './ThingActions';
 import {ThingConstants} from './ThingConstants';
 import ContextMixin from '../../util/ContextMixin';
+
+const formStyles = {
+  float: 'left',
+  maxWidth: '300px',
+  margin: '30px auto',
+  padding: '10px 20px',
+  background: '#d8d8d8',
+  borderRadius: '8px'
+};
+
+const thingListStyles = {
+  float: 'left',
+  maxWidth: '300px',
+  margin: '30px auto',
+  padding: '10px 20px',
+  background: '#d8d8d8',
+  borderRadius: '8px'
+};
 
 function getThings() {
   return ThingStore.getData().data;
@@ -18,7 +39,7 @@ export default React.createClass({
       return ThingActions.getData(context);
     }
   },
-  mixins: [ContextMixin],
+  mixins: [ContextMixin, StyleResolverMixin],
   getInitialState() {
     return getThings();
   },
@@ -55,21 +76,22 @@ export default React.createClass({
     let thingList;
     if (this.state.things && this.state.things.length) {
       thingList = this.state.things.map(function (thing) {
-        return <Thing item={thing} key={thing.id} _modify={this._modify} editState={false} />
+        return <Thing item={thing} key={thing.id} _modify={this._modify} editState={false} />;
       }.bind(this));
     }
 
     return (
         <div>
-          <form action="/API/thing" method="post" onSubmit={this._createThing}>
-            <input name="name" type="text" onChange={this._setChangedText} />
-            <button>Create Thing</button>
+          <form style={this.buildStyles(formStyles)} action="/API/thing" method="post" onSubmit={this._createThing}>
+            <Input name="name" type="text" onChange={this._setChangedText} />
+            <Submit name="Create Thing" />
           </form>
-          <br/>
-          Current Things
-          <ul>
+          <div style={this.buildStyles(thingListStyles)}>
+            Current Things
+            <ul>
             {thingList}
-          </ul>
+            </ul>
+          </div>
         </div>
     );
   }

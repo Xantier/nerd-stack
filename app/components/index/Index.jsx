@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { RouteHandler } from 'react-router';
-import LogoutButton from './LogoutButton.jsx';
 import NavBar from './nav/NavBar.jsx';
 
 export default React.createClass({
@@ -23,23 +22,20 @@ export default React.createClass({
     return null;
   },
   render() {
-    let logoutButton;
     let links = [
       {key: 'Index', link: '/'}
     ];
     if (this.props.loggedIn) {
-      logoutButton = <LogoutButton />;
       links.unshift({key: 'Profile', link: '/profile'});
       links.push({key: 'Logout', link: '/logout'});
     } else {
       links.push({key: 'Register', link: '/register'}, {key: 'Signin', link: '/signin'});
     }
     return (
-        <div>
+        <div styles={{marginTop: '0px'}}>
           <NavBar links={links}/>
           <div>
             <RouteHandler {...this.props}/>
-          {logoutButton}
           </div>
         </div>
     );

@@ -1,6 +1,9 @@
 'use strict';
 
 import React from 'react';
+import { StyleResolverMixin } from 'radium';
+import Button from '../common/Button.jsx';
+import Input from '../common/Input.jsx';
 import ThingActions from './ThingActions';
 
 export default React.createClass({
@@ -9,6 +12,7 @@ export default React.createClass({
     _modify: React.PropTypes.func.isRequired,
     item: React.PropTypes.object.isRequired
   },
+  mixins: [StyleResolverMixin],
   getInitialState() {
     return {editing: false};
   },
@@ -31,8 +35,8 @@ export default React.createClass({
     if (this.state.editing) {
       return (
           <form action="/API/thing?_method=PUT" method="post" onSubmit={this._modify}>
-            <input name="name" type="text" onChange={this._setChangedText} />
-            <button>Update</button>
+            <Input name="name" type="text" onChange={this._setChangedText} />
+            <Button text="Update" />
           </form>
       );
     }
@@ -40,7 +44,7 @@ export default React.createClass({
         <li ref="itemContainer">
           <span ref="thingSpan" onContextMenu={this._enableEditMode}>{this.props.item.name}
             <a onClick={this._delete} href={'/API/thing/' + this.props.item.id + '?_method=DELETE'}>
-              Delete thing
+              <Button text="Delete" />
             </a>
           </span>
         </li>

@@ -2,12 +2,11 @@
 
 import Dispatcher from '../../util/dispatcher';
 import {httpGet} from '../../services/fetcher';
-import {HelloConstants} from './UserConstants';
+import {UserConstants} from './UserConstants';
 import { get as getCached} from '../../util/cache';
 
-export default
-class HelloActions {
+export default class UserActions {
   static getData(context) {
-    return httpGet('/user', Dispatcher.transmit(HelloConstants.GET), context);
+    return httpGet('/user', Dispatcher.transmit(UserConstants.GET), context);
   }
 }

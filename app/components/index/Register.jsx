@@ -12,7 +12,7 @@ const formStyles = {
   maxWidth: '300px',
   margin: '30px auto',
   padding: '10px 20px',
-  background: '#f4f7f8',
+  background: '#d8d8d8',
   borderRadius: '8px'
 };
 
