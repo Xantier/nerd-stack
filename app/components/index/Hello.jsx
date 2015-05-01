@@ -6,7 +6,6 @@ import UserStore from '../user/UserStore';
 import UserActions from '../user/UserActions';
 import ContextMixin from '../../util/ContextMixin';
 import {UserConstants} from '../user/UserConstants';
-import { StyleResolverMixin } from 'radium';
 import { Route, Link, RouteHandler } from 'react-router';
 
 const h2Styles = {
@@ -31,7 +30,7 @@ export default React.createClass({
       return UserActions.getData(context);
     }
   },
-  mixins: [ContextMixin, StyleResolverMixin],
+  mixins: [ContextMixin],
   getInitialState(){
     return getHelloString();
   },
@@ -53,7 +52,7 @@ export default React.createClass({
   render: function () {
     return (
         <div className="hello">
-          <h2 style={this.buildStyles(h2Styles)}>Hello {this.state.user}, here are all your things.</h2>
+          <h2 >Hello {this.state.user}, here are all your things.</h2>
           <ThingContainer />
           <RouteHandler/>
         </div>

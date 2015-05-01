@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import { StyleResolverMixin, BrowserStateMixin } from 'radium';
 
 const inputStyles = {
   background: '#5ff1f1',
@@ -37,10 +36,9 @@ export default React.createClass({
     required: React.PropTypes.bool,
     onChange: React.PropTypes.func
   },
-  mixins: [StyleResolverMixin, BrowserStateMixin],
   render() {
     return (
-        <input style={this.buildStyles(inputStyles)} id={this.props.name} name={this.props.name}
+        <input id={this.props.name} name={this.props.name}
             type={this.props.type} placeholder={this.props.placeholder}
             required={this.props.required} onChange={this.props.onChange} />
     );

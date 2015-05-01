@@ -2,7 +2,6 @@
 
 import React from 'react';
 import {Link} from 'react-router';
-import { StyleResolverMixin } from 'radium';
 import Label from '../common/Label.jsx';
 import Input from '../common/Input.jsx';
 import Submit from '../common/Submit.jsx';
@@ -18,7 +17,6 @@ const formStyles = {
 
 export default React.createClass({
   displayName: 'Register',
-  mixins: [StyleResolverMixin],
   render() {
     return (
         <div>

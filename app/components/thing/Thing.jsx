@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import { StyleResolverMixin } from 'radium';
 import Button from '../common/Button.jsx';
 import Input from '../common/Input.jsx';
 import ThingActions from './ThingActions';
@@ -12,7 +11,6 @@ export default React.createClass({
     _modify: React.PropTypes.func.isRequired,
     item: React.PropTypes.object.isRequired
   },
-  mixins: [StyleResolverMixin],
   getInitialState() {
     return {editing: false};
   },

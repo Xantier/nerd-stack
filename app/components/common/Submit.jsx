@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import { StyleResolverMixin, BrowserStateMixin } from 'radium';
 import color from 'color';
 
 const submitStyles = {
@@ -37,10 +36,9 @@ export default React.createClass({
   propTypes: {
     name: React.PropTypes.string.isRequired
   },
-  mixins: [StyleResolverMixin, BrowserStateMixin],
   render() {
     return (
-        <input {...this.getBrowserStateEvents()} style={this.buildStyles(submitStyles)} name={this.props.name} value={this.props.name} type="submit" />
+        <input name={this.props.name} value={this.props.name} type="submit" />
     );
   }
 });

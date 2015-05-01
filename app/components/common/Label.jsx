@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import { StyleResolverMixin } from 'radium';
 
 const labelStyles = {
   display: 'block',
@@ -14,10 +13,9 @@ export default React.createClass({
     htmlFor: React.PropTypes.string.isRequired,
     text: React.PropTypes.string.isRequired
   },
-  mixins: [StyleResolverMixin],
   render() {
     return (
-        <label style={this.buildStyles(labelStyles)} htmlFor={this.props.htmlFor}>{this.props.text}</label>
+        <label htmlFor={this.props.htmlFor}>{this.props.text}</label>
     );
   }
 });

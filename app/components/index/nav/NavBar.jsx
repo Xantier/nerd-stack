@@ -2,7 +2,6 @@
 
 import React from 'react';
 import NavBarLink from './NavBarLink.jsx';
-import { StyleResolverMixin } from 'radium';
 
 const navContainerStyles = {
   float: 'left',
@@ -27,11 +26,10 @@ export default React.createClass({
   propTypes: {
     links: React.PropTypes.arrayOf(React.PropTypes.object).isRequired
   },
-  mixins: [StyleResolverMixin],
   render() {
     return (
-        <div style={this.buildStyles(navContainerStyles)}>
-          <ul style={this.buildStyles(ulStyles)}>{ this.props.links.map(function (link) {
+        <div>
+          <ul>{ this.props.links.map(function (link) {
             return <NavBarLink key={link.key} link={link} />;
           })}
           </ul>

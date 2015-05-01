@@ -2,7 +2,6 @@
 
 import React from 'react';
 import ProfilePic from './ProfilePic.jsx';
-import { StyleResolverMixin, BrowserStateMixin } from 'radium';
 
 const aStyles = {
   color: '#ffffff',
@@ -38,13 +37,12 @@ export default React.createClass({
   propTypes: {
     link: React.PropTypes.object.isRequired
   },
-  mixins: [StyleResolverMixin, BrowserStateMixin],
   render() {
     const userImg = this.props.link.url || 'user.png';
     imgStyles.background = `url(${userImg}) no-repeat`;
     return (
-        <a href={this.props.link.link} style={this.buildStyles(aStyles)} >
-          <div style={this.buildStyles(imgStyles)} {...this.getBrowserStateEvents()}></div>
+        <a href={this.props.link.link} >
+          <div></div>
         </a>
     );
   }

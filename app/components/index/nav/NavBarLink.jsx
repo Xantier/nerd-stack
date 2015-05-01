@@ -3,7 +3,6 @@
 import React from 'react';
 import color from 'color';
 import ProfilePic from './ProfilePic.jsx';
-import { StyleResolverMixin, BrowserStateMixin } from 'radium';
 
 const liStyles = {
   float: 'left',
@@ -45,18 +44,17 @@ export default React.createClass({
   propTypes: {
     link: React.PropTypes.object.isRequired
   },
-  mixins: [StyleResolverMixin, BrowserStateMixin],
   render() {
     if (this.props.link.key === 'Profile') {
       return (
-          <li style={this.buildStyles(liStyles)}>
+          <li>
             <ProfilePic link={this.props.link} />
           </li>
       );
     }
     return (
-        <li style={this.buildStyles(liStyles)}>
-          <a href={this.props.link.link} {...this.getBrowserStateEvents()} style={this.buildStyles(aStyles)} >{this.props.link.key}</a>
+        <li>
+          <a href={this.props.link.link}>{this.props.link.key}</a>
         </li>
     );
   }

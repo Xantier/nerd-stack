@@ -4,7 +4,6 @@ import React from 'react';
 import Thing from './Thing.jsx';
 import Input from '../common/Input.jsx';
 import Submit from '../common/Submit.jsx';
-import { StyleResolverMixin } from 'radium';
 import ThingStore from './ThingStore';
 import ThingActions from './ThingActions';
 import {ThingConstants} from './ThingConstants';
@@ -22,7 +21,7 @@ const formStyles = {
 const thingListStyles = {
   float: 'left',
   maxWidth: '300px',
-  margin: '30px auto',
+  margin: '30px 20px',
   padding: '10px 20px',
   background: '#d8d8d8',
   borderRadius: '8px'
@@ -39,7 +38,7 @@ export default React.createClass({
       return ThingActions.getData(context);
     }
   },
-  mixins: [ContextMixin, StyleResolverMixin],
+  mixins: [ContextMixin],
   getInitialState() {
     return getThings();
   },
@@ -82,11 +81,11 @@ export default React.createClass({
 
     return (
         <div>
-          <form style={this.buildStyles(formStyles)} action="/API/thing" method="post" onSubmit={this._createThing}>
+          <form action="/API/thing" method="post" onSubmit={this._createThing}>
             <Input name="name" type="text" onChange={this._setChangedText} />
             <Submit name="Create Thing" />
           </form>
-          <div style={this.buildStyles(thingListStyles)}>
+          <div>
             Current Things
             <ul>
             {thingList}

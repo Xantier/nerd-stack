@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import { StyleResolverMixin, BrowserStateMixin } from 'radium';
 
 const styles = {
   padding: '5px 10px',
@@ -17,13 +16,13 @@ const styles = {
 export default React.createClass({
   displayName: 'Button',
   propTypes: {
-    text: React.PropTypes.string.isRequired
+    text: React.PropTypes.string.isRequired,
+    href: React.PropTypes.string
   },
-  mixins: [StyleResolverMixin, BrowserStateMixin],
   render() {
     return (
-        <a a href="/logout">
-          <button {...this.getBrowserStateEvents()} style={this.buildStyles(styles)}>
+        <a href={this.props.href}>
+          <button>
           {this.props.text}
           </button>
         </a>
