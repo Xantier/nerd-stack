@@ -41,7 +41,6 @@ export default React.createClass({
     return (
         <div>
           <h2>{this.state.user}</h2>
-          <RouteHandler/>
         </div>
     );
   }

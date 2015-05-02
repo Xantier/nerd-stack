@@ -4,28 +4,11 @@ import React from 'react';
 import Thing from './Thing.jsx';
 import Input from '../common/Input.jsx';
 import Submit from '../common/Submit.jsx';
+import Label from '../common/Label.jsx';
 import ThingStore from './ThingStore';
 import ThingActions from './ThingActions';
 import {ThingConstants} from './ThingConstants';
 import ContextMixin from '../../util/ContextMixin';
-
-const formStyles = {
-  float: 'left',
-  maxWidth: '300px',
-  margin: '30px auto',
-  padding: '10px 20px',
-  background: '#d8d8d8',
-  borderRadius: '8px'
-};
-
-const thingListStyles = {
-  float: 'left',
-  maxWidth: '300px',
-  margin: '30px 20px',
-  padding: '10px 20px',
-  background: '#d8d8d8',
-  borderRadius: '8px'
-};
 
 function getThings() {
   return ThingStore.getData().data;
@@ -80,15 +63,26 @@ export default React.createClass({
     }
 
     return (
-        <div>
-          <form action="/API/thing" method="post" onSubmit={this._createThing}>
-            <Input name="name" type="text" onChange={this._setChangedText} />
-            <Submit name="Create Thing" />
-          </form>
-          <div>
-            Current Things
+        <div className="thing-container">
+          <div className="thing-form-container">
+            <form action="/API/thing" method="post" onSubmit={this._createThing}>
+              <div className="form-header">
+                <h1>Create Things</h1>
+              </div>
+              <div className="form-content">
+                <Label htmlFor="name" text="Create new item" />
+                <Input id="name" name="name" type="text" onChange={this._setChangedText} />
+              </div>
+              <div className="form-footer">
+                <input type="reset" value="Clear" className="submit-button-secondary"/>
+                <Submit name="Create" value="Create"/>
+              </div>
+            </form>
+          </div>
+          <div className="thing-list-container">
+            <span className="thing-list-header">Current Things</span>
             <ul>
-            {thingList}
+              {thingList}
             </ul>
           </div>
         </div>

@@ -11,11 +11,11 @@ import NotFound from './NotFound.jsx';
 
 export default function () {
   return [
-    <Route name="index" handler={Index}>
+    <Route name="root" handler={Index}>
       <Route name="signin" path="/signin" handler={Signin}/>
       <Route name="register" path="/register" handler={Register}/>
       <Route name="profile" path="/profile" handler={Profile}/>
-      <Route name="hello" path="/" handler={Hello} />
+      <Route name="index" path="/" handler={Hello} />
     </Route>,
     <NotFoundRoute name="not-found" handler={NotFound} />
   ];

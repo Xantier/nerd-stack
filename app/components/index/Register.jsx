@@ -6,31 +6,31 @@ import Label from '../common/Label.jsx';
 import Input from '../common/Input.jsx';
 import Submit from '../common/Submit.jsx';
 
-const formStyles = {
-  float: 'left',
-  maxWidth: '300px',
-  margin: '30px auto',
-  padding: '10px 20px',
-  background: '#d8d8d8',
-  borderRadius: '8px'
-};
-
 export default React.createClass({
   displayName: 'Register',
   render() {
     return (
-        <div>
-          <form style={this.buildStyles(formStyles)} method="post" action="/register">
-            <fieldset>
-              <legend>Register</legend>
+        <div className="register-form-container">
+          <form method="post" action="/register">
+            <div className="form-header">
+              <h1>Please Register</h1>
+              <span>Please insert your desired username and password.
+                At the moment validations are non existant for username/password length, type etc.</span>
+            </div>
+            <div className="form-content">
               <Label htmlFor="username" text="Username" />
               <Input name="username" type="username" placeholder="Username" required={true} />
               <Label htmlFor="password" text="Password" />
               <Input name="password" type="password" placeholder="Password" required={true} />
               <Label htmlFor="password2" text="Password Again" />
               <Input name="password2" type="password" placeholder="Password Again" required={true} />
-              <Submit name="Register" />
-            </fieldset>
+            </div>
+            <div className="form-footer">
+              <Link to="signin">
+                <span className="submit-button-secondary">Sign in</span>
+              </Link>
+              <Submit name="Register" value="Register" />
+            </div>
           </form>
         </div>
     );

@@ -22,14 +22,17 @@ export default React.createClass({
     return null;
   },
   render() {
-    let links = [
-      {key: 'Index', link: '/'}
-    ];
+    let links = [];
     if (this.props.loggedIn) {
-      links.unshift({key: 'Profile', link: '/profile'});
-      links.push({key: 'Logout', link: '/logout'});
+      links.unshift(
+          {key: 'Profile', link: '/profile'});
+      links.push(
+          {key: 'Index', link: '/'},
+          {key: 'Logout', link: '/logout'});
     } else {
-      links.push({key: 'Register', link: '/register'}, {key: 'Signin', link: '/signin'});
+      links.push(
+          {key: 'Register', link: '/register'},
+          {key: 'Signin', link: '/signin'});
     }
     return (
         <div styles={{marginTop: '0px'}}>

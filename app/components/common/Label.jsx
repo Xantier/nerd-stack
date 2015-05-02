@@ -2,11 +2,6 @@
 
 import React from 'react';
 
-const labelStyles = {
-  display: 'block',
-  marginBottom: '8px'
-};
-
 export default React.createClass({
   displayName: 'Label',
   propTypes: {

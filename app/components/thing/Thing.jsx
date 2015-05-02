@@ -3,6 +3,7 @@
 import React from 'react';
 import Button from '../common/Button.jsx';
 import Input from '../common/Input.jsx';
+import Label from '../common/Label.jsx';
 import ThingActions from './ThingActions';
 
 export default React.createClass({
@@ -32,19 +33,26 @@ export default React.createClass({
   render() {
     if (this.state.editing) {
       return (
-          <form action="/API/thing?_method=PUT" method="post" onSubmit={this._modify}>
+          <form className="thing-item" action="/API/thing?_method=PUT" method="post" onSubmit={this._modify}>
             <Input name="name" type="text" onChange={this._setChangedText} />
             <Button text="Update" />
           </form>
       );
     }
     return (
-        <li ref="itemContainer">
-          <span ref="thingSpan" onContextMenu={this._enableEditMode}>{this.props.item.name}
+        <li>
+          <div className="thing-item">
+            <div className="tooltip" ref="thingSpan" onContextMenu={this._enableEditMode}>
+            {this.props.item.name}
+              <pre>
+                <img className="callout" src="img/callout.gif" />
+                Right click to edit
+              </pre>
+            </div>
             <a onClick={this._delete} href={'/API/thing/' + this.props.item.id + '?_method=DELETE'}>
               <Button text="Delete" />
             </a>
-          </span>
+          </div>
         </li>
     );
   }

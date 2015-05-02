@@ -57,3 +57,7 @@ function onListening() {
       : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+process.on('SIGTERM', function () {
+  server.close();
+});

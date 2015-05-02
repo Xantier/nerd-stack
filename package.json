@@ -32,7 +32,7 @@
     "passport-local": "~1.0.0",
     "pg": "^4.3.0",
     "react": "^0.13",
-    "react-router": "^0.13",
+    "react-router": "^0.13.3",
     "serve-favicon": "~2.2.0",
     "superagent": "^1.1.0",
     "use-strict": "~1.0.0",
@@ -55,7 +55,6 @@
     "gulp": "^3.8.11",
     "gulp-eslint": "^0.7.0",
     "gulp-jsx-coverage": "^0.1.1",
-    "gulp-less": "^3.0.1",
     "gulp-livereload": "^3.8.0",
     "gulp-load-plugins": "~0.9.0",
     "gulp-minify-css": "^0.5.1",
@@ -66,7 +65,6 @@
     "mocha": "^2.2.1",
     "reactify": "^1.0.0",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "react-inline": "~0.6.0"
+    "vinyl-source-stream": "^1.1.0"
   }
 }

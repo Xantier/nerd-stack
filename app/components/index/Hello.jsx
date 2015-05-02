@@ -8,16 +8,6 @@ import ContextMixin from '../../util/ContextMixin';
 import {UserConstants} from '../user/UserConstants';
 import { Route, Link, RouteHandler } from 'react-router';
 
-const h2Styles = {
-  color: 'black',
-  fontFamily: 'sans-serif',
-  fontSize: '30px',
-  fontWeight: '800',
-  lineHeight: '36px',
-  margin: '0 0 24px',
-  textAlign: 'center'
-};
-
 function getHelloString() {
   return UserStore.getData().data;
 }
@@ -51,8 +41,8 @@ export default React.createClass({
   },
   render: function () {
     return (
-        <div className="hello">
-          <h2 >Hello {this.state.user}, here are all your things.</h2>
+        <div>
+          <h2>Hello {this.state.user}, here are all your things.</h2>
           <ThingContainer />
           <RouteHandler/>
         </div>
