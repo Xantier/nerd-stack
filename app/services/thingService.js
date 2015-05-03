@@ -1,8 +1,8 @@
 'use strict';
 
 import config from '../config/config.json';
-import * as thingDAO from '../data/rethinkdb/persistence/thingRepository';
 import respond from './responder.js';
+const thingDAO = require('../data/' + config.db + '/persistence/thingRepository');
 
 export default {
   get(req, res, next) {

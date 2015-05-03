@@ -2,13 +2,14 @@
 
 const debug = require('debug')('NERD-seed:server');
 const port = normalizePort(process.env.PORT || '3000');
-let app = require('./../../app');
-let http = require('http');
+import app from './../../app';
+import http from 'http';
 
 app.set('port', port);
 
 let server = http.createServer(app);
 server.listen(port);
+
 server.on('error', onError);
 server.on('listening', onListening);
 
@@ -44,7 +45,12 @@ function onError(error) {
       throw error;
     case 'EADDRINUSE':
       error.message = error.message + '. ' + bind + ' is already in use';
-      throw error;
+
+      setTimeout(function () {
+        server.close();
+        server.listen(port);
+      }, 1000);
+      break;
     default:
       throw error;
   }

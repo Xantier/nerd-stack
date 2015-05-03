@@ -1,17 +1,19 @@
 'use strict';
 
-const express = require('express');
-const flash = require('connect-flash');
-const passport = require('passport');
-const path = require('path');
-const favicon = require('serve-favicon');
-const logger = require('morgan');
-const helmet = require('helmet');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const methodOverride = require('method-override');
-const db = require('./app/config/db')(passport);
+import express from 'express';
+import flash from 'connect-flash';
+import passport from 'passport';
+import path from 'path';
+import favicon from 'serve-favicon';
+import dexter from 'morgan';
+import helmet from 'helmet';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
+import { logger, stream } from './app/util/logger';
+import database from './app/config/db';
 
+const db = database(passport);
 let app = express();
 
 // view engine setup
@@ -19,7 +21,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(favicon(__dirname + '/views/favicon.ico'));
-app.use(logger('dev'));
+
+logger.debug("Overriding 'Express' logger");
+app.use(dexter('combined', {'stream': stream}));
 app.use(methodOverride('_method', {methods: ['POST', 'GET']}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -69,4 +73,4 @@ app.use(function (err, req, res) {
   });
 });
 
-module.exports = app;
+export default app;
