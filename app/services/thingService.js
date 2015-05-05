@@ -2,11 +2,11 @@
 
 import config from '../config/config.json';
 import respond from './responder.js';
-const thingDAO = require('../data/' + config.db + '/persistence/thingRepository');
+const thingRepository = require('../data/' + config.db + '/persistence/thingRepository');
 
 export default {
   get(req, res, next) {
-    return thingDAO.getThingsById(req.db, req.user.id, (err, collection)=> {
+    return thingRepository.getThingsById(req.db, req.user.id, (err, collection)=> {
       if (err) {
         res.payload = {error: true, data: {message: err.message}};
         res.status(500).json({error: true, data: {message: err.message}});
@@ -21,7 +21,7 @@ export default {
       user: req.user,
       thing: req.body
     };
-    thingDAO.addThingToUser(req.db, payload, (err, thing) => {
+    thingRepository.addThingToUser(req.db, payload, (err, thing) => {
       let data = {};
       if (err) {
         data = {error: true, data: {message: err.message}};
@@ -33,7 +33,7 @@ export default {
   },
 
   del(req, res) {
-    thingDAO.deleteThing(req.db, req.params.id, (err)=> {
+    thingRepository.deleteThing(req.db, req.params.id, (err)=> {
       let data;
       if (err) {
         data = {error: true, data: {message: err.message}};
@@ -49,7 +49,7 @@ export default {
       thing: req.body,
       thingId: req.params.id
     };
-    thingDAO.updateThing(req.db, payload, (err, thing)=> {
+    thingRepository.updateThing(req.db, payload, (err, thing)=> {
       let data;
       if (err) {
         data = {error: true, data: {message: err.message}};

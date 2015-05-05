@@ -1,9 +1,11 @@
 'use strict';
 
-const debug = require('debug')('NERD-seed:server');
-const port = normalizePort(process.env.PORT || '3000');
+import dbg from 'debug';
 import app from './../../app';
 import http from 'http';
+
+const debug = dbg('nerd-stack:server');
+const port = normalizePort(process.env.PORT || '3000');
 
 app.set('port', port);
 

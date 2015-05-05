@@ -22,8 +22,10 @@ app.set('view engine', 'jade');
 
 app.use(favicon(__dirname + '/views/favicon.ico'));
 
-logger.debug("Overriding 'Express' logger");
+logger.info("Overriding 'Express' logger");
 app.use(dexter('combined', {'stream': stream}));
+app.set('logger', logger);
+
 app.use(methodOverride('_method', {methods: ['POST', 'GET']}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));

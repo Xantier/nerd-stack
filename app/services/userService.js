@@ -1,11 +1,11 @@
 'use strict';
 
 import config from '../config/config.json';
-const userDAO = require('../data/' + config.db + '/persistence/userRepository');
+const userRepository = require('../data/' + config.db + '/persistence/userRepository');
 
 export default {
   get(req, res, next) {
-    return userDAO.getUser(req.db, req.user.id, (err, user)=> {
+    return userRepository.getUser(req.db, req.user.id, (err, user)=> {
       if (err) {
         res.status(500).json({error: true, data: {message: err.message}});
       }
@@ -18,7 +18,7 @@ export default {
     const payload = {
       name: req.body.name
     };
-    userDAO.addUser(req.db, payload, (err, user)=> {
+    userRepository.addUser(req.db, payload, (err, user)=> {
       if (err) {
         res.status(500).json({error: true, data: {message: err.message}});
       }
