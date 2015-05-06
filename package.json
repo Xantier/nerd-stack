@@ -66,6 +66,9 @@
     "mocha": "^2.2.1",
     "reactify": "^1.0.0",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "sinon": "~1.14.1",
+    "mockery": "~1.4.0",
+    "proxyquire": "~1.4.0"
   }
 }
