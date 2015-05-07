@@ -7,7 +7,7 @@ var proxyquire = require('proxyquire');
 describe('UserActions', function () {
   var userActions;
   var response = {};
-  var stubDispatcher = sinon.stub();
+  var dispatcherStub = sinon.stub();
   before(function () {
     var fetcherStub = sinon.stub();
     fetcherStub.httpGet = function (url, dispatcher, context) {
@@ -17,7 +17,7 @@ describe('UserActions', function () {
     };
     userActions = proxyquire('../../../app/components/user/UserActions',
         {'../../services/fetcher': fetcherStub},
-        {'../../util/dispatcher': stubDispatcher}
+        {'../../util/dispatcher': dispatcherStub}
     );
   });
 
@@ -26,7 +26,7 @@ describe('UserActions', function () {
     userActions.getData(context);
     expect(response.url).to.equal('/user');
     expect(response.context).to.equal(context);
-    expect(stubDispatcher.called);
+    expect(dispatcherStub.called);
   });
 
 });
