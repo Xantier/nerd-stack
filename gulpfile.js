@@ -13,7 +13,7 @@ plugins.buffer = require('vinyl-buffer');
 /**
  * TODO: Pull this out to somewhere where it can reside while
  * user decides what database to use.
-**/
+ **/
 
 gulp.task('migrate', function () {
   require('babel/register');
@@ -31,7 +31,8 @@ gulp.task('migrate', function () {
 gulp.task('default', ['build', 'serve']);
 gulp.task('build', ['scripts', 'styles']);
 gulp.task('dev', ['lint', 'build', 'serve']);
-gulp.task('debug', ['lint', 'test', 'build', 'serve']);
+gulp.task('debug', ['lint', 'runTests', 'build', 'serve']);
+gulp.task('test', ['runTests']);
 
 var paths = {
   server: 'run.js',
@@ -99,8 +100,13 @@ gulp.task('styles', function () {
       .pipe(plugins.livereload());
 });
 
+// livereload browser on client app changes
+gulp.task('livereload', function () {
+  plugins.livereload.listen({auto: true});
+});
+
 // Run tests
-gulp.task('test',
+gulp.task('runTests',
     plugins.jsxCoverage.createTask(
         {
           src: 'spec/**/*.spec.js',
@@ -128,8 +134,3 @@ gulp.task('test',
         }
     )
 );
-
-// livereload browser on client app changes
-gulp.task('livereload', function () {
-  plugins.livereload.listen({auto: true});
-});
