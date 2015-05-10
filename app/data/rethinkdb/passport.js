@@ -43,14 +43,13 @@ export default function (passport, db) {
   passport.use('signin', new LocalStrategy(
       function (username, password, done) {
         db.models.user.filter({name: username}).run().then(function (user) {
-          if (!user.length || user.length > 1) {
+          if (!user.length || user.length < 1) {
             done(null, false, {message: 'Unknown user.'});
-          }
-          user = user[0];
-          if (!bcrypt.compareSync(password, user.password)) {
+          } else if (!bcrypt.compareSync(password, user[0].password)) {
             done(null, false, {message: 'Invalid username or password.'});
+          } else {
+            done(null, user[0]);
           }
-          done(null, user);
         }).catch(function (err) {
           done(err);
         });

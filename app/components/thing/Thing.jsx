@@ -33,10 +33,12 @@ export default React.createClass({
   render() {
     if (this.state.editing) {
       return (
-          <form className="thing-item" action="/API/thing?_method=PUT" method="post" onSubmit={this._modify}>
-            <Input name="name" type="text" onChange={this._setChangedText} />
-            <Button text="Update" />
-          </form>
+          <li>
+            <form className="thing-item" action="/API/thing?_method=PUT" method="post" onSubmit={this._modify}>
+              <Input name="name" type="text" onChange={this._setChangedText} />
+              <Button text="Update" />
+            </form>
+          </li>
       );
     }
     return (
