@@ -3,13 +3,16 @@
 require('../../testdom')('<html><body></body></html>'); // Remember to require and init before React
 var React = require('react/addons');
 var expect = require('chai').expect;
+var sinon = require('sinon');
 var Thing = require('../../../app/components/thing/Thing.jsx');
 var TestUtils = React.addons.TestUtils;
 
-var thingComponent, item;
 describe('Thing component', function () {
+  var thingComponent, item, modify;
+  var modifySpy = false;
   before('render and locate element', function () {
-    var modify = function () {
+    modify = function () {
+      modifySpy = true;
     };
     item = {
       id: 1,
@@ -64,15 +67,48 @@ describe('Thing component', function () {
     );
     var inputElement = inputComponent.getDOMNode();
     expect(inputElement.getAttribute('type')).to.equal('text');
+    thingComponent.setState({editing: false});
   });
 
-  it('Has button with update text if state is editing', function () {
-    thingComponent.setState({editing: true});
+  function hasUpdateButton() {
     var buttonComponent = TestUtils.findRenderedDOMComponentWithTag(
         thingComponent,
         'button'
     );
     var buttonElement = buttonComponent.getDOMNode();
     expect(buttonElement.firstChild.nodeValue).to.equal('Update');
+  }
+
+  it('Has button with update text if state is editing', function () {
+    thingComponent.setState({editing: true});
+    hasUpdateButton();
+    thingComponent.setState({editing: false});
   });
+
+  it('Changes it state to editing when right-clicked', function () {
+    TestUtils.Simulate.contextMenu(thingComponent.refs.thingSpan.getDOMNode());
+    hasUpdateButton();
+  });
+
+  it('calls _delete method when delete button is clicked', function () {
+    var stub = sinon.stub(Thing.prototype.__reactAutoBindMap, "_delete");
+    thingComponent = TestUtils.renderIntoDocument(
+        <Thing _modify={modify} item={item} />
+    );
+    var linkComponents = TestUtils.scryRenderedDOMComponentsWithTag(
+        thingComponent,
+        'a'
+    );
+    var deleteAnchor = linkComponents[1].getDOMNode();
+    TestUtils.Simulate.click(deleteAnchor);
+    expect(stub).to.be.called;
+  });
+
+  it('calls injected _modify method when form is submitted', function () {
+    thingComponent.setState({editing: true});
+    var updateForm = thingComponent.refs.updateForm.getDOMNode();
+    TestUtils.Simulate.submit(updateForm);
+    expect(modifySpy).to.be.true;
+  });
+
 });

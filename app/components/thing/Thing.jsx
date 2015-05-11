@@ -34,7 +34,7 @@ export default React.createClass({
     if (this.state.editing) {
       return (
           <li>
-            <form className="thing-item" action="/API/thing?_method=PUT" method="post" onSubmit={this._modify}>
+            <form ref="updateForm" className="thing-item" action="/API/thing?_method=PUT" method="post" onSubmit={this._modify}>
               <Input name="name" type="text" onChange={this._setChangedText} />
               <Button text="Update" />
             </form>
