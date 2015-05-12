@@ -109,6 +109,16 @@ describe('Thing component', function () {
     var updateForm = thingComponent.refs.updateForm.getDOMNode();
     TestUtils.Simulate.submit(updateForm);
     expect(modifySpy).to.be.true;
+    thingComponent.setState({editing: false});
+  });
+
+
+  it('Edits target value when editing and text entered into field', function () {
+    thingComponent.setState({editing: true});
+    var updateForm = thingComponent.refs.updateForm.getDOMNode();
+    var value = 'testValue';
+    TestUtils.Simulate.change(updateForm.firstChild,{ target: {value: value}});
+    expect(thingComponent.state.name).to.be.equal(value);
   });
 
 });
