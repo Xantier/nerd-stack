@@ -1,5 +1,5 @@
 {
-  "db": "rethinkdb",
+  "db": "couchdb",
   "bookshelf": {
     "init": "data/bookshelf/init",
     "passport" : "data/bookshelf/passport",
@@ -71,6 +71,12 @@
     "host": "localhost",
     "port": 28015,
     "authKey": "",
+    "db": "nerd_stack_dev"
+  },
+  "couchdb": {
+    "init": "data/couchdb/init",
+    "passport" : "data/couchdb/passport",
+    "host": "http://localhost:5984",
     "db": "nerd_stack_dev"
   }
 }

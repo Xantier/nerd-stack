@@ -45,8 +45,7 @@
     "thinky": "~2.0.2",
     "helmet": "~0.8.0",
     "color": "~0.8.0",
-    "winston": "~1.0.0",
-    "node-neo4j": "~2.0.3"
+    "winston": "~1.0.0"
   },
   "devDependencies": {
     "babelify": "^5.0.4",
