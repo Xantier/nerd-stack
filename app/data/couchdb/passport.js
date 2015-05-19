@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt-nodejs';
 
 export default function (passport, db) {
   passport.serializeUser(function (user, done) {
-    done(null, user.id);
+    done(null, user._id);
   });
 
   passport.deserializeUser(function (id, done) {
@@ -21,16 +21,16 @@ export default function (passport, db) {
               return done(null, false, {message: 'Passwords don\'t match'});
             }
             const user = req.body;
-            db.models.user.filter({name: username}).run().then(function (result) {
+            db.models.user.findOneByName(username).then(function (result) {
+              console.log(result);
               if (result.length) {
                 return done(null, false, {message: 'User Already Exists.'});
               }
               const hash = bcrypt.hashSync(password);
-              const newUser = new db.models.user({
+              db.models.user.create({
                 name: user.username,
                 password: hash
-              });
-              newUser.save().then(function (savedUser) {
+              }).then(function (savedUser) {
                 return done(null, savedUser, {message: 'User Registered.'});
               }).error(function (err) {
                 return done(err);
