@@ -6,11 +6,9 @@ export default
 class User {
   static register(db) {
     db.insert({
-      views: {
-        by_name: {
-          map: function (doc) {
-            emit(doc.name, doc);
-          }
+      'views': {
+        'by_name': {
+          'map': 'function (doc) {if (doc.name) { emit(doc.name, doc);}}'
         }
       }
     }, '_design/user');
