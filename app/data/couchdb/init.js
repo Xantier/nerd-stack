@@ -1,10 +1,10 @@
 'use strict';
 
-import nano from 'nano';
+import cradle from 'cradle';
 import config from '../../config/config.json';
 
-const connection = nano(config.couchdb.host);
-const db = connection.use(config.couchdb.db);
+const db = new (cradle.Connection)(config.couchdb.host, config.couchdb.port)
+    .database(config.couchdb.db);
 
 db.models = {};
 // Register models

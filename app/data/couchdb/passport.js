@@ -5,13 +5,13 @@ import bcrypt from 'bcrypt-nodejs';
 
 export default function (passport, db) {
   passport.serializeUser(function (user, done) {
-    done(null, user._id);
+    done(null, user);
   });
 
   passport.deserializeUser(function (id, done) {
-    let user = db.models.user;
-    user.findOneByID(id).then(function (dbUser) {
-      done(null, dbUser);
+    db.get(id, function (err, dbUser) {
+      if (err) done(err);
+      done(null, dbUser.value);
     });
   });
 
@@ -21,37 +21,40 @@ export default function (passport, db) {
               return done(null, false, {message: 'Passwords don\'t match'});
             }
             const user = req.body;
-            db.models.user.findOneByName(username).then(function (result) {
-              console.log(result);
-              if (result.length) {
+            db.view('user/byName', {key: username}, function (err, doc) {
+              if (err) {
+                return done(null, false, {message: 'Error trying to check for user existence'});
+              }
+              if (doc.length) {
                 return done(null, false, {message: 'User Already Exists.'});
               }
               const hash = bcrypt.hashSync(password);
-              db.models.user.create({
+              db.save({
                 name: user.username,
                 password: hash
-              }).then(function (savedUser) {
-                return done(null, savedUser, {message: 'User Registered.'});
-              }).error(function (err) {
-                return done(err);
+              }, function (saveErr, res) {
+                if (saveErr) {
+                  throw saveErr;
+                }
+                return done(null, res, {message: 'User Registered.'});
               });
             });
+
           }
       )
   );
 
   passport.use('signin', new LocalStrategy(
       function (username, password, done) {
-        db.models.user.filter({name: username}).run().then(function (user) {
+        db.view('user/byName', {key: username}, function (err, user) {
+          if (err) done(err);
           if (!user.length || user.length < 1) {
             done(null, false, {message: 'Unknown user.'});
-          } else if (!bcrypt.compareSync(password, user[0].password)) {
+          } else if (!bcrypt.compareSync(password, user[0].value.password)) {
             done(null, false, {message: 'Invalid username or password.'});
           } else {
-            done(null, user[0]);
+            done(null, user[0].value);
           }
-        }).catch(function (err) {
-          done(err);
         });
       }));
 }

@@ -76,7 +76,8 @@
   "couchdb": {
     "init": "data/couchdb/init",
     "passport" : "data/couchdb/passport",
-    "host": "http://localhost:5984",
+    "host": "http://localhost",
+    "port" : "5984",
     "db": "nerd_stack_dev"
   }
 }
