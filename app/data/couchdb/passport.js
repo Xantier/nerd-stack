@@ -5,13 +5,12 @@ import bcrypt from 'bcrypt-nodejs';
 
 export default function (passport, db) {
   passport.serializeUser(function (user, done) {
-    done(null, user);
+    done(null, user._id);
   });
 
   passport.deserializeUser(function (id, done) {
-    db.get(id, function (err, dbUser) {
-      if (err) done(err);
-      done(null, dbUser.value);
+    db.get(id, function (err, user) {
+      done(err, user);
     });
   });
 
