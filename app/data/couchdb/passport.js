@@ -30,7 +30,8 @@ export default function (passport, db) {
               const hash = bcrypt.hashSync(password);
               db.save({
                 name: user.username,
-                password: hash
+                password: hash,
+                document_type: 'user'
               }, function (saveErr, res) {
                 if (saveErr) {
                   throw saveErr;

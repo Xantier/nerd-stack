@@ -8,7 +8,7 @@ class User {
     db.save('_design/user', {
       views: {
         byName: {
-          map: 'function (doc) {if (doc.name) { emit(doc.name, doc);}}'
+          map: 'function (doc) {if (doc.document_type = "user") { emit(doc.name, doc);}}'
         }
       }
     });

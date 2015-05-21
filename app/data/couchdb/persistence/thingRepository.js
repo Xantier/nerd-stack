@@ -1,74 +1,59 @@
 'use strict';
 
-function mapToObject(thing) {
-  let obj = thing.toObject();
-  obj.id = thing._id;
-  return obj;
-}
-
-function mapToObjects(things) {
-  if (!things) {
-    return things;
-  }
-  return things.map(function (thing) {
-    return mapToObject(thing);
-  });
-}
-
 export function getThingsById(db, id, cb) {
-  const User = db.model('User');
-  return User.findById(id).exec().then(function (user) {
-    return db.model('Thing').find({
-      '_id': {$in: user.things}
-    }).exec();
-  }).then(function (things) {
-    const thingsWithId = mapToObjects(things);
-    return cb(null, thingsWithId);
-  }).onReject(function (err) {
-    return cb(err, null);
-  });
-}
-
-export function addThingToUser(db, payload, cb) {
-  const User = db.model('User');
-  const ThingSchema = db.model('Thing');
-  const Thing = new ThingSchema({name: payload.thing.name});
-  let thingWithId;
-  return Thing.save().then(function (thing) {
-    thingWithId = mapToObject(thing);
-    return User.findById(payload.user.id).exec();
-  }).then(function (user) {
-    user.things.push(Thing);
-    return user.save();
-  }).then(function () {
-    cb(null, thingWithId);
-  }).onReject(function (err) {
-    cb(err, null);
-  });
-}
-
-export function deleteThing(db, id, cb) {
-  const Thing = db.model('Thing');
-  Thing.findById(id).exec().then(function (thing) {
-    thing.remove(function (err) {
-      if (err) {
-        cb(err);
-      } else {
-        cb(null);
-      }
+  return new Promise(function (resolve, reject) {
+    db.view('thing/byUserId', {key: id}, function (err, things) {
+      if (err) return reject(cb(err, null));
+      if (!things.length) return resolve(cb(null, things));
+      let count = 0;
+      let returnables = [];
+      things.forEach(function (thing) {
+        let returnable = {};
+        returnable.id = thing._id;
+        returnable.name = thing.name;
+        returnables.push(returnable);
+        if (++count === things.length) {
+          return resolve(cb(null, returnables));
+        }
+      });
     });
   });
 }
 
+export function addThingToUser(db, payload, cb) {
+  let newThing = {
+    name: payload.thing.name,
+    user_id: payload.user.id,
+    document_type: 'thing'
+  };
+  db.save(newThing, function (saveErr, res) {
+    if (saveErr) {
+      throw saveErr;
+    }
+    newThing.id = res.id;
+    cb(null, newThing);
+  });
+}
+
+export function deleteThing(db, id, cb) {
+  db.remove(id, function (err) {
+    if (err) {
+      cb(err);
+    } else {
+      cb(null);
+    }
+  });
+}
+
 export function updateThing(db, payload, cb) {
-  const Thing = db.model('Thing');
-  Thing.findById(payload.thingId).exec().then(function (thing) {
-    thing.name = payload.thing.name;
-    return thing.save();
-  }).then(function (savedThing) {
-    const thingWithId = mapToObject(savedThing);
-    cb(null, thingWithId);
-  }).onReject(function (err) {
-    cb(err, null);
+  db.merge(payload.thingId, {name: payload.thing.name }, function (err, res) {
+    if (err) {
+      cb(err);
+    } else {
+      let returnable = {};
+      returnable.name = payload.thing.name;
+      returnable.id = res.id;
+      cb(null, returnable);
+    }
   });
 }
