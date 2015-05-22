@@ -16,7 +16,9 @@ The purpose of this application skeleton is to empower developers to be able to 
 
 
 ## Installation ##
-This repository contains all source code for the actual implementation of the skeleton. To start using this, please refer to the installer [still under construction] which let's you choose few options, including your database implementation. 
+
+You can find more information on the app from wiki
+This repository contains all source code for the actual implementation of the skeleton.
 
 ####Environment ####
 The tools of the trade for this application development stack are node.js, git and your preferred database implementation. 

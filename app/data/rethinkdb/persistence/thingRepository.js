@@ -19,6 +19,7 @@ export function addThingToUser(db, payload, cb) {
     cb(err, null);
   });
 }
+
 export function deleteThing(db, id, cb) {
   db.models.thing.get(id).getJoin().run().then(function (thing) {
     thing.delete().then(function () {
@@ -28,6 +29,7 @@ export function deleteThing(db, id, cb) {
     });
   });
 }
+
 export function updateThing(db, payload, cb) {
   db.models.thing.get(payload.thingId).getJoin().run().then(function (thing) {
     thing.name = payload.thing.name;
