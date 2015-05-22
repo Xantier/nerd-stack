@@ -17,7 +17,7 @@ The purpose of this application skeleton is to empower developers to be able to 
 
 ## Installation ##
 
-You can find more information on the app from wiki
+You can find more information on the app from [wiki] (https://github.com/Xantier/nerd-stack/wiki)
 This repository contains all source code for the actual implementation of the skeleton.
 
 ####Environment ####
