@@ -14,7 +14,7 @@ plugins.buffer = require('vinyl-buffer');
  * TODO: Pull this out to somewhere where it can reside while
  * user decides what database to use.
  **/
-
+//This is only  for  Bookshelf Dbs
 gulp.task('migrate', function () {
   require('babel/register');
   require('./app/data/bookshelf/migrate')();
