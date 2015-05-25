@@ -10,6 +10,7 @@ import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
+import { logger, stream } from './app/util/logger';
 import database from './app/config/db';
 
 const db = database(passport);
@@ -20,6 +21,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(favicon(__dirname + '/views/favicon.ico'));
+
+logger.info('Overriding Express logger');
+app.use(dexter('combined', {'stream': stream}));
+app.set('logger', logger);
 
 app.use(methodOverride('_method', {methods: ['POST', 'GET']}));
 app.use(bodyParser.json());
@@ -36,7 +41,6 @@ app.use(require('express-session')({
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, '/public/build')));
 
 app.use(function (req, res, next) {
