@@ -7,6 +7,8 @@ let router = new Router();
 import user from '../services/userService';
 import thing from '../services/thingService';
 
+
+// For isomorphic dataloads. This is overridden for server rendered data/views 
 function respond(req, res) {
   res.send(JSON.stringify(res.payload));
 }
