@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/Xantier/nerd-stack.svg)](https://travis-ci.org/Xantier/nerd-stack)
-
+https://david-dm.org/xantier/nerd-stack.svg
 # NERD stack #
 
 The NERD stack provides you with an application skeleton with [Node.js](https://nodejs.org/), [Express](http://expressjs.com/), [React](https://facebook.github.io/react/) and database connectivity. It provides user with an opportunity to start quickly developing both large and small scale [isomorphic javascript](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) web applications using [Flux](https://facebook.github.io/flux/) architecture. The skeleton has in place implementations for:
