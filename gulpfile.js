@@ -137,6 +137,6 @@ gulp.task('runTests',
 );
 
 gulp.task('coveralls', function () {  
-  return gulp.src('./spec/coverage/file.lcov')
+  return gulp.src('./spec/coverage/lcov.info')
     .pipe(plugins.coveralls());
 });
