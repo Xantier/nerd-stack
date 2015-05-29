@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/Xantier/nerd-stack.svg)](https://travis-ci.org/Xantier/nerd-stack)
+[![Coverage Status](https://coveralls.io/repos/Xantier/nerd-stack/badge.svg)](https://coveralls.io/r/Xantier/nerd-stack)
 [![Dependencies](https://david-dm.org/Xantier/nerd-stack.svg)](https://david-dm.org/Xantier/nerd-stack)
+[![devDependency Status](https://david-dm.org/Xantier/nerd-stack/dev-status.svg)](https://david-dm.org/Xantier/nerd-stack#info=devDependencies)
 
 
 # NERD stack #
