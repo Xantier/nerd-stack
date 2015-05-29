@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/Xantier/nerd-stack.svg)](https://travis-ci.org/Xantier/nerd-stack)
-[![Dependencies](https://david-dm.org/Xantier/nerd-stack.svg)](https://david-dm.org/Xantier/nerd-stack.svg)
+[![Dependencies](https://david-dm.org/Xantier/nerd-stack.svg)](https://david-dm.org/Xantier/nerd-stack)
 
 
 # NERD stack #
