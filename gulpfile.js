@@ -33,6 +33,7 @@ gulp.task('build', ['scripts', 'styles']);
 gulp.task('dev', ['lint', 'build', 'serve']);
 gulp.task('debug', ['lint', 'runTests', 'build', 'serve']);
 gulp.task('test', ['runTests']);
+gulp.task('ci', ['lint', 'runTests', 'build'])
 
 var paths = {
   server: 'run.js',
