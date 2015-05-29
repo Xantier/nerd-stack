@@ -135,3 +135,8 @@ gulp.task('runTests',
         }
     )
 );
+
+gulp.task('coveralls', function () {  
+  return gulp.src('./spec/coverage/file.lcov')
+    .pipe(plugins.coveralls());
+});
