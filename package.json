@@ -40,6 +40,8 @@
     "react-router": "^0.13.3",
     "redis": "~0.12.1",
     "rethinkdb": "~2.0.0",
+    "seraph": "^0.11.3",
+    "seraph-model": "^0.7.2",
     "serve-favicon": "~2.2.0",
     "superagent": "^1.1.0",
     "thinky": "~2.0.2",
