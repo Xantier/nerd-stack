@@ -85,7 +85,7 @@
     "passport" : "data/neo4j/passport",
     "server" : "http://localhost:7474",
     "endpoint" : "",
-    "user" : "neo4j",
-    "password" : "neo4j"
+    "user" : "",
+    "password" : ""
   }
 }

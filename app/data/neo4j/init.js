@@ -3,7 +3,7 @@
 import seraph from 'seraph';
 import config from '../../config/config.json';
 
-let db = seraph(config.neo4j);
+let db = seraph();
 
 db.models = {};
 // Register models

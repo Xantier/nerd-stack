@@ -4,9 +4,10 @@ import model from 'seraph-model';
 
 export default class Thing {
   static register(db) {
-    let Thing = model(db, 'thing');
-    Thing.fields = ['name'];
-    db.models.Things = Thing;
-    console.log(db);
+    let thing = model(db, 'THING');
+    thing.schema = {
+      name: { type: String, required: true }
+    };
+    db.models.thing = thing;
   }
 }
