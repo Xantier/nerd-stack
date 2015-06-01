@@ -8,38 +8,26 @@ function mapToObject(thing) {
 }
 
 export function getThingsById(db, id, cb) {
-  let Thing = db.factory('Thing');
   return new Promise(function (resolve, reject) {
-    Thing.find({user_id: id}, function (err, thingIds) {
-      if (err) return cb(err, null);
-      let things = [];
-      if (!thingIds.length) return resolve(cb(null, things));
-      let count = 0;
-      thingIds.forEach(function (thingId) {
-        Thing.load(thingId, function (thingErr, props) {
-          if (thingErr) return reject(cb(thingErr, null));
-          let thing = props;
-          thing.id = thingId;
-          things.push(thing);
-          if (++count === thingIds.length) {
-            return resolve(cb(null, things));
-          }
-        });
-      });
+    db.models.user.read(id, function (err, user) {
+      if (err) return reject(cb(err, null));
+      return resolve(cb(null, user.things));
     });
   });
 }
 
 export function addThingToUser(db, payload, cb) {
-  let Thing = db.factory('Thing');
-  Thing.p('name', payload.thing.name);
-  Thing.p('user_id', payload.user.id);
-  Thing.save(function (err) {
+  db.models.user.read(payload.user.id, function (err, user) {
     if (err) cb(err, null);
-    const thingWithId = mapToObject(Thing.properties);
-    cb(null, thingWithId);
+    if (!user.things) user.things = [];
+    user.things.push({
+      name: payload.thing.name
+    });
+    db.models.user.saveComposition(user.id, 'things', user.things, function (compositionErr, things) {
+      if (compositionErr) cb(compositionErr, null);
+      cb(null, things[0]);
+    });
   });
-
 }
 
 export function deleteThing(db, id, cb) {
