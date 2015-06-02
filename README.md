@@ -75,7 +75,3 @@ It is recommended to use something like supervisor to run the application when u
 
 
 [The MIT License](http://opensource.org/licenses/mit-license.php)
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Xantier/nerd-stack/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
