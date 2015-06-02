@@ -1,58 +1,47 @@
 'use strict';
 
-function mapToObject(thing) {
-  let obj = {};
-  obj.id = thing.id;
-  obj.name = thing.name.value;
-  return obj;
-}
-
 export function getThingsById(db, id, cb) {
   return new Promise(function (resolve, reject) {
     db.models.user.read(id, function (err, user) {
       if (err) return reject(cb(err, null));
-      return resolve(cb(null, user.things));
+      if (Array.isArray(user.things)) {
+        return resolve(cb(null, user.things));
+      }
+      if (user.things) {
+        return resolve(cb(null, [].concat(user.things)));
+      }
+      return resolve(cb(null, []));
     });
   });
 }
 
 export function addThingToUser(db, payload, cb) {
-  db.models.user.read(payload.user.id, function (err, user) {
-    if (err) cb(err, null);
-    if (!user.things) user.things = [];
-    user.things.push({
-      name: payload.thing.name
-    });
-    db.models.user.saveComposition(user.id, 'things', user.things, function (compositionErr, things) {
-      if (compositionErr) cb(compositionErr, null);
-      cb(null, things[0]);
-    });
+  const newThing = {
+    name: payload.thing.name
+  };
+  db.models.user.push(payload.user.id, 'things', newThing, function (compositionErr, savedThing) {
+    if (compositionErr) cb(compositionErr, null);
+    cb(null, savedThing);
   });
 }
 
 export function deleteThing(db, id, cb) {
-  let Thing = db.factory('Thing');
-  Thing.id = id;
-  Thing.remove(function (err) {
+  db.delete(id, true, function (err) {
     if (err) {
       cb(err);
     } else {
-      cb(null);
+      cb(null, parseInt(id, 10));
     }
   });
 }
 
 export function updateThing(db, payload, cb) {
-  const Thing = db.factory('Thing');
-  Thing.id = payload.thingId;
-  Thing.load(payload.thingId, function (err) {
+  db.models.thing.read(payload.thingId, function (err, thing) {
     if (err) cb(err, null);
-    Thing.p('name', payload.thing.name);
-    Thing.save(function (saveErr) {
+    thing.name = payload.thing.name;
+    db.models.thing.save(thing, function (saveErr) {
       if (saveErr) cb(saveErr, null);
-      const thingWithId = mapToObject(Thing.properties);
-      cb(null, thingWithId);
+      cb(null, thing);
     });
   });
-
 }

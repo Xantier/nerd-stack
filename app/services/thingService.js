@@ -33,12 +33,13 @@ export default {
   },
 
   del(req, res) {
-    thingRepository.deleteThing(req.db, req.params.id, (err)=> {
+    thingRepository.deleteThing(req.db, req.params.id, (err, id) => {
       let data;
       if (err) {
         data = {error: true, data: {message: err.message}};
       } else {
-        data = {error: false, data: {message: 'Thing deleted', id: req.params.id}};
+        const deleteId = id || req.params.id;
+        data = {error: false, data: {message: 'Thing deleted', id: deleteId}};
       }
       respond(req, res, data);
     });

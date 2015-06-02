@@ -1,5 +1,5 @@
 {
-  "db": "neo4j",
+  "db": "rethinkdb",
   "bookshelf": {
     "init": "data/bookshelf/init",
     "passport" : "data/bookshelf/passport",
