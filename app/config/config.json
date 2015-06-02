@@ -79,5 +79,13 @@
     "host": "http://localhost",
     "port" : "5984",
     "db": "nerd_stack_dev"
+  },
+  "neo4j" : {
+    "init" : "data/neo4j/init",
+    "passport" : "data/neo4j/passport",
+    "server" : "http://localhost:7474",
+    "endpoint" : "",
+    "user" : "",
+    "password" : ""
   }
 }

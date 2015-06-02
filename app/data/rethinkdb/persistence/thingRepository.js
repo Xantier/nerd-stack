@@ -25,7 +25,7 @@ export function deleteThing(db, id, cb) {
     thing.delete().then(function () {
       cb(null);
     }).catch(function (err) {
-      cb(err, null);
+      cb(err);
     });
   });
 }
