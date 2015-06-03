@@ -18,13 +18,7 @@
     "globalReturn": false,
     "jsx": true,
     "modules": true,
-    "objectLiteralComputedProperties": true,
-    "objectLiteralDuplicateProperties": false,
-    "objectLiteralShorthandMethods": true,
-    "objectLiteralShorthandProperties": true,
-    "octalLiterals": true,
-    "regexYFlag": true,
-    "restParams": true,
+    "objectLiteralComputedProperties"no-
     "spread": true,
     "superInFunctions": true,
     "templateStrings": true,
@@ -226,7 +220,10 @@
         "args": "after-used"
       }
     ],
-    "no-use-before-define": 2,
+    "no-use-before-define": [
+    2,
+    "nofunc"
+    ],
     "no-var": 2,
     "no-void": 0,
     "no-warning-comments": [
