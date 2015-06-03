@@ -4,6 +4,18 @@ import dbg from 'debug';
 import app from './../../app';
 import http from 'http';
 
+
+const debug = dbg('nerd-stack:server');
+const port = normalizePort(process.env.PORT || '3000');
+
+app.set('port', port);
+
+let server = http.createServer(app);
+server.listen(port);
+
+server.on('error', onError);
+server.on('listening', onListening);
+
 function normalizePort(val) {
   const returnable = parseInt(val, 10);
 
@@ -19,17 +31,6 @@ function normalizePort(val) {
 
   return false;
 }
-
-const debug = dbg('nerd-stack:server');
-const port = normalizePort(process.env.PORT || '3000');
-
-app.set('port', port);
-
-let server = http.createServer(app);
-server.listen(port);
-
-server.on('error', onError);
-server.on('listening', onListening);
 
 function onError(error) {
   if (error.syscall !== 'listen') {
