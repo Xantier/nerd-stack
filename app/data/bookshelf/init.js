@@ -12,7 +12,7 @@ bookshelf.models = {};
 // Register models
 import User from './model/User';
 User.register(bookshelf);
-import Thing from './model/Thing'
+import Thing from './model/Thing';
 Thing.register(bookshelf);
 
 // TODO: Migrations functions to automatically update DB
