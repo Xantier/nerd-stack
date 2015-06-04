@@ -17,7 +17,7 @@ mongoose.models = {};
 // Register models
 import User from './model/User';
 User.register(mongoose);
-import Thing from './model/Thing'
+import Thing from './model/Thing';
 Thing.register(mongoose);
 
 export default mongoose;
