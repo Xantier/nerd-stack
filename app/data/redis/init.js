@@ -22,7 +22,7 @@ client.on('connect', function () {
 // Register models
 import User from './model/User';
 User.register(nohm);
-import Thing from './model/Thing'
+import Thing from './model/Thing';
 Thing.register(nohm);
 
 export default nohm;
