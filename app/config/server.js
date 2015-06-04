@@ -4,7 +4,6 @@ import dbg from 'debug';
 import app from './../../app';
 import http from 'http';
 
-
 const debug = dbg('nerd-stack:server');
 const port = normalizePort(process.env.PORT || '3000');
 
