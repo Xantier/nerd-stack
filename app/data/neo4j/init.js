@@ -1,7 +1,7 @@
 'use strict';
 
 import seraph from 'seraph';
-import config from '../../config/config.json';
+//import config from '../../config/config.json';
 
 let db = seraph();
 
