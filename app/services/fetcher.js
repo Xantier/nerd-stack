@@ -53,12 +53,12 @@ export function httpPost(url, payload, dispatch) {
       .send(payload)
       .end(function (err, res) {
         if (err) {
-          response = 'SOMETHING WENT WRONG \\o/ ' + err.message;
+          response = {error: 'error: ' + err.message};
         }
         if (res.ok) {
           response = res.text;
         } else {
-          response = 'SOMETHING WENT WRONG \\o/ ' + res.text;
+          response = JSON.stringify({error: 'error: ' + res.text});
         }
         if (dispatch) {
           dispatch(JSON.parse(response));

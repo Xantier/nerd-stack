@@ -29,4 +29,13 @@ describe('UserActions', function () {
     expect(dispatcherStub.called);
   });
 
+  it('should be able to create an instance of Actions class', function(){
+    var actions = new userActions();
+    expect(actions).to.be.not.null;
+  });
+
+  it('shouldn\'t be able to call class as a function', function(){
+    expect(userActions).to.throw(TypeError);
+  });
+
 });

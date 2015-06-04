@@ -62,4 +62,14 @@ describe('ThingActions', function () {
     expect(response.action).to.equal(ThingConstants.ThingConstants.DELETE_THING);
   });
 
+  it('should be able to create an instance of Actions class', function(){
+    var actions = new thingActions();
+    expect(actions).to.be.not.null;
+  });
+
+  it('shouldn\'t be able to call class as a function', function(){
+    expect(thingActions).to.throw(TypeError);
+  });
+
+
 });

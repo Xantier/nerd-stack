@@ -4,8 +4,11 @@ require('../../testdom')('<html><body></body></html>'); // Remember to require a
 var React = require('react/addons');
 var expect = require('chai').expect;
 var sinon = require('sinon');
-var Thing = require('../../../app/components/thing/Thing.jsx');
+var proxyquire = require('proxyquire');
+
 var TestUtils = React.addons.TestUtils;
+var Thing;
+var thingActionsStub = {};
 
 describe('Thing component', function () {
   var thingComponent, item, modify;
@@ -18,6 +21,11 @@ describe('Thing component', function () {
       id: 1,
       name: 'Test Item'
     };
+    thingActionsStub.del = sinon.stub();
+    Thing = proxyquire('../../../app/components/thing/Thing.jsx',
+        {'./ThingActions': thingActionsStub}
+    );
+
     thingComponent = TestUtils.renderIntoDocument(
         <Thing _modify={modify} item={item} />
     );
@@ -30,6 +38,16 @@ describe('Thing component', function () {
     );
     var containerElement = divContainerComponent.getDOMNode();
     expect(containerElement).to.not.be.null;
+  });
+
+  it('calls thingActions.del when _delete is called', function () {
+    var linkComponents = TestUtils.scryRenderedDOMComponentsWithTag(
+        thingComponent,
+        'a'
+    );
+    var deleteAnchor = linkComponents[1].getDOMNode();
+    TestUtils.Simulate.click(deleteAnchor);
+    expect(thingActionsStub.del).to.be.called;
   });
 
   it('Has correct Name showing on item', function () {
@@ -112,12 +130,11 @@ describe('Thing component', function () {
     thingComponent.setState({editing: false});
   });
 
-
   it('Edits target value when editing and text entered into field', function () {
     thingComponent.setState({editing: true});
     var updateForm = thingComponent.refs.updateForm.getDOMNode();
     var value = 'testValue';
-    TestUtils.Simulate.change(updateForm.firstChild,{ target: {value: value}});
+    TestUtils.Simulate.change(updateForm.firstChild, {target: {value: value}});
     expect(thingComponent.state.name).to.be.equal(value);
   });
 
