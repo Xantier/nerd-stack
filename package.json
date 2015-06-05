@@ -32,7 +32,7 @@
     "mongoose": "~4.0.1",
     "morgan": "^1.5.2",
     "nohm": "~0.9.6",
-    "object-assign": "^2.0.0",
+    "object-assign": "~3.0.0",
     "passport": "~0.2.1",
     "passport-local": "~1.0.0",
     "pg": "^4.3.0",
