@@ -13,7 +13,7 @@ var thingActionsStub = {};
 describe('Thing component', function () {
   var thingComponent, item, modify;
   var modifySpy = false;
-  before('render and locate element', function () {
+  before('mock dependencies and render element', function () {
     modify = function () {
       modifySpy = true;
     };
