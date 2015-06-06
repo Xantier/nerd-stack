@@ -33,7 +33,7 @@ gulp.task('build', ['scripts', 'styles']);
 gulp.task('dev', ['lint', 'build', 'serve']);
 gulp.task('debug', ['lint', 'runTests', 'build', 'serve']);
 gulp.task('test', ['runTests']);
-gulp.task('ci', ['lint', 'runTests', 'build'])
+gulp.task('ci', ['lint', 'runTests', 'build']);
 
 var paths = {
   server: 'run.js',
@@ -136,7 +136,7 @@ gulp.task('runTests',
     )
 );
 
-gulp.task('coveralls', function () {  
+gulp.task('coveralls', function () {
   return gulp.src('./spec/coverage/lcov.info')
     .pipe(plugins.coveralls());
 });

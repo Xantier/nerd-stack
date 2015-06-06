@@ -13,12 +13,12 @@ function getXhrData(url, cb) {
       .set('port', 3000)
       .end(function (err, res) {
         if (err) {
-          response = 'SOMETHING WENT WRONG \\o/ ' + err.message;
+          response = {error: 'message: ' + err.message};
         }
         if (res.ok) {
           response = res.text;
         } else {
-          response = 'SOMETHING WENT WRONG \\o/ ' + res.text;
+          response = JSON.stringify({error: 'message: ' + res.text});
         }
         if (cb) {
           cb(JSON.parse(response));
@@ -27,6 +27,13 @@ function getXhrData(url, cb) {
       });
 }
 
+/**
+ * Determines if execution is on a browser or server and makes a get request or retrieves data directly.
+ * @param {string} url
+ * @param {string} dispatch - Flux dispatcher function
+ * @param {Object=} context - Optional context holding cached data. If exists, no XHR made.
+ * @returns {*} Optionally returns promises if called without global window object
+ */
 export function httpGet(url, dispatch, context) {
   if (typeof window === 'undefined') {
     return handleServerRequest(url, context);
@@ -53,12 +60,12 @@ export function httpPost(url, payload, dispatch) {
       .send(payload)
       .end(function (err, res) {
         if (err) {
-          response = {error: 'error: ' + err.message};
+          response = {error: 'message: ' + err.message};
         }
         if (res.ok) {
           response = res.text;
         } else {
-          response = JSON.stringify({error: 'error: ' + res.text});
+          response = JSON.stringify({error: 'message: ' + res.text});
         }
         if (dispatch) {
           dispatch(JSON.parse(response));
@@ -75,7 +82,7 @@ export function httpDel(url, dispatch) {
       .end(function (err, res) {
         let response;
         if (err) {
-          response = 'SOMETHING WENT WRONG \\o/ ' + err.message;
+          response = {error: 'message: ' + err.message};
         }
         if (res.ok) {
           response = res.text;
@@ -96,12 +103,12 @@ export function httpPut(url, payload, dispatch) {
       .send(payload)
       .end(function (err, res) {
         if (err) {
-          response = 'SOMETHING WENT WRONG \\o/ ' + err.message;
+          response = {error: 'message: ' + err.message};
         }
         if (res.ok) {
           response = res.text;
         } else {
-          response = 'SOMETHING WENT WRONG \\o/ ' + res.text;
+          response = JSON.stringify({error: 'message: ' + res.text});
         }
         if (dispatch) {
           dispatch(JSON.parse(response));
