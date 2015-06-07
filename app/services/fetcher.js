@@ -28,7 +28,8 @@ function getXhrData(url, cb) {
 }
 
 /**
- * Determines if execution is on a browser or server and makes a get request or retrieves data directly.
+ * Determines if execution is on a browser or server and makes a get request
+ * or retrieves data directly.
  * @param {string} url
  * @param {string} dispatch - Flux dispatcher function
  * @param {Object=} context - Optional context holding cached data. If exists, no XHR made.

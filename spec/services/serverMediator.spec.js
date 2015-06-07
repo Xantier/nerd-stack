@@ -8,9 +8,12 @@ var serverMediator;
 describe('serverMediator', function () {
   var apiRouter, item, handleSpyFunction;
   var handleSpy = false;
+  var passedInCallback;
   before('render and locate element', function () {
-    handleSpyFunction = function () {
+    handleSpyFunction = function (context, res, cb) {
+      res.payload= 'testPayload';
       handleSpy = true;
+      passedInCallback = cb;
     };
     item = {
       id: 1,
@@ -33,6 +36,10 @@ describe('serverMediator', function () {
     var context = {};
     serverMediator.handleServerRequest('/user', context);
     expect(handleSpy).to.be.true;
+  });
+
+  it('should pass in a callback that returns populatable response', function () {
+    expect(passedInCallback()).to.be.equal('testPayload');
   });
 })
 ;
