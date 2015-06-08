@@ -9,7 +9,7 @@ describe('serverMediator', function () {
   var apiRouter, item, handleSpyFunction;
   var handleSpy = false;
   var passedInCallback;
-  before('render and locate element', function () {
+  before('load service and stub dependencies', function () {
     handleSpyFunction = function (context, res, cb) {
       res.payload= 'testPayload';
       handleSpy = true;

@@ -16,6 +16,7 @@ export default {
       return next();
     });
   },
+
   add(req, res) {
     const payload = {
       user: req.user,
