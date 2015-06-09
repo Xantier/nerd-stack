@@ -5,7 +5,7 @@ const userRepository = require('../data/' + config.db + '/persistence/userReposi
 
 export default {
   get(req, res, next) {
-    return userRepository.getUser(req.db, req.user.id, (err, user)=> {
+    return userRepository.getUser(req.db, req.user.id, (err, user) => {
       if (err) {
         res.status(500).json({error: true, data: {message: err.message}});
       }
@@ -18,11 +18,12 @@ export default {
     const payload = {
       name: req.body.name
     };
-    userRepository.addUser(req.db, payload, (err, user)=> {
+    userRepository.addUser(req.db, payload, (err, user) => {
       if (err) {
         res.status(500).json({error: true, data: {message: err.message}});
+      } else {
+        res.json({error: false, data: {id: user.id}});
       }
-      res.json({error: false, data: {id: user.get('id')}});
     });
   }
 };
