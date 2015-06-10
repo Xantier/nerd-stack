@@ -21,7 +21,7 @@ describe('responder', function () {
         done();
       }
     };
-    var data = "hello world";
+    var data = 'hello world';
     respond(request, response, data);
     expect(redirAddress).to.deep.equal({address: 'Referrer'});
   });
@@ -34,7 +34,7 @@ describe('responder', function () {
         done();
       }
     };
-    var data = "hello world";
+    var data = 'hello world';
     respond(request, response, data);
     expect(data).to.equal(responseData);
   });
