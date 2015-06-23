@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import color from 'color';
 
 export default React.createClass({
   displayName: 'Submit',
