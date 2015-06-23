@@ -17,6 +17,7 @@ The NERD stack provides you with an application skeleton with [Node.js](https://
 - Frontend resource bundling and sourcemaps
 - Sourcecode linting to ensure code quality
 - Test runner and test coverage reporting with Mocha and Istanbul
+- ES6 transpilation using Babel
 
 The purpose of this application skeleton is to empower developers to be able to start developing their Node.js + React easily but still maintaining enough wiggle room to not get constrained into heavy frameworks.
 
