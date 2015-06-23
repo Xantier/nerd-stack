@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import color from 'color';
 import ProfilePic from './ProfilePic.jsx';
 import {Link} from 'react-router';
 
