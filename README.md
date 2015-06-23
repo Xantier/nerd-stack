@@ -52,7 +52,7 @@ You can select your database implementation by modifying configuration file call
 
 To run this application you can install this app with usual commands:
 ````
-git clone :repository
+git clone git@github.com:Xantier/nerd-stack.git
 npm install
 gulp dev
 ````
