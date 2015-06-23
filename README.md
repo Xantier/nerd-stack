@@ -6,12 +6,12 @@
 
 # NERD stack #
 
-The NERD stack provides you with an application skeleton with [Node.js](https://nodejs.org/), [Express](http://expressjs.com/), [React](https://facebook.github.io/react/) and database connectivity. It provides user with an opportunity to start quickly developing both large and small scale [isomorphic javascript](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) web applications using [Flux](https://facebook.github.io/flux/) architecture. The skeleton has in place implementations for:
+The NERD stack provides you with an application skeleton with [Node.js](https://nodejs.org/), [Express](http://expressjs.com/), [React](https://facebook.github.io/react/) and database connectivity. It provides user with an opportunity to start quickly developing both large and small scale [isomorphic/universal javascript](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) web applications using [Flux](https://facebook.github.io/flux/) architecture. The skeleton has in place implementations for:
 
 - A server backend using Node.js and Express
 - View layer rendered by Facebook's React framework 
 - Establish database connectivity and perform standard CRUD operations
-- Isomorphic application architecture sharing resources on server and client
+- Universal JS application architecture sharing resources on server and client
 - Unidirectional data flow using Flux architecture
 - Gulp build tasks to run the server with automatic restarts and livereload
 - Frontend resource bundling and sourcemaps
