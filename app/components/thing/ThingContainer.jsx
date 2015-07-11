@@ -8,7 +8,7 @@ import Label from '../common/Label.jsx';
 import ThingStore from './ThingStore';
 import ThingActions from './ThingActions';
 import {ThingConstants} from './ThingConstants';
-import ContextMixin from '../../util/ContextMixin';
+import ContextMixin from '../common/Mixins/ContextMixin';
 
 function getThings() {
   return ThingStore.getData().data;

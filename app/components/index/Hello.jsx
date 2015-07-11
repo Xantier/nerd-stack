@@ -4,7 +4,7 @@ import React from 'react';
 import ThingContainer from '../thing/ThingContainer.jsx';
 import UserStore from '../user/UserStore';
 import UserActions from '../user/UserActions';
-import ContextMixin from '../../util/ContextMixin';
+import ContextMixin from '../common/Mixins/ContextMixin';
 import {UserConstants} from '../user/UserConstants';
 import { Route, Link, RouteHandler } from 'react-router';
 

@@ -3,7 +3,7 @@
 import React from 'react';
 import UserStore from './UserStore';
 import UserActions from './UserActions';
-import ContextMixin from '../../util/ContextMixin';
+import ContextMixin from '../common/Mixins/ContextMixin';
 import {UserConstants} from './UserConstants';
 import { Route, Link, RouteHandler } from 'react-router';
 
