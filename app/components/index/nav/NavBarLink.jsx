@@ -14,7 +14,7 @@ export default React.createClass({
     switch (key) {
       case 'Profile':
         return (
-            <li className="profile-pic">
+            <li className="mdl-layout-title">
               <ProfilePic link={this.props.link} />
             </li>
         );
@@ -28,7 +28,7 @@ export default React.createClass({
         );
       default:
         return (
-            <li>
+            <li className="mdl-navigation__link">
               <Link to={link}>
                 <span>{key}</span>
               </Link>
