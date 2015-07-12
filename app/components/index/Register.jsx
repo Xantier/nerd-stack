@@ -4,7 +4,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import Label from '../common/Label.jsx';
 import Input from '../common/Input.jsx';
-import Submit from '../common/Submit.jsx';
+import Button from '../common/Button.jsx';
 
 export default React.createClass({
   displayName: 'Register',
@@ -29,7 +29,7 @@ export default React.createClass({
               <Link to="signin">
                 <span className="submit-button-secondary">Sign in</span>
               </Link>
-              <Submit name="Register" value="Register" />
+              <Button type="submit" text="Register" />
             </div>
           </form>
         </div>

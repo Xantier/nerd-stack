@@ -3,7 +3,7 @@
 import React from 'react';
 import Thing from './Thing.jsx';
 import Input from '../common/Input.jsx';
-import Submit from '../common/Submit.jsx';
+import Button from '../common/Button.jsx';
 import Label from '../common/Label.jsx';
 import ThingStore from './ThingStore';
 import ThingActions from './ThingActions';
@@ -69,13 +69,13 @@ export default React.createClass({
               <div className="form-header">
                 <h1>Create Things</h1>
               </div>
-              <div className="form-content">
+              <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
                 <Label htmlFor="name" text="Create new item" />
                 <Input id="name" name="name" type="text" onChange={this._setChangedText} />
               </div>
               <div className="form-footer">
-                <input type="reset" value="Clear" className="submit-button-secondary"/>
-                <Submit name="Create" value="Create"/>
+                <Button type="reset" text="Clear" />
+                <Button type="submit" text="Create" />
               </div>
             </form>
           </div>
