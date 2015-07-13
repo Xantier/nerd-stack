@@ -10,20 +10,26 @@ export default React.createClass({
   displayName: 'Signin',
   render() {
     return (
-        <div className="signin-form-container">
+        <div className="mdl-card mdl-shadow--4dp form-card-medium">
+          <div className="mdl-card__title">
+            <h2 className="mdl-card__title-text">Please Signin</h2>
+          </div>
           <form method="post" action="/signin">
-            <div className="form-header">
-              <h1>Please Signin</h1>
+            <div className="mdl-card__supporting-text">
+              <fieldset>
+                <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+                  <Label htmlFor="username" text="Username" />
+                  <Input name="username" type="text" required={true}/>
+                </div>
+                <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+                  <Label htmlFor="password" text="Password" />
+                  <Input name="password" type="password" required={true}/>
+                </div>
+              </fieldset>
             </div>
-            <div className="form-content">
-              <Label htmlFor="username" text="Username" />
-              <Input name="username" type="username" placeholder="Username" required={true}/>
-              <Label htmlFor="password" text="Password" />
-              <Input name="password" type="password" placeholder="Password" required={true}/>
-            </div>
-            <div className="form-footer">
+            <div className="mdl-card__actions mdl-card--border">
               <Link to="register">
-                <span className="submit-button-secondary">Register</span>
+                <Button type="button" text="Register" />
               </Link>
               <Button type="submit" text="Login" />
             </div>

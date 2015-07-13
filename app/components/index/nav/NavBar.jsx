@@ -12,11 +12,12 @@ export default React.createClass({
     return (
         <header className="mdl-layout__header">
           <div className="mdl-layout__header-row">
+            <span className="mdl-layout-title">NERD</span>
             <div className="mdl-layout-spacer"></div>
             {
-              this.props.links.map(function (link) {
-              return <NavBarLink key={link.key} link={link} />;
-            })}
+                this.props.links.map(function (link) {
+                  return <NavBarLink key={link.key} link={link} />;
+                })}
           </div>
         </header>
     );

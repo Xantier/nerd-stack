@@ -28,11 +28,9 @@ export default React.createClass({
         );
       default:
         return (
-            <li className="mdl-navigation__link">
-              <Link to={link}>
-                <span>{key}</span>
-              </Link>
-            </li>
+            <Link to={link} className="mdl-navigation__link">
+              <span>{key}</span>
+            </Link>
         );
     }
 
