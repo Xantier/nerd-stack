@@ -8,6 +8,9 @@ import Button from '../common/Button.jsx';
 
 export default React.createClass({
   displayName: 'Signin',
+  componentDidUpdate: function () {
+    componentHandler.upgradeDom();
+  },
   render() {
     return (
         <div className="mdl-card mdl-shadow--4dp form-card-medium">

@@ -81,9 +81,17 @@ export default React.createClass({
           </div>
           <div className="thing-list-container">
             <span className="thing-list-header">Current Things</span>
-            <ul>
+            <table className="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
+              <thead>
+                <tr>
+                  <th className="mdl-data-table__cell--non-numeric">Name</th>
+                  <th className="mdl-data-table__cell--non-numeric">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
               {thingList}
-            </ul>
+              </tbody>
+            </table>
           </div>
         </div>
     );

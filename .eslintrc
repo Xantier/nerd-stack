@@ -6,6 +6,9 @@
     "mocha": true,
     "jasmine": false
   },
+  "globals": {
+    "componentHandler": false
+  },
   "ecmaFeatures": {
     "arrowFunctions": true,
     "binaryLiterals": true,
@@ -19,11 +22,11 @@
     "jsx": true,
     "modules": true,
     "objectLiteralComputedProperties": true,
-    "objectLiteralDuplicateProperties": false,		
-    "objectLiteralShorthandMethods": true,		
-    "objectLiteralShorthandProperties": true,		
-    "octalLiterals": true,		
-    "regexYFlag": true,		
+    "objectLiteralDuplicateProperties": false,
+    "objectLiteralShorthandMethods": true,
+    "objectLiteralShorthandProperties": true,
+    "octalLiterals": true,
+    "regexYFlag": true,
     "restParams": true,
     "spread": true,
     "superInFunctions": true,
@@ -227,8 +230,8 @@
       }
     ],
     "no-use-before-define": [
-    2,
-    "nofunc"
+      2,
+      "nofunc"
     ],
     "no-var": 2,
     "no-void": 0,

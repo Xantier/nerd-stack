@@ -8,6 +8,9 @@ import Button from '../common/Button.jsx';
 
 export default React.createClass({
   displayName: 'Register',
+  componentDidUpdate: function () {
+    componentHandler.upgradeDom();
+  },
   render() {
     return (
         <div className="mdl-card mdl-shadow--4dp form-card-wide">
@@ -16,7 +19,8 @@ export default React.createClass({
               <h2>Please Register</h2>
               <div id="register-info-tooltip" className="icon material-icons">info</div>
               <div className="mdl-tooltip" htmlFor="register-info-tooltip">
-                Please insert your desired username and password.<br />
+                Please insert your desired username and password.
+                <br />
                 At the moment validations are non existant for username/password length, type etc.
               </div>
             </div>

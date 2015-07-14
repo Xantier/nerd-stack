@@ -3,7 +3,6 @@
 import React from 'react';
 import Button from '../common/Button.jsx';
 import Input from '../common/Input.jsx';
-import Label from '../common/Label.jsx';
 import ThingActions from './ThingActions';
 
 export default React.createClass({
@@ -11,6 +10,9 @@ export default React.createClass({
   propTypes: {
     _modify: React.PropTypes.func.isRequired,
     item: React.PropTypes.object.isRequired
+  },
+  componentDidUpdate: function () {
+    componentHandler.upgradeDom();
   },
   getInitialState() {
     return {editing: false};
@@ -33,29 +35,29 @@ export default React.createClass({
   render() {
     if (this.state.editing) {
       return (
-          <li>
+          <tr>
             <form ref="updateForm" className="thing-item" action="/API/thing?_method=PUT" method="post" onSubmit={this._modify}>
-              <Input name="name" type="text" onChange={this._setChangedText} />
-              <Button text="Update" />
+              <td>
+                <Input name="name" type="text" onChange={this._setChangedText} />
+              </td>
+              <td>
+                <Button text="Update" />
+              </td>
             </form>
-          </li>
+          </tr>
       );
     }
     return (
-        <li>
-          <div className="thing-item">
-            <div className="tooltip" ref="thingSpan" onContextMenu={this._enableEditMode}>
+        <tr>
+          <td ref="thingSpan" onContextMenu={this._enableEditMode}>
             {this.props.item.name}
-              <pre>
-                <img className="callout" src="img/callout.gif" />
-                Right click to edit
-              </pre>
-            </div>
+          </td>
+          <td>
             <a onClick={this._delete} href={'/API/thing/' + this.props.item.id + '?_method=DELETE'}>
               <Button text="Delete" />
             </a>
-          </div>
-        </li>
+          </td>
+        </tr>
     );
   }
 });
