@@ -63,11 +63,11 @@ export default React.createClass({
     }
 
     return (
-        <div className="thing-container">
-          <div className="thing-form-container">
+        <div>
+          <div className="mdl-card mdl-shadow--4dp form-card-medium">
             <form action="/API/thing" method="post" onSubmit={this._createThing}>
-              <div className="form-header">
-                <h1>Create Things</h1>
+              <div className="mdl-card__title">
+                <h2 className="mdl-card__title-text">Create Thing</h2>
               </div>
               <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
                 <Label htmlFor="name" text="Create new item" />
@@ -79,8 +79,10 @@ export default React.createClass({
               </div>
             </form>
           </div>
-          <div className="thing-list-container">
-            <span className="thing-list-header">Current Things</span>
+          <div className="mdl-card mdl-shadow--4dp form-card-medium">
+            <div className="mdl-card__title">
+              <h2 className="mdl-card__title-text">Current Things</h2>
+            </div>
             <table className="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
               <thead>
                 <tr>
