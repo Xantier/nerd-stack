@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import ProfilePic from './ProfilePic.jsx';
 import {Link} from 'react-router';
 
 export default React.createClass({
@@ -11,10 +10,9 @@ export default React.createClass({
   },
   render() {
     const userImg = this.props.link.url || 'user.png';
-    const imgStyle = {background: 'url(' + userImg + ') no-repeat'};
     return (
-        <Link to={this.props.link.link}>
-          <div className="profile-pic-img" style={imgStyle}></div>
+        <Link to={this.props.link.link} className="mdl-navigation__link">
+          <img src={userImg} />
         </Link>
     );
   }
