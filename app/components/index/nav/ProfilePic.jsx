@@ -12,7 +12,7 @@ export default React.createClass({
     const userImg = this.props.link.url || 'user.png';
     return (
         <Link to={this.props.link.link} className="mdl-navigation__link">
-          <img src={userImg} />
+          <img src={userImg} className="cropped-round"/>
         </Link>
     );
   }

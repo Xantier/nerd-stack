@@ -41,7 +41,7 @@ export default React.createClass({
   },
   render: function () {
     return (
-        <div>
+        <div className="mdl-typography--text-center">
           <h2>Hello {this.state.user}, here are all your things.</h2>
           <ThingContainer />
           <RouteHandler/>

@@ -3,7 +3,36 @@ html, body {
    padding: 0;
 }
 
-.form-card-wide.mdl-card {
+img.cropped-round {
+   -webkit-border-radius: 25px;
+   -moz-border-radius: 25px;
+   border-radius: 25px;
+}
+
+table.mdl-data-table {
+   width: 100%;
+}
+
+table.mdl-data-table td{
+   text-align: left;
+   }
+
+th.table-button {
+   width: 20%;
+}
+
+.android-slogan {
+   font-size: 60px;
+   padding-top: 160px;
+}
+.android-font {
+   font-family: 'And Black', 'Helvetica', 'Arial', sans-serif;
+   line-height: 1;
+   color: #767777;
+   font-weight: 300;
+}
+
+.form-card-wide.mdl-card, .form-card-large.mdl-card {
    width: 512px;
    margin-right: auto;
    margin-left: auto;
@@ -23,4 +52,10 @@ html, body {
 
 .form-card-medium > .mdl-card__menu, .form-card-wide > .mdl-card__menu {
    color: #fff;
+}
+
+.form-card-large > .mdl-card__title {
+   color: #fff;
+   height: 64px;
+   background-color: rgb(105, 240, 174);
 }

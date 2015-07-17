@@ -9,6 +9,7 @@ import Button from '../common/Button.jsx';
 export default React.createClass({
   displayName: 'Register',
   componentDidUpdate: function () {
+    console.log('ShouldUpdate');
     componentHandler.upgradeDom();
   },
   render() {
@@ -43,12 +44,16 @@ export default React.createClass({
               </fieldset>
             </div>
             <div className="mdl-card__actions mdl-card--border">
-              <Link to="signin">
-                <Button type="button" text="Sign in" />
-              </Link>
               <Button type="submit" text="Register" />
             </div>
           </form>
+          <div className="mdl-card__menu">
+            <Link to="signin">
+              <button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                <i className="material-icons">account_circle</i>
+              </button>
+            </Link>
+          </div>
         </div>
     );
   }
