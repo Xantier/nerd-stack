@@ -4,7 +4,7 @@ import React from 'react';
 import ThingContainer from '../thing/ThingContainer.jsx';
 import UserStore from '../user/UserStore';
 import UserActions from '../user/UserActions';
-import ContextMixin from '../common/Mixins/ContextMixin';
+import ContextMixin from '../decorators/ContextMixin';
 import {UserConstants} from '../user/UserConstants';
 import { Route, Link, RouteHandler } from 'react-router';
 
@@ -41,7 +41,7 @@ export default React.createClass({
   },
   render: function () {
     return (
-        <div>
+        <div className="mdl-typography--text-center">
           <h2>Hello {this.state.user}, here are all your things.</h2>
           <ThingContainer />
           <RouteHandler/>

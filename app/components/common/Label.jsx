@@ -10,7 +10,7 @@ export default React.createClass({
   },
   render() {
     return (
-        <label htmlFor={this.props.htmlFor}>{this.props.text}</label>
+        <label className="mdl-textfield__label" htmlFor={this.props.htmlFor}>{this.props.text}</label>
     );
   }
 });

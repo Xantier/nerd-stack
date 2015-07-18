@@ -3,12 +3,13 @@
 import React from 'react';
 import Thing from './Thing.jsx';
 import Input from '../common/Input.jsx';
-import Submit from '../common/Submit.jsx';
+import Button from '../common/Button.jsx';
 import Label from '../common/Label.jsx';
 import ThingStore from './ThingStore';
 import ThingActions from './ThingActions';
 import {ThingConstants} from './ThingConstants';
-import ContextMixin from '../common/Mixins/ContextMixin';
+import ContextMixin from '../decorators/ContextMixin';
+import MaterialRebindMixin from '../decorators/MaterialRebindMixin.js';
 
 function getThings() {
   return ThingStore.getData().data;
@@ -21,7 +22,7 @@ export default React.createClass({
       return ThingActions.getData(context);
     }
   },
-  mixins: [ContextMixin],
+  mixins: [ContextMixin, MaterialRebindMixin],
   getInitialState() {
     return getThings();
   },
@@ -63,27 +64,41 @@ export default React.createClass({
     }
 
     return (
-        <div className="thing-container">
-          <div className="thing-form-container">
+        <div>
+          <div className="mdl-card mdl-shadow--4dp form-card-medium">
+            <div className="mdl-card__title">
+              <h2 className="mdl-card__title-text">Create Thing</h2>
+            </div>
             <form action="/API/thing" method="post" onSubmit={this._createThing}>
-              <div className="form-header">
-                <h1>Create Things</h1>
-              </div>
-              <div className="form-content">
+              <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
                 <Label htmlFor="name" text="Create new item" />
                 <Input id="name" name="name" type="text" onChange={this._setChangedText} />
               </div>
               <div className="form-footer">
-                <input type="reset" value="Clear" className="submit-button-secondary"/>
-                <Submit name="Create" value="Create"/>
+                <div style={{float: 'left'}}>
+                  <Button type="submit" text="Create" />
+                </div>
+                <div style={{float: 'right'}}>
+                  <Button type="reset" text="Clear" />
+                </div>
               </div>
             </form>
           </div>
-          <div className="thing-list-container">
-            <span className="thing-list-header">Current Things</span>
-            <ul>
+          <div className="mdl-card mdl-shadow--4dp form-card-large" style={{marginTop: '15px'}}>
+            <div className="mdl-card__title">
+              <h2 className="mdl-card__title-text">Current Things</h2>
+            </div>
+            <table className="mdl-data-table mdl-js-data-table">
+              <thead>
+                <tr>
+                  <th className="mdl-data-table__cell--non-numeric">Name</th>
+                  <th className="mdl-data-table__cell--non-numeric table-button">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
               {thingList}
-            </ul>
+              </tbody>
+            </table>
           </div>
         </div>
     );

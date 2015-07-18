@@ -3,8 +3,8 @@
 import React from 'react';
 import Button from '../common/Button.jsx';
 import Input from '../common/Input.jsx';
-import Label from '../common/Label.jsx';
 import ThingActions from './ThingActions';
+import MaterialRebindMixin from '../decorators/MaterialRebindMixin.js';
 
 export default React.createClass({
   displayName: 'Thing',
@@ -12,6 +12,7 @@ export default React.createClass({
     _modify: React.PropTypes.func.isRequired,
     item: React.PropTypes.object.isRequired
   },
+  mixins: [MaterialRebindMixin],
   getInitialState() {
     return {editing: false};
   },
@@ -33,29 +34,29 @@ export default React.createClass({
   render() {
     if (this.state.editing) {
       return (
-          <li>
-            <form ref="updateForm" className="thing-item" action="/API/thing?_method=PUT" method="post" onSubmit={this._modify}>
-              <Input name="name" type="text" onChange={this._setChangedText} />
-              <Button text="Update" />
-            </form>
-          </li>
+          <tr>
+            <td>
+              <form ref="updateForm" action="/API/thing?_method=PUT" method="post" onSubmit={this._modify}>
+                <Input name="name" type="text" onChange={this._setChangedText} />
+              </form>
+            </td>
+            <td>
+              <a onClick={this._modify}>
+                <Button text="Update" />
+              </a>
+            </td>
+          </tr>
       );
     }
     return (
-        <li>
-          <div className="thing-item">
-            <div className="tooltip" ref="thingSpan" onContextMenu={this._enableEditMode}>
+        <tr>
+          <td ref="thingSpan" onContextMenu={this._enableEditMode}>
             {this.props.item.name}
-              <pre>
-                <img className="callout" src="img/callout.gif" />
-                Right click to edit
-              </pre>
-            </div>
-            <a onClick={this._delete} href={'/API/thing/' + this.props.item.id + '?_method=DELETE'}>
-              <Button text="Delete" />
-            </a>
-          </div>
-        </li>
+          </td>
+          <td>
+            <Button clickAction={this._delete} text="Delete" href={'/API/thing/' + this.props.item.id + '?_method=DELETE'}/>
+          </td>
+        </tr>
     );
   }
 });

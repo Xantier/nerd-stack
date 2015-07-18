@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "author": "Jussi Hallila",
   "repository": "https://github.com/Xantier/nerd-stack.git",
-  "private": true,
   "scripts": {
-    "start": "gulp dev"
+    "start": "gulp dev",
+    "test": "gulp test"
   },
   "dependencies": {
     "babel": "^5.4.7",
@@ -27,11 +27,12 @@
     "knex": "^0.8.6",
     "less-middleware": "^2.0.1",
     "lodash": "^3.4.0",
+    "material-design-lite": "^1.0.0-3",
     "method-override": "~2.3.2",
     "mongoose": "~4.0.1",
     "morgan": "^1.5.2",
     "nohm": "~0.9.6",
-    "object-assign": "~3.0.0",
+    "object-assign": "~2.0.0",
     "passport": "~0.2.1",
     "passport-local": "~1.0.0",
     "pg": "^4.3.0",
@@ -51,7 +52,7 @@
   },
   "devDependencies": {
     "babelify": "^6.1.2",
-    "browserify": "^10.2.3",
+    "browserify": "^11.0.0",
     "chai": "^3.0.0",
     "eslint": "~0.24.0",
     "eslint-plugin-react": "^2.4.0",

@@ -35,10 +35,14 @@ export default React.createClass({
           {key: 'Signin', link: '/signin'});
     }
     return (
-        <div styles={{marginTop: '0px'}}>
-          <NavBar links={links}/>
-          <div>
-            <RouteHandler {...this.props}/>
+        <div className="mdl-layout__container">
+          <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <NavBar links={links} />
+            <main className="mdl-layout__content">
+              <div className="page-content">
+                <RouteHandler {...this.props}/>
+              </div>
+            </main>
           </div>
         </div>
     );

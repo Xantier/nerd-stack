@@ -14,25 +14,19 @@ export default React.createClass({
     switch (key) {
       case 'Profile':
         return (
-            <li className="profile-pic">
-              <ProfilePic link={this.props.link} />
-            </li>
+            <ProfilePic link={this.props.link} />
         );
       case 'Logout':
         return (
-            <li>
-              <a href={link}>
-                <span>{key}</span>
-              </a>
-            </li>
+            <a href={link} className="mdl-navigation__link">
+              <span>{key}</span>
+            </a>
         );
       default:
         return (
-            <li>
-              <Link to={link}>
-                <span>{key}</span>
-              </Link>
-            </li>
+            <Link to={link} className="mdl-navigation__link">
+              <span>{key}</span>
+            </Link>
         );
     }
 
