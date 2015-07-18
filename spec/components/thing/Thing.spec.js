@@ -31,16 +31,6 @@ describe('Thing component', function () {
     );
   });
 
-  it('calls thingActions.del when _delete is called', function () {
-    var linkComponents = TestUtils.scryRenderedDOMComponentsWithTag(
-        thingComponent,
-        'a'
-    );
-    var deleteAnchor = linkComponents[1].getDOMNode();
-    TestUtils.Simulate.click(deleteAnchor);
-    expect(thingActionsStub.del).to.be.called;
-  });
-
   it('Has correct Name showing on item', function () {
     var divContainerComponent = TestUtils.scryRenderedDOMComponentsWithTag(
         thingComponent,
@@ -56,29 +46,6 @@ describe('Thing component', function () {
     );
     var anchor = linkComponents[0].getDOMNode();
     expect(anchor.getAttribute('href')).to.be.equal('/API/thing/' + item.id + '?_method=DELETE');
-  });
-
-  it('Has delete Button with no href', function () {
-    var linkComponents = TestUtils.scryRenderedDOMComponentsWithTag(
-        thingComponent,
-        'a'
-    );
-    var anchor = linkComponents[1].getDOMNode();
-    expect(anchor.href).to.be.equal('');
-  });
-
-  it('calls _delete method when delete button is clicked', function () {
-    var stub = sinon.stub(Thing.prototype.__reactAutoBindMap, "_delete");
-    thingComponent = TestUtils.renderIntoDocument(
-        <Thing _modify={modify} item={item} />
-    );
-    var linkComponents = TestUtils.scryRenderedDOMComponentsWithTag(
-        thingComponent,
-        'a'
-    );
-    var deleteAnchor = linkComponents[1].getDOMNode();
-    TestUtils.Simulate.click(deleteAnchor);
-    expect(stub).to.be.called;
   });
 
 });
