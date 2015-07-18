@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "babelify": "^6.1.2",
-    "browserify": "^10.2.3",
+    "browserify": "^11.0.0",
     "chai": "^3.0.0",
     "eslint": "~0.24.0",
     "eslint-plugin-react": "^2.4.0",

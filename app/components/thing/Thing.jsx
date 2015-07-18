@@ -4,6 +4,7 @@ import React from 'react';
 import Button from '../common/Button.jsx';
 import Input from '../common/Input.jsx';
 import ThingActions from './ThingActions';
+import MaterialRebindMixin from '../decorators/MaterialRebindMixin.js';
 
 export default React.createClass({
   displayName: 'Thing',
@@ -11,9 +12,7 @@ export default React.createClass({
     _modify: React.PropTypes.func.isRequired,
     item: React.PropTypes.object.isRequired
   },
-  componentDidUpdate: function () {
-    componentHandler.upgradeDom();
-  },
+  mixins: [MaterialRebindMixin],
   getInitialState() {
     return {editing: false};
   },
@@ -55,9 +54,7 @@ export default React.createClass({
             {this.props.item.name}
           </td>
           <td>
-            <a onClick={this._delete} href={'/API/thing/' + this.props.item.id + '?_method=DELETE'}>
-              <Button text="Delete" />
-            </a>
+            <Button clickAction={this._delete} text="Delete" href={'/API/thing/' + this.props.item.id + '?_method=DELETE'}/>
           </td>
         </tr>
     );

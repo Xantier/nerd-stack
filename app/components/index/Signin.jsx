@@ -5,13 +5,11 @@ import {Link} from 'react-router';
 import Input from '../common/Input.jsx';
 import Label from '../common/Label.jsx';
 import Button from '../common/Button.jsx';
+import MaterialRebindMixin from '../decorators/MaterialRebindMixin.js';
 
 export default React.createClass({
   displayName: 'Signin',
-  componentDidUpdate: function () {
-    console.log('ShouldUpdate');
-    componentHandler.upgradeDom();
-  },
+  mixins: [MaterialRebindMixin],
   render() {
     return (
         <div className="mdl-card mdl-shadow--4dp form-card-medium">
@@ -37,9 +35,12 @@ export default React.createClass({
           </form>
           <div className="mdl-card__menu">
             <Link to="register">
-              <button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+              <button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="register-icon">
                 <i className="material-icons">person_add</i>
               </button>
+              <div className="mdl-tooltip" htmlFor="register-icon">
+                Register
+              </div>
             </Link>
           </div>
         </div>

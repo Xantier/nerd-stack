@@ -8,7 +8,8 @@ import Label from '../common/Label.jsx';
 import ThingStore from './ThingStore';
 import ThingActions from './ThingActions';
 import {ThingConstants} from './ThingConstants';
-import ContextMixin from '../../util/ContextMixin';
+import ContextMixin from '../decorators/ContextMixin';
+import MaterialRebindMixin from '../decorators/MaterialRebindMixin.js';
 
 function getThings() {
   return ThingStore.getData().data;
@@ -21,7 +22,7 @@ export default React.createClass({
       return ThingActions.getData(context);
     }
   },
-  mixins: [ContextMixin],
+  mixins: [ContextMixin, MaterialRebindMixin],
   getInitialState() {
     return getThings();
   },
@@ -74,8 +75,12 @@ export default React.createClass({
                 <Input id="name" name="name" type="text" onChange={this._setChangedText} />
               </div>
               <div className="form-footer">
-                <Button type="reset" text="Clear" />
-                <Button type="submit" text="Create" />
+                <div style={{float: 'left'}}>
+                  <Button type="submit" text="Create" />
+                </div>
+                <div style={{float: 'right'}}>
+                  <Button type="reset" text="Clear" />
+                </div>
               </div>
             </form>
           </div>

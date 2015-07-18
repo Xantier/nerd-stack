@@ -21,15 +21,8 @@ th.table-button {
    width: 20%;
 }
 
-.android-slogan {
-   font-size: 60px;
-   padding-top: 160px;
-}
-.android-font {
-   font-family: 'And Black', 'Helvetica', 'Arial', sans-serif;
-   line-height: 1;
-   color: #767777;
-   font-weight: 300;
+button.mdl-button {
+   color: #000000;
 }
 
 .form-card-wide.mdl-card, .form-card-large.mdl-card {
