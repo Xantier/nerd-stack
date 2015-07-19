@@ -41,9 +41,7 @@ export default React.createClass({
               </form>
             </td>
             <td>
-              <a onClick={this._modify}>
-                <Button text="Update" />
-              </a>
+              <Button text="Update" clickAction={this._modify}/>
             </td>
           </tr>
       );
