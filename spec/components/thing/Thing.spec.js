@@ -14,6 +14,10 @@ describe('Thing component', function () {
   var thingComponent, item, modify;
   var modifySpy = false;
   before('mock dependencies and render element', function () {
+    global.componentHandler = {
+      upgradeDom() {
+      }
+    };
     modify = function () {
       modifySpy = true;
     };
