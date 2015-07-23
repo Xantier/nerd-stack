@@ -41,5 +41,4 @@ describe('serverMediator', function () {
   it('should pass in a callback that returns populatable response', function () {
     expect(passedInCallback()).to.be.equal('testPayload');
   });
-})
-;
+});

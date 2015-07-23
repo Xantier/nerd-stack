@@ -69,7 +69,7 @@
     "gulp-sourcemaps": "^1.5.1",
     "gulp-uglify": "^1.1.0",
     "jsdom": "~5.6.0",
-    "mocha": "^2.2.1",
+    "mocha": "^2.2.5",
     "mocha-jsdom": "~1.0.0",
     "mockery": "~1.4.0",
     "nock": "^2.3.0",

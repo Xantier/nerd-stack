@@ -130,7 +130,7 @@ gulp.task('runTests',
             reporter: 'spec'
           },
           babel: {
-            sourceMap: 'inline'
+            sourceMap: 'both'
           }
         }
     )
