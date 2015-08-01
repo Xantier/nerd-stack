@@ -1,5 +1,3 @@
-'use strict';
-
 export function getThingsById(db, id, cb) {
   return new Promise(function (resolve, reject) {
     db.models.user.read(id, function (err, user) {

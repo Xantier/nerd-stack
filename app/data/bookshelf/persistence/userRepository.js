@@ -1,5 +1,3 @@
-'use strict';
-
 export function getUser(db, id, cb) {
   const User = new db.models.User(
       {id: id}

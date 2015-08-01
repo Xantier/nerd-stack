@@ -1,5 +1,3 @@
-'use strict';
-
 const expect = require('chai').expect;
 const userStore = require('../../../app/components/user/UserStore');
 const Dispatcher = require('../../../app/util/dispatcher');

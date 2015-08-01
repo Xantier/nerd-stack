@@ -1,5 +1,3 @@
-'use strict';
-
 export default class User {
   static register(mongoose) {
     let UserSchema = new mongoose.Schema({

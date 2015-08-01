@@ -1,5 +1,3 @@
-'use strict';
-
 import Thinky from 'thinky';
 import config from '../../config/config.json';
 

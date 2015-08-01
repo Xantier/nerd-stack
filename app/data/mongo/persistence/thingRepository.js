@@ -1,5 +1,3 @@
-'use strict';
-
 function mapToObject(thing) {
   let obj = thing.toObject();
   obj.id = thing._id;

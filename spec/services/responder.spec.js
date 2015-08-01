@@ -1,7 +1,3 @@
-'use strict';
-
-'use strict';
-
 import { expect } from 'chai';
 import respond from '../../app/services/responder';
 

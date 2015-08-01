@@ -85,9 +85,7 @@
     "indent": [
       2,
       2,
-      {
-        "indentSwitchCase": true
-      }
+      {"SwitchCase": 1}
     ],
     "key-spacing": [
       2,
@@ -139,7 +137,7 @@
     "no-duplicate-case": 2,
     "no-else-return": 2,
     "no-empty": 2,
-    "no-empty-class": 2,
+    "no-empty-character-class": 2,
     "no-empty-label": 2,
     "no-eq-null": 2,
     "no-eval": 2,
@@ -149,7 +147,7 @@
     "no-extra-boolean-cast": 2,
     "no-extra-parens": 0,
     "no-extra-semi": 2,
-    "no-extra-strict": 2,
+    "strict": [2, "global"],
     "no-fallthrough": 2,
     "no-floating-decimal": 2,
     "no-func-assign": 2,
@@ -209,7 +207,7 @@
     "no-sequences": 2,
     "no-shadow": 2,
     "no-shadow-restricted-names": 2,
-    "no-space-before-semi": 2,
+    "semi-spacing": 2,
     "no-spaced-func": 2,
     "no-sparse-arrays": 2,
     "no-sync": 0,
@@ -247,7 +245,7 @@
       }
     ],
     "no-with": 2,
-    "no-wrap-func": 2,
+    "no-extra-parens": 2,
     "one-var": 0,
     "operator-assignment": [
       0,
@@ -290,7 +288,7 @@
       0,
       "always"
     ],
-    "space-before-function-parentheses": [
+    "space-before-function-paren": [
       2,
       {
         "anonymous": "always",

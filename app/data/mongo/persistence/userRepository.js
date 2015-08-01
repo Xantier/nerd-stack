@@ -1,5 +1,3 @@
-'use strict';
-
 export function getUser(db, id, cb) {
   const User = db.model('User');
   return User.findById(id).exec()

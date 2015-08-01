@@ -1,5 +1,3 @@
-'use strict';
-
 import config from '../config/config.json';
 const userRepository = require('../data/' + config.db + '/persistence/userRepository');
 

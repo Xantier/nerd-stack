@@ -1,5 +1,3 @@
-'use strict';
-
 import {Strategy as LocalStrategy} from 'passport-local';
 import bcrypt from 'bcrypt-nodejs';
 

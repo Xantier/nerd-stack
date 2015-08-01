@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import { Route, NotFoundRoute } from 'react-router';
 import Index from './index/Index.jsx';

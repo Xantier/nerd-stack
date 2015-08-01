@@ -1,5 +1,3 @@
-'use strict';
-
 export default class Thing {
   static register(bookshelf) {
     bookshelf.models.Thing = bookshelf.Model.extend({

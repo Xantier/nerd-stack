@@ -1,7 +1,3 @@
-'use strict';
-
-//Not in use
-
 import winston from 'winston';
 winston.emitErrs = true;
 

@@ -1,5 +1,3 @@
-'use strict';
-
 import config from '../config/config.json';
 import respond from './responder.js';
 const thingRepository = require('../data/' + config.db + '/persistence/thingRepository');

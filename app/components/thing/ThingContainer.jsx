@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import Thing from './Thing.jsx';
 import Input from '../common/Input.jsx';

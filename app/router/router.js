@@ -1,5 +1,3 @@
-'use strict';
-
 import render from '../render/server';
 import api from './apiRouter';
 

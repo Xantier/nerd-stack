@@ -1,5 +1,3 @@
-'use strict';
-
 import redis from 'redis';
 import config from '../../config/config.json';
 import { Nohm as nohm } from 'nohm';

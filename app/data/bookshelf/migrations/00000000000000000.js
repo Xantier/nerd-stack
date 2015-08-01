@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Naming convention for migration files is date, hours, minutes, seconds, milliseconds
  * 4+2+2+2+2+2+3 = 17 numbers e.g. 20150331211015325

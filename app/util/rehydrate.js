@@ -1,5 +1,3 @@
-'use strict';
-
 import { set as setCache } from'./cache';
 
 export default function () {

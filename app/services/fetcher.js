@@ -1,5 +1,3 @@
-'use strict';
-
 import request from 'superagent';
 import {handleServerRequest} from './serverMediator';
 import {get as getCached} from '../util/cache';

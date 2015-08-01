@@ -1,5 +1,3 @@
-'use strict';
-
 // Imports
 var debug = require('debug');
 var gulp = require('gulp');

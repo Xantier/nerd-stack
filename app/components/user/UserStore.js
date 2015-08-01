@@ -1,5 +1,3 @@
-'use strict';
-
 import IndexDispatcher from '../../util/dispatcher';
 import {EventEmitter} from 'events';
 import assign from 'object-assign';

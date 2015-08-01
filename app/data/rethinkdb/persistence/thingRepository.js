@@ -1,5 +1,3 @@
-'use strict';
-
 export function getThingsById(db, id, cb) {
   return db.models.user.get(id).getJoin().run().then(function (user) {
     return cb(null, user.things);

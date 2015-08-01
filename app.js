@@ -1,5 +1,3 @@
-'use strict';
-
 import express from 'express';
 import flash from 'connect-flash';
 import passport from 'passport';

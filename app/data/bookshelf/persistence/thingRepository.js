@@ -1,5 +1,3 @@
-'use strict';
-
 export function getThingsById(db, id, cb) {
   const Things = new db.models.Things();
   return Things.query({where: {'user_id': id}})

@@ -1,5 +1,3 @@
-'use strict';
-
 import knex from 'knex';
 import config from '../../config/config.json';
 import Bookshelf from 'bookshelf';

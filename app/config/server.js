@@ -1,5 +1,3 @@
-'use strict';
-
 import dbg from 'debug';
 import app from './../../app';
 import http from 'http';

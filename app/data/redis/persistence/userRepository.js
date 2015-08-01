@@ -1,5 +1,3 @@
-'use strict';
-
 export function getUser(db, id, cb) {
   const User = db.factory('User');
   return new Promise(function (resolve, reject) {

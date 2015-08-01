@@ -1,5 +1,3 @@
-'use strict';
-
 import seraph from 'seraph';
 //import config from '../../config/config.json';
 

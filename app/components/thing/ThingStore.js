@@ -1,5 +1,3 @@
-'use strict';
-
 import IndexDispatcher from '../../util/dispatcher';
 import assign from 'object-assign';
 import _ from 'lodash';

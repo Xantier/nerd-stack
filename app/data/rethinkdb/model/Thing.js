@@ -1,5 +1,3 @@
-'use strict';
-
 export default class Thing {
   static register(thinky) {
     let Things = thinky.createModel('thing', {

@@ -1,5 +1,3 @@
-'use strict';
-
 require('../../testdom')('<html><body></body></html>'); // Remember to require and init before React
 var React = require('react/addons');
 var expect = require('chai').expect;

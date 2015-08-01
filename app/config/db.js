@@ -1,5 +1,3 @@
-'use strict';
-
 import config from './config.json';
 
 export default function (passport) {

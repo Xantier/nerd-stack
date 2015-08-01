@@ -1,5 +1,3 @@
-'use strict';
-
 import model from 'seraph-model';
 
 export default class User {

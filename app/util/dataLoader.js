@@ -1,5 +1,3 @@
-'use strict';
-
 import {all} from 'when/keys';
 let token;
 let context;

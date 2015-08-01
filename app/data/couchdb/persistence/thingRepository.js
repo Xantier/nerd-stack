@@ -1,5 +1,3 @@
-'use strict';
-
 export function getThingsById(db, id, cb) {
   return new Promise(function (resolve, reject) {
     db.view('thing/byUserId', {key: id}, function (err, things) {

@@ -1,5 +1,3 @@
-'use strict';
-
 import {Strategy as LocalStrategy} from 'passport-local';
 import bcrypt from 'bcrypt-nodejs';
 
@@ -14,9 +12,8 @@ export default function (passport, db) {
     });
   });
 
-  passport.use('register', new LocalStrategy({
-            passReqToCallback: true
-          }, function (req, username, password, done) {
+  passport.use('register', new LocalStrategy({passReqToCallback: true},
+          function (req, username, password, done) {
             if (password !== req.body.password2) {
               return done(null, false, {message: 'Passwords don\'t match'});
             }

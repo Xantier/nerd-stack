@@ -1,5 +1,3 @@
-'use strict';
-
 import Dispatcher from '../../util/dispatcher';
 import {httpGet} from '../../services/fetcher';
 import {UserConstants} from './UserConstants';

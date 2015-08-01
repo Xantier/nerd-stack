@@ -1,5 +1,3 @@
-'use strict';
-
 import {Dispatcher} from 'flux';
 const IndexDispatcher = new Dispatcher();
 
