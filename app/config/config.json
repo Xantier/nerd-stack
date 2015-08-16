@@ -1,6 +1,7 @@
 {
   "db": "rethinkdb",
   "bookshelf": {
+    "db": "sqlite",
     "init": "data/bookshelf/init",
     "passport" : "data/bookshelf/passport",
     "migrations": {
@@ -30,7 +31,7 @@
     "sqlite": {
       "client": "sqlite3",
       "connection": {
-        "filename": "/data/nerd.db"
+        "filename": "app/data/nerd.db"
       }
     }
   },
