@@ -2,7 +2,8 @@ import knex from 'knex';
 import config from '../../config/config.json';
 import Bookshelf from 'bookshelf';
 
-const knexConfig = knex(config.bookshelf.postgresql);
+const dbConf = config.bookshelf[config.bookshelf.db];
+const knexConfig = knex(dbConf);
 let bookshelf = new Bookshelf(knexConfig);
 
 bookshelf.models = {};

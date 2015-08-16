@@ -46,8 +46,18 @@ The application contains multiple implementations of databases. After you have d
 - [Redis (Windows not officially supported)](http://redis.io/download)
 - [RethinkDB (Not available on Windows)](http://rethinkdb.com/docs/install/)
 
+####Dependencies####
+`package.json` contains all the dependencies that are required by the project, including the supported database clients, so it might be a good idea to remove the ones that you are not planning to use.
+
+Install the dependencies by running `npm install`.
+
 ####Configuration####
 You can select your database implementation by modifying configuration file called config.json in app/config/ folder. In the file replace the db attribute with your chosen implementation. Actual DB settings are listed below under their respective names. Please make sure to setup your system how you have configured your database itself. Good things to change are hostname, database name and user credentials.
+
+#####PostgreSql, MySql and SQLite3 users#####
+Please note that PostgreSql, MySql and SQLite3 are handled by the [Bookshelf.js](http://bookshelfjs.org/) module, therefore in the `app/config/config.json` you should select `bookshelf` as your db and depending on your actual database of choice, change `bookshelf.db` to one of the matching database configurations (under `bookshelf`).
+
+To setup your database, run `gulp migrate`. It will execute migrations that are stored in `app/data/bookshelf/migrations`. In order to create your own migrations take a look at the existing files and [Knex.js schema builder API](http://knexjs.org/#Schema).
 
 ##Running##
 
@@ -57,6 +67,7 @@ git clone git@github.com:Xantier/nerd-stack.git
 npm install
 gulp dev
 ````
+Your application will be accessible at `http://localhost:3000`
 
 When you are happy with your application and plan to run it without development mode  you can invoke the following commands:
 ````
