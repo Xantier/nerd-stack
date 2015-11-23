@@ -75,7 +75,7 @@
     "mocha-jsdom": "~1.0.0",
     "mockery": "~1.4.0",
     "nock": "^2.3.0",
-    "proxyquire": "~1.6.0",
+    "proxyquire": "~1.7.0",
     "reactify": "^1.0.0",
     "sinon": "~1.15.1",
     "vinyl-buffer": "^1.0.0",
