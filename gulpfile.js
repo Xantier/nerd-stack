@@ -57,7 +57,7 @@ gulp.task('serve', function () {
       'NODE_ENV': 'development'
     },
     watch: [paths.sources, paths.tests],
-    ext: ['js', 'jsx'],
+    ext: 'js, jsx',
     ignore: [paths.client.sources, 'public/build/**', '*.xml', 'node_modules/**']
   })
       .on('start', ['livereload'])
@@ -136,5 +136,5 @@ gulp.task('runTests',
 
 gulp.task('coveralls', function () {
   return gulp.src('./spec/coverage/lcov.info')
-    .pipe(plugins.coveralls());
+      .pipe(plugins.coveralls());
 });
