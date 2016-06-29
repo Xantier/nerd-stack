@@ -21,7 +21,7 @@ function create(response) {
 function remove(response) {
   if (response.data) {
     _.remove(things.things, function (thing) {
-      return thing.id === response.data.id;
+      return thing.id == response.data.id;
     });
   }
 }
@@ -29,7 +29,7 @@ function remove(response) {
 function update(response) {
   if (response.data) {
     _.remove(things.things, function (thing) {
-      return thing.id === response.data.id;
+      return thing.id == response.data.id;
     });
     things.things.push(response.data);
   }
