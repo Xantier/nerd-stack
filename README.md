@@ -27,14 +27,14 @@ The purpose of this application skeleton is to empower developers to be able to 
 ## Installation ##
 
 
-####Environment ####
+#### Environment ####
 The tools of the trade for this application development stack are node.js, git and your preferred database implementation. 
 You can install node.js for Windows or Mac from https://nodejs.org/download/
 For Linux you can follow instructions on https://github.com/joyent/node/wiki/Installation
 
 To install git you can download it from http://git-scm.com/downloads or use your package manager to install it.
 
-####Databases####
+#### Databases ####
 The application contains multiple implementations of databases. After you have decided which database to use you need to have it running on your local machine to be able to start developing your next big web application with NERD stack. Installation instructions for different databases:
 
 - [PostgreSql](https://wiki.postgresql.org/wiki/Detailed_installation_guides)
@@ -46,20 +46,20 @@ The application contains multiple implementations of databases. After you have d
 - [Redis (Windows not officially supported)](http://redis.io/download)
 - [RethinkDB (Not available on Windows)](http://rethinkdb.com/docs/install/)
 
-####Dependencies####
+#### Dependencies ####
 `package.json` contains all the dependencies that are required by the project, including the supported database clients, so it might be a good idea to remove the ones that you are not planning to use.
 
 Install the dependencies by running `npm install`.
 
-####Configuration####
+#### Configuration ####
 You can select your database implementation by modifying configuration file called config.json in app/config/ folder. In the file replace the db attribute with your chosen implementation. Actual DB settings are listed below under their respective names. Please make sure to setup your system how you have configured your database itself. Good things to change are hostname, database name and user credentials.
 
-#####PostgreSql, MySql and SQLite3 users#####
+##### PostgreSql, MySql and SQLite3 users #####
 Please note that PostgreSql, MySql and SQLite3 are handled by the [Bookshelf.js](http://bookshelfjs.org/) module, therefore in the `app/config/config.json` you should select `bookshelf` as your db and depending on your actual database of choice, change `bookshelf.db` to one of the matching database configurations (under `bookshelf`).
 
 To setup your database, run `gulp migrate`. It will execute migrations that are stored in `app/data/bookshelf/migrations`. In order to create your own migrations take a look at the existing files and [Knex.js schema builder API](http://knexjs.org/#Schema).
 
-##Running##
+## Running ##
 
 To run this application you can install this app with usual commands:
 ````
@@ -82,7 +82,7 @@ It is recommended to use something like supervisor to run the application when u
 
 
 
-#Licence#
+# Licence #
 
 
 [The MIT License](http://opensource.org/licenses/mit-license.php)
