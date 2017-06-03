@@ -64,6 +64,7 @@ To setup your database, run `gulp migrate`. It will execute migrations that are 
 To run this application you can install this app with usual commands:
 ````
 git clone git@github.com:Xantier/nerd-stack.git
+cd nerd-stack
 npm install
 gulp dev
 ````
