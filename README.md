@@ -29,7 +29,8 @@ The purpose of this application skeleton is to empower developers to be able to 
 
 #### Environment ####
 The tools of the trade for this application development stack are node.js, git and your preferred database implementation. 
-You can install node.js for Windows or Mac from https://nodejs.org/download/
+You can [install node.js](
+https://www.scaler.com/topics/javascript/install-node-js/) for Windows or Mac from https://nodejs.org/download/
 For Linux you can follow instructions on https://github.com/joyent/node/wiki/Installation
 
 To install git you can download it from http://git-scm.com/downloads or use your package manager to install it.
